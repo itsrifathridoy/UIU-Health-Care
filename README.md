@@ -100,10 +100,7 @@ DB_DATABASE=uiu_healthcare
 DB_USERNAME=your_db_username
 DB_PASSWORD=your_db_password
 ```
-*App Settings (if necessary):
-```env
-APP_URL=http://localhost
-```
+
 #### **Step 5: Generate Application Key**
 Run the following command to generate a unique application key:
 ```bash
