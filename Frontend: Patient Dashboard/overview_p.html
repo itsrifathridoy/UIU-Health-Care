@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UIU Healthcare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-black text-white relative overflow-hidden rounded-r-3xl">
+      <!-- Curved Background -->
+      <div class="absolute top-0 right-0 h-full w-6 bg-black rounded-r-sm"></div>
+      
+      <div class="flex items-center justify-center py-4 mt-4 mr-10">
+        <img src="../assets/logowhite.png" alt="Logo" class="h-20">
+      </div>
+      <nav class="flex flex-col justify-between h-[calc(100%-6rem)]">
+        <!-- Main Navigation -->
+        <ul class="space-y-4 p-4">
+          <!-- Selected item "Overview" -->
+          <li class="flex items-center space-x-3 py-2 px-4 bg-gradient-to-r from-[#f5852a] to-[#241cf5] text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-dashboard text-2xl'></i>
+            <a href="#" class="block">Overview</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-chat text-2xl'></i>
+            <a href="#" class="block">Messages</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-calendar text-2xl'></i>
+            <a href="#" class="block">Appointments</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-user-voice text-2xl'></i>
+            <a href="#" class="block">Consultation</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-capsule text-2xl'></i>
+            <a href="#" class="block">Medicine</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-book-alt text-2xl'></i>
+            <a href="#" class="block">Health Records</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-credit-card text-2xl'></i>
+            <a href="#" class="block">Payments</a>
+          </li>
+        </ul>
+    
+        <!-- Bottom Items -->
+        <ul class="p-4 mb-6">
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-cog text-2xl'></i>
+            <a href="#" class="block">Settings</a>
+          </li>
+          <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+            <i class='bx bxs-help-circle text-2xl'></i>
+            <a href="#" class="block">Support</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+      <header class="flex justify-between items-center mb-6">
+        <div>
+          <h1 class="text-4xl font-bold text-orange-400">Overview</h1>
+        </div>
+        <div class="flex items-center space-x-6">
+            <header class="flex justify-between items-center mb-6">
+                
+                <div class="flex items-center space-x-6">
+                  <!-- Search Bar -->
+                  <div class="flex items-center space-x-3 p-2 bg-gray-800 rounded-lg">
+                    <i class='bx bx-search text-xl text-gray-200'></i>
+                    <input 
+                      type="search" 
+                      placeholder="Search..." 
+                      class="p-1 w-full bg-transparent border-0 outline-none text-gray-200 placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-[#f5852a] transition-all duration-300 ease-in-out"
+                      style="appearance: none; -webkit-appearance: none;" 
+                    />
+                  </div>
+              
+                  <!-- Notification Icon -->
+                  <div class="relative">
+                    <i class='bx bxs-bell text-3xl' ></i>
+                    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">2</span>
+                  </div>
+              
+                  <!-- User Profile -->
+                  <div class="flex items-center gap-4">
+                    <img src="https://placehold.co/40x40" alt="User" class="w-10 h-10 rounded-full" />
+                    <div class="text-right">
+                      <p class="text-sm font-semibold">UserName</p>
+                      <p class="text-xs text-gray-500">Patient</p>
+                    </div>
+                  </div>
+                </div>
+              </header>
+        </div>
+      </header>
+      
+      
+      <div class="flex space-x-8">
+        <!-- Column 1: Quick Actions and Medicine Schedule -->
+        <div class="flex-1">
+          <!-- Quick Actions Section -->
+          <section class="mb-6">
+            <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
+            <div class="grid grid-cols-3 gap-4">
+              <a href="#" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/emergency-services.png" alt="Emergency Service" class="mb-2" />
+                <span class="text-xl">Emergency Service</span>
+              </a>
+              <a href="#" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/medical.png" alt="Book Appointment" class="mb-2" />
+                <span class="text-xl">Book Appointment</span>
+              </a>
+              <a href="consultation.html" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/video-call.png" alt="Consultation" class="mb-2" />
+                <span class="text-xl">Consultation</span>
+              </a>
+              <a href="buy-medicine.html" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/medicine.png" alt="Buy Medicine" class="mb-2" />
+                <span class="text-xl">Buy Medicine</span>
+              </a>
+              <a href="request-blood.html" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/blood.png" alt="Request Blood" class="mb-2" />
+                <span class="text-xl">Request for Blood</span>
+              </a>
+              <a href="update-metrics.html" class="flex flex-col items-center justify-center bg-black text-white w-full h-40 rounded-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                <img src="../assets/health.png" alt="Update Health Metrics" class="mb-2" />
+                <span class="text-xl">Update Health Metrics</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- Medicine Schedule Section -->
+          <section>
+            <div class="mt-10 bg-white shadow-lg rounded-lg ">
+              <!-- Tab Header -->
+              <div class="flex justify-between bg-orange-500 rounded-t-lg">
+                <button 
+                  class="flex-1 py-3 text-white font-bold text-center hover:bg-orange-600 active:bg-amber-400 transition rounded-tl-lg"
+                  id="medicineTab"
+                  onclick="showTab('next-medicine')"
+                >
+                  Next Medicine
+                </button>
+                <button 
+                  class="flex-1 py-3 text-white font-bold text-center hover:bg-orange-600 bg-orange-400 transition rounded-tr-lg"
+                  id="appointmentTab"
+                  onclick="showTab('next-appointment')"
+                >
+                  Next Appointment
+                </button>
+              </div>
+          
+              <!-- Content Sections -->
+              <div id="next-medicine" class="p-6">
+                <h3 class="text-xl font-semibold mb-4">Next Medicine</h3>
+                <table class="w-full text-left border-collapse">
+                  <thead class="bg-gray-200">
+                    <tr>
+                      <th class="py-2 px-4 border-b">Name</th>
+                      <th class="py-2 px-4 border-b">Type</th>
+                      <th class="py-2 px-4 border-b">Dosage Time</th>
+                      <th class="py-2 px-4 border-b">Schedule</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="hover:bg-gray-100">
+                      <td class="py-2 px-4 border-b">Napa</td>
+                      <td class="py-2 px-4 border-b">Tablet</td>
+                      <td class="py-2 px-4 border-b">After Meal</td>
+                      <td class="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
+                    </tr>
+                    <tr class="hover:bg-gray-100">
+                      <td class="py-2 px-4 border-b">Aspra</td>
+                      <td class="py-2 px-4 border-b">Capsule</td>
+                      <td class="py-2 px-4 border-b">Before Meal</td>
+                      <td class="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
+                    </tr>
+                    <tr class="hover:bg-gray-100">
+                      <td class="py-2 px-4 border-b">Tusca Plus</td>
+                      <td class="py-2 px-4 border-b">Syrup</td>
+                      <td class="py-2 px-4 border-b">After Meal</td>
+                      <td class="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          
+              <div id="next-appointment" class="p-6 hidden">
+                <h3 class="text-xl font-semibold mb-4">Next Appointment</h3>
+                <!-- <p class="text-gray-700">No appointments scheduled yet. Stay tuned for updates!</p> -->
+                <div id="next-appointment" class="p-6 bg-gradient-to-r from-orange-100 to-white rounded-lg shadow-md flex flex-col sm:flex-row items-center">
+                  <!-- Doctor's Details -->
+                  <div class="flex-1">
+                    <p class="text-sm font-medium text-gray-500 mb-2">Psychiatrist</p>
+                    <h3 class="text-xl font-bold text-gray-900">Prof. Dr. Mesbah Uddin Ahmed</h3>
+                    <p class="text-orange-500 font-medium">MBBS, MS (ENT)</p>
+                    <p class="text-gray-600 mb-4">United Medical Hospital</p>
+            
+                    <!-- Appointment Info -->
+                    <div class="flex items-center text-gray-600 space-x-4">
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="ml-2 text-sm">9:30 AM</span>
+                      </div>
+                      <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="ml-2 text-sm">19 Nov 2024</span>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <!-- Doctor's Image -->
+                  <div class="w-60 h-60 sm:w-48 sm:h-48 bg-cover bg-center rounded-lg ml-2 shadow-lg"
+                    style="background-image: url('https://via.placeholder.com/150');">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Column 2: Health Metrics -->
+        <section class="flex-2 space-y-6">
+          <h3 class="text-xl font-semibold mb-4">Health Metrics</h3>
+          <div class="grid grid-cols-1 gap-6">
+            <!-- First row: Heart Rate and Blood Pressure -->
+            <div class="grid grid-cols-2 gap-4 bg-gray-900 p-6 rounded-lg shadow">
+              <div class="flex items-center space-x-4  bg-yellow-50 p-8 rounded-lg shadow">
+                <img src="../assets/heart-rate.png" alt="Heart Rate" class="w-14 h-14" />
+                <div class="text-center">
+                  <p>Heart Rate</p>
+                  <p class="text-2xl font-bold">120 bpm</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4  bg-blue-200 p-8 rounded-lg shadow">
+                <img src="../assets/blood-pressure.png" alt="Blood Pressure" class="w-14 h-14" />
+                <div class="text-center">
+                  <p>Blood Pressure</p>
+                  <p class="text-2xl font-bold">80/120 mmHg</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-800 text-white p-4 rounded-lg ">
+              <div class="text-lg font-semibold ml-1">Body Mass Index (BMI)</div>
+              <div class="text-4xl font-bold mt-2 ml-1" id="bmi-value">24.9</div>
+              <div class="mt-2 flex items-center justify-center">
+                <span id="status" class="bg-green-100 text-green-700 text-sm px-2 py-1 rounded-md">
+                  You're Healthy
+                </span>
+              </div>
+              <div class="relative mt-4">
+                <div class="h-2 bg-gradient-to-r from-blue-400 via-green-400 to-red-500 rounded-full"></div>
+                <div
+                  id="indicator"
+                  class="absolute h-4 w-4 bg-red-500 rounded-full top-1/2 transform -translate-y-1/2"
+                  style="left: calc(24.9% / 40 * 100%)"
+                ></div>
+              </div>
+              <div
+                id="scale"
+                class="flex justify-between text-sm text-gray-400 mt-1 transition-all"
+                style="left: calc(24.9% / 40 * 100%)"
+              >
+                <span>15</span>
+                <span>18.5</span>
+                <span>25</span>
+                <span>30</span>
+                <span>40</span>
+              </div>
+              <!-- Slider Input -->
+              <input
+                type="range"
+                id="bmi-slider"
+                min="15"
+                max="40"
+                step="0.1"
+                value="24.9"
+                class="mt-4 w-full"
+              />
+            </div>
+            
+
+            <!-- Third row: Height and Weight with scale -->
+            <div class="bg-gray-800 text-white p-6 rounded-lg">
+              <!-- Height and Weight Section -->
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Height -->
+                <div class="bg-amber-100 text-black p-4 rounded-lg">
+                  <h4 class="text-center text-lg font-semibold">Height</h4>
+                  <div class="flex items-center justify-between mt-4">
+                    <span class="text-sm text-gray-600">150</span>
+                    <input
+                      type="range"
+                      min="150"
+                      max="200"
+                      value="170"
+                      class="w-full mx-2 accent-amber-500"
+                      id="height-slider"
+                    />
+                    <span class="text-sm text-gray-600">200</span>
+                  </div>
+                  <p class="text-center text-xl font-bold mt-2" id="height-value">170 cm</p>
+                </div>
+                <!-- Weight -->
+                <div class="bg-sky-100 text-black p-4 rounded-lg">
+                  <h4 class="text-center text-lg font-semibold">Weight</h4>
+                  <div class="flex items-center justify-between mt-4">
+                    <span class="text-sm text-gray-600">40</span>
+                    <input
+                      type="range"
+                      min="40"
+                      max="150"
+                      value="72"
+                      class="w-full mx-2 accent-sky-500"
+                      id="weight-slider"
+                    />
+                    <span class="text-sm text-gray-600">150</span>
+                  </div>
+                  <p class="text-center text-xl font-bold mt-2" id="weight-value">72 kg</p>
+                </div>
+              </div>
+            
+              <!-- Body Measurements Section -->
+              <div class="mt-6">
+                <h4 class="text-left text-lg font-semibold">Body Measurements</h4>
+                <div class="grid grid-cols-2 gap-4 items-center mt-4">
+                  <!-- Measurements -->
+                  <div class="space-y-4">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                      <p class="font-semibold text-center">Chest (in)</p>
+                      <p class="text-center text-xl font-bold">44.5</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                      <p class="font-semibold text-center">Waist (in)</p>
+                      <p class="text-center text-xl font-bold">34</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                      <p class="font-semibold text-center">Hip (in)</p>
+                      <p class="text-center text-xl font-bold">42.5</p>
+                    </div>
+                  </div>
+                  <!-- Human Figure -->
+                  <div class="flex justify-center">
+                    <img
+                      src="../assets/bmi_men.png"
+                      alt="Body Figure"
+                      class="w-32 h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function emergencyService() {
+      alert('Emergency service clicked!');
+    }
+
+    function bookAppointment() {
+      alert('Book appointment clicked!');
+    }
+
+    function consultation() {
+      alert('Consultation clicked!');
+    }
+
+    function buyMedicine() {
+      alert('Buy medicine clicked!');
+    }
+
+    function requestBlood() {
+      alert('Request for blood clicked!');
+    }
+
+    function updateMetrics() {
+      alert('Update health metrics clicked!');
+    }
+
+    function showTab(tabId) {
+      // Toggle visibility of sections
+      document.getElementById('next-medicine').classList.toggle('hidden', tabId !== 'next-medicine');
+      document.getElementById('next-appointment').classList.toggle('hidden', tabId !== 'next-appointment');
+
+      // Update active state for buttons
+      document.getElementById('medicineTab').classList.toggle('bg-orange-600', tabId === 'next-medicine');
+      document.getElementById('appointmentTab').classList.toggle('bg-orange-600', tabId === 'next-appointment');
+    }
+
+    const slider = document.getElementById('bmi-slider');
+    const bmiValue = document.getElementById('bmi-value');
+    const status = document.getElementById('status');
+    const indicator = document.getElementById('indicator');
+    const scale = document.getElementById('scale');
+    const heightSlider = document.getElementById("height-slider");
+    const weightSlider = document.getElementById("weight-slider");
+    const heightValue = document.getElementById("height-value");
+    const weightValue = document.getElementById("weight-value");
+
+    // Update BMI and UI based on slider value
+    slider.addEventListener('input', () => {
+      const value = parseFloat(slider.value);
+      bmiValue.textContent = value.toFixed(1);
+
+      // Update health status dynamically
+      if (value < 18.5) {
+        status.textContent = "Underweight";
+        status.className = "bg-yellow-100 text-yellow-700 text-sm px-2 py-1 rounded-md";
+      } else if (value >= 18.5 && value < 25) {
+        status.textContent = "You're Healthy";
+        status.className = "bg-green-100 text-green-700 text-sm px-2 py-1 rounded-md";
+      } else if (value >= 25 && value < 30) {
+        status.textContent = "Overweight";
+        status.className = "bg-orange-100 text-orange-700 text-sm px-2 py-1 rounded-md";
+      } else {
+        status.textContent = "Obese";
+        status.className = "bg-red-100 text-red-700 text-sm px-2 py-1 rounded-md";
+      }
+
+      // Update indicator and scale positions
+      const percentage = ((value - 15) / (40 - 15)) * 100;
+      indicator.style.left = `calc(${percentage}%)`;
+      scale.style.left = `calc(${percentage}%)`;
+    });
+
+    // Update Height
+    heightSlider.addEventListener("input", () => {
+      heightValue.textContent = `${heightSlider.value} cm`;
+    });
+
+    // Update Weight
+    weightSlider.addEventListener("input", () => {
+      weightValue.textContent = `${weightSlider.value} kg`;
+    });
+  </script>
+</body>
+</html>
