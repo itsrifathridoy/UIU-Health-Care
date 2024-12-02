@@ -37,6 +37,201 @@ A comprehensive healthcare management system for the United International Univer
 └── README.md        # Project documentation
 ```
 ---
+## **ER Diagram**
+
+
+```mermaid
+erDiagram
+    USERS {
+        BIGINT user_id PK 
+        VARCHAR name
+        VARCHAR email 
+        VARCHAR password
+        VARCHAR role
+        VARCHAR blood_group
+        BOOLEAN available_for_donation
+        VARCHAR phone
+        TEXT address
+        VARCHAR user_type
+        VARCHAR emergency_contact
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    DOCTORS {
+        BIGINT doc_id PK "Primary Key"
+        VARCHAR specialization
+        JSON availability
+        JSON educations
+        JSON experience
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    APPOINTMENTS {
+        BIGINT appointment_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        BIGINT doctor_id FK "Foreign Key"
+        VARCHAR reason
+        DATE date
+        TIME time
+        TEXT description
+        VARCHAR status
+        TIMESTAMP status_updated_at
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    CONSULTATIONS {
+        BIGINT consultation_id PK "Primary Key"
+        BIGINT doctor_id FK "Foreign Key"
+        VARCHAR consultation_type
+        TEXT notes
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    PRESCRIPTIONS {
+        BIGINT prescription_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        BIGINT doctor_id FK "Foreign Key"
+        JSON prescription_details
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    MEDICINES {
+        BIGINT medicine_id PK "Primary Key"
+        VARCHAR brand_name
+        VARCHAR generic_name
+        VARCHAR strength
+        TEXT indication
+        TEXT adult_dose
+        TEXT child_dose
+        TEXT side_effects
+        VARCHAR form
+        TEXT administration
+        VARCHAR packsize
+        DECIMAL price
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    INVENTORY_MEDICINES {
+        BIGINT inventory_medicine_id PK "Primary Key"
+        VARCHAR name
+        INT stock
+        DECIMAL price
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    CART {
+        BIGINT cart_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    CART_ITEMS {
+        BIGINT cart_item_id PK "Primary Key"
+        BIGINT cart_id FK "Foreign Key"
+        BIGINT medicine_id FK "Foreign Key"
+        INT quantity
+        DECIMAL price
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    ORDERS {
+        BIGINT order_id PK "Primary Key"
+        BIGINT cart_id FK "Foreign Key"
+        VARCHAR status
+        TIMESTAMP status_updated_at
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    PAYMENTS {
+        BIGINT payment_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        BIGINT order_id FK "Foreign Key"
+        DECIMAL amount
+        VARCHAR payment_method
+        VARCHAR status
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    HEALTH_RECORDS {
+        BIGINT health_record_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        BIGINT doctor_id FK "Foreign Key"
+        JSON record_details
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    MEDICAL_HISTORY {
+        BIGINT medical_history_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        JSON record_details
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    TEST_REPORTS {
+        BIGINT test_report_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        BIGINT doctor_id FK "Foreign Key"
+        TEXT report_details
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    BLOOD_REQUESTS {
+        BIGINT blood_request_id PK "Primary Key"
+        BIGINT user_id FK "Foreign Key"
+        VARCHAR blood_group
+        VARCHAR status
+        TIMESTAMP status_updated_at
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    DONATION_RECORDS {
+        BIGINT donation_record_id PK "Primary Key"
+        BIGINT donor_id FK "Foreign Key"
+        BIGINT request_id FK "Foreign Key"
+        DATE donation_date
+        VARCHAR blood_group
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    USERS ||--o{ APPOINTMENTS : ""
+    USERS ||--o{ PRESCRIPTIONS : ""
+    USERS ||--o{ CART : ""
+    USERS ||--o{ PAYMENTS : ""
+    USERS ||--o{ HEALTH_RECORDS : ""
+    USERS ||--o{ MEDICAL_HISTORY : ""
+    USERS ||--o{ TEST_REPORTS : ""
+    USERS ||--o{ BLOOD_REQUESTS : ""
+    DOCTORS ||--o{ APPOINTMENTS : ""
+    DOCTORS ||--o{ CONSULTATIONS : ""
+    DOCTORS ||--o{ PRESCRIPTIONS : ""
+    DOCTORS ||--o{ HEALTH_RECORDS : ""
+    DOCTORS ||--o{ TEST_REPORTS : ""
+    CART ||--o{ CART_ITEMS : ""
+    CART_ITEMS ||--|| INVENTORY_MEDICINES : ""
+    CART ||--o{ ORDERS : ""
+    ORDERS ||--o{ PAYMENTS : ""
+    BLOOD_REQUESTS ||--o{ DONATION_RECORDS : ""
+
+
+    
+```
+
 ## **Database Structure**
 ```sql
 -- Users Table
