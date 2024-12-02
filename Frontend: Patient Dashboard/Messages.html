@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UIU Healthcare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <link href="https://cdn.fonticons.com/your-icon-library.css" rel="stylesheet">
+  
+
+
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen bg-beige-100 font-sans ">
+        <!-- Sidebar -->
+        <div class="w-1/3 bg-white shadow-md rounded-l-xl flex flex-col">
+          <!-- Search Bar -->
+          
+          <div class="flex items-center space-x-3 p-4 border-b">
+            <i class="fi fi-br-search text-lg"></i>
+            <input
+                
+              type="text"
+              placeholder="Search Messages"
+              class="w-full p-2 text-sm bg-gray-100 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+          </div>
+          <!-- Message List -->
+          <div class="overflow-y-auto flex-grow ">
+            <!-- Individual Message -->
+            <div class="p-4 flex items-center justify-between hover:bg-orange-100 transition cursor-pointer border-b">
+            <div class="w-10 h-10 bg-gray-300 rounded-full mr-1"></div>
+              <div>
+                
+                <h4 class="font-semibold text-gray-800 mr-2">Dr. Ashuk Singh</h4>
+                <p class="text-sm text-gray-500 truncate">Please Send Me Your Medical...</p>
+              </div>
+              <span class="text-xs text-gray-400">9:30 AM</span>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Chat Window -->
+        <div class="flex-1 flex flex-col bg-beige-50 rounded-xl ">
+          <!-- Chat Header -->
+         
+          <div class="p-4 flex items-center  bg-white border-b rounded-tr-xl">
+            <div class="w-10 h-10 bg-gray-300 rounded-full mr-1"></div>
+            <div class="ml-3">
+                <h3 class="text-lg font-semibold text-gray-800 ">Dr. Ashuk Singh</h3>
+                <span class="text-sm text-gray-500">Doctor</span></div>
+          </div>
+      
+          <!-- Messages Section -->
+          <div class="flex-1 p-4 overflow-y-auto mt-2">
+            <!-- Message from Others -->
+            <div class="flex items-start space-x-3 mb-4">
+              <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+              <div>
+                <p class="bg-gray-300 p-3 rounded-xl text-sm text-gray-800">
+                  Please Send Me Your Medical Reports
+                </p>
+                <span class="text-xs text-gray-400">9:30 AM</span>
+              </div>
+            </div>
+      
+            <!-- Message from Me -->
+            <div class="flex items-end justify-end space-x-3 mb-4">
+              <div>
+                <p class="bg-orange-500 text-white p-3 rounded-xl text-sm">
+                  Sure, I'll send it right away!
+                </p>
+                <span class="text-xs text-gray-400 block text-right">9:32 AM</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Chat Input Section -->
+          <div class="p-4 bg-white border-t flex items-center space-x-3 rounded-br-xl">
+            <input
+              type="text"
+              placeholder="Type Your Message"
+              class="flex-1 p-3 text-sm bg-gray-100 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+            />
+            <button class="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition flex items-center justify-center">
+                <i class='bx bxs-paper-plane text-md' ></i>
+              </button>
+              
+          </div>
+        </div>
+      </div>
+      
+      
+     
+</body>
+</html>

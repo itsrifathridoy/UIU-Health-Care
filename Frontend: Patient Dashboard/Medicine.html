@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Tab Switching</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="bg-gray-50 min-h-screen p-8 rounded-lg">
+    
+
+    <!-- Tabs Navigation -->
+    <div class="flex space-x-6 border-b pb-4 mb-6 text-gray-600 text-lg font-semibold">
+      <a 
+        href="#medicine" 
+        class="tab border-orange-500 text-orange-500 border-b-2 pb-2"
+        onclick="switchTab('medicine', this)"
+      >
+        My Medicine
+      </a>
+      <a 
+        href="#order_medicine" 
+        class="tab hover:text-orange-500"
+        onclick="switchTab('order_medicine', this)"
+      >
+        Order Medicine
+      </a>
+      <a 
+        href="#order_history" 
+        class="tab hover:text-orange-500"
+        onclick="switchTab('order_history', this)"
+      >
+        Order History
+      </a>
+
+      <a 
+        href="#cart " 
+        class="tab hover:text-orange-500"
+        onclick="switchTab('cart', this)"
+      >
+        Cart
+      </a>
+    </div>
+    
+
+    <!-- Sections -->
+    <section id="medicine" class="section">
+      <!-- Search Bar -->
+    <div class="bg-white shadow-md p-4 rounded-lg flex items-center mb-6">
+      <i class='bx bx-search text-2xl mr-2'></i>
+      <input
+        type="text"
+        placeholder="Search Medicine"
+        class="w-full p-2 text-sm bg-gray-100 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+    </div>
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <h2 class="text-lg font-semibold mb-4">My Medicine</h2>
+        <table class="w-full text-center text-sm text-gray-600">
+          <!-- Table Header -->
+          <thead class="bg-gray-100 ">
+            <tr>
+              <th class="py-3 px-6">Name</th>
+              <th class="py-3 px-6">Strength</th>
+              <th class="py-3 px-6">Quantity</th>
+              <th class="py-3 px-6">Dosage Time</th>
+              <th class="py-3 px-6">Schedule</th>
+              <th class="py-3 px-6">Duration</th>
+              <th class="py-3 px-6">Process</th>
+            </tr>
+          </thead>
+          <!-- Table Body -->
+          <tbody>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="py-4 px-6 flex items-center space-x-4">
+                <div class="p-1 flex items-center">
+                  <img src="../assets/pill.png" alt="napa">
+                  <div class="ml-4 text-left">
+                    <p class="font-bold">Napa</p>
+                    <p class="text-gray-400">Paracetamol</p>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 px-6">500mg</td>
+              <td class="py-4 px-6">1</td>
+              <td class="py-4 px-6">After Meal</td>
+              <td class="py-4 px-6">8:30AM - 12:00 AM</td>
+              <td class="py-4 px-6">3 Months</td>
+              <td class="py-4 px-6">
+                <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                  <div class="bg-orange-500 h-2 rounded-full" style="width: 50%"></div>
+                </div>
+              </td>
+            </tr>
+
+             <!-- Add more rows below -->
+             <tr class="border-b hover:bg-gray-50">
+              <td class="py-4 px-6 flex items-center space-x-4">
+
+                <div class=" p-1 flex items-center justify-between">
+                  <img src="../assets/capsule.png" alt="aspra">
+                  <div class="ml-4 text-left">
+                    <p class="font-bold">Aspra</p>
+                    <p class="text-gray-400">Omeprazole</p>
+                  </div>
+                </div>
+                
+              </td>
+              <td class="py-4 px-6">500mg</td>
+              <td class="py-4 px-6">1</td>
+              <td class="py-4 px-6">Before Meal</td>
+              <td class="py-4 px-6">8:30AM - 12:00 AM</td>
+              <td class="py-4 px-6">2 Months</td>
+              <td class="py-4 px-6">
+                <p class="text-gray-400 text-xs">Start Date: 05 Oct 2024</p>
+                <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                  <div class="bg-orange-500 h-2 rounded-full" style="width: 50%"></div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+      <!-- Medicine Grid -->
+      <section id="order_medicine"  class="section hidden">
+        <h2 class="text-lg font-semibold text-orange-500 mb-4">Your Medicine</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Single Medicine Card -->
+          <div class="bg-white shadow-lg rounded-lg p-4">
+            <div class="flex items-center space-x-4">
+              <img src="../assets/pill.png" alt="napa">
+              <div>
+                <p class="font-semibold text-gray-700">Napa</p>
+                <p class="text-sm text-gray-400">Paracetamol 500mg</p>
+              </div>
+            </div>
+            <select class="w-full mt-4 border rounded-lg p-2 text-sm">
+              <option>1 Piece</option>
+              <option>2 Pieces</option>
+              <option>3 Pieces</option>
+            </select>
+            <p class="mt-2 text-gray-700">৳3.00</p>
+            <button
+              class="mt-4 w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800"
+            >
+              Add to cart
+            </button>
+          </div>
+
+          <!-- Single Medicine Card (Buy Now Button Version) -->
+          <div class="bg-white shadow-lg rounded-lg p-4">
+            <div class="flex items-center space-x-4">
+              <img src="../assets/capsule.png" alt="napa">
+              <div>
+                <p class="font-semibold text-gray-700">Aspra</p>
+                <p class="text-sm text-gray-400">Omeprazole 500mg</p>
+              </div>
+            </div>
+            <select class="w-full mt-4 border rounded-lg p-2 text-sm">
+              <option>1 Piece</option>
+              <option>2 Pieces</option>
+              <option>3 Pieces</option>
+            </select>
+            <p class="mt-2 text-gray-700">৳3.00</p>
+            <button
+              class="mt-4 w-full py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            >
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="cart"  class="section hidden">
+        <div class=" bg-white shadow-md rounded-lg p-6">
+          <!-- Cart Items Table -->
+          <table class="w-full mb-8">
+            <thead class="bg-gray-100 text-gray-700 text-left text-sm font-semibold">
+              <tr>
+                <th class="py-3 px-4">Name</th>
+                <th class="py-3 px-4">Strength</th>
+                <th class="py-3 px-4">Quantity</th>
+                <th class="py-3 px-4">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Cart Item 1 -->
+              <tr class="border-b">
+                <td class="py-4 px-4 flex items-center space-x-4">
+                  <img src="../assets/pill.png" alt="Napa" class="w-8 h-8">
+                  <div>
+                    <p class="font-bold text-gray-800">Napa</p>
+                    <p class="text-sm text-gray-500">Paracetamol</p>
+                  </div>
+                </td>
+                <td class="py-4 px-4">500mg</td>
+                <td class="py-4 px-4">
+                  <select class="border rounded-lg p-2 text-sm">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                  </select>
+                </td>
+                <td class="py-4 px-4">৳100</td>
+              </tr>
+              <!-- Cart Item 2 -->
+              <tr>
+                <td class="py-4 px-4 flex items-center space-x-4">
+                  <img src="../assets/capsule.png" alt="aspra" class="w-8 h-8">
+                  <div>
+                    <p class="font-bold text-gray-800">Aspra</p>
+                    <p class="text-sm text-gray-500">Omeprazole</p>
+                  </div>
+                </td>
+                <td class="py-4 px-4">500mg</td>
+                <td class="py-4 px-4">
+                  <select class="border rounded-lg p-2 text-sm">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                  </select>
+                </td>
+                <td class="py-4 px-4">৳100</td>
+              </tr>
+            </tbody>
+          </table>
+      
+          <!-- Cart Summary and Delivery Address -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-7 ">
+            <!-- Cart Total -->
+            <div class="border p-6 rounded-lg mt-14">
+              <h3 class="text-lg font-bold mb-4">Cart Total</h3>
+              <div class="flex justify-between text-gray-700 mb-2">
+                <span>Subtotal:</span>
+                <span>৳200</span>
+              </div>
+              <div class="flex justify-between text-gray-700 mb-2">
+                <span>Shipping:</span>
+                <span>৳30</span>
+              </div>
+              <div class="flex justify-between text-gray-800 font-semibold">
+                <span>Total:</span>
+                <span>৳500</span>
+              </div>
+              <button class="mt-6 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-400 transition">
+                Proceed to checkout
+              </button>
+            </div>
+      
+            <!-- Delivery Address -->
+            <div class="mt-14">
+              <label class="block text-gray-700 font-bold mb-2">
+                Delivery Address
+                <i class="bx bx-question-mark-circle text-gray-400 ml-1"></i>
+              </label>
+              <textarea
+                class="w-full border p-3 rounded-lg text-sm"
+                rows="5"
+                placeholder="Enter your delivery address"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach((section) => {
+        section.classList.add('hidden');
+      });
+
+      // Show the selected section
+      document.getElementById(tabId).classList.remove('hidden');
+    }
+
+    function switchTab(tabId, element) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach((section) => {
+      section.classList.add('hidden');
+    });
+
+    // Show the selected section
+    document.getElementById(tabId).classList.remove('hidden');
+
+    // Remove active styles from all tabs
+    document.querySelectorAll('.tab').forEach((tab) => {
+      tab.classList.remove('border-orange-500', 'text-orange-500', 'border-b-2');
+    });
+
+    // Add active styles to the clicked tab
+    element.classList.add('border-orange-500', 'text-orange-500', 'border-b-2');
+  }
+
+  </script>
+</body>
+</html>
