@@ -126,6 +126,18 @@ erDiagram
         TIMESTAMP updated_at
     }
 
+    USER_MEDICINES {
+        BIGINT user_id PK
+        BIGINT medicine_id PK
+        INT quantity
+        FLOAT durations
+        DATE starting_date
+        JSON schedule
+        JSON notes
+        TIMESTAMP created_at  
+        TIMESTAMP updated_at
+    }
+
     CART {
         BIGINT cart_id PK "Primary Key"
         BIGINT user_id FK "Foreign Key"
@@ -227,6 +239,8 @@ erDiagram
     CART ||--o{ ORDERS : ""
     ORDERS ||--o{ PAYMENTS : ""
     BLOOD_REQUESTS ||--o{ DONATION_RECORDS : ""
+    USERS ||--o{ USER_MEDICINES : ""
+    MEDICINES ||--o{ USER_MEDICINES : ""
 
 
     
