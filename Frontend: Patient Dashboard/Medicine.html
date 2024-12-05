@@ -200,11 +200,26 @@
                 </td>
                 <td class="py-4 px-4">500mg</td>
                 <td class="py-4 px-4">
-                  <select class="border rounded-lg p-2 text-sm">
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                  </select>
+                  <div class="flex items-center relative w-20">
+                    <input
+                      type="number"
+                      value="1"
+                      min="1"
+                      max="99"
+                      readonly
+                      class="w-full h-10 text-center border border-gray-300 rounded-lg pr-8"
+                    />
+                    <div class="absolute right-0 top-0 h-10">
+                      <div class="flex flex-col h-full divide-y divide-gray-300 border border-gray-300 rounded-r-lg">
+                        <button class="w-8 h-5 flex justify-center items-center bg-gray-100 hover:bg-gray-200 text-sm font-bold increment">
+                          ▲
+                        </button>
+                        <button class="w-8 h-5 flex justify-center items-center bg-gray-100 hover:bg-gray-200 text-sm font-bold decrement">
+                          ▼
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </td>
                 <td class="py-4 px-4">৳100</td>
               </tr>
@@ -219,11 +234,26 @@
                 </td>
                 <td class="py-4 px-4">500mg</td>
                 <td class="py-4 px-4">
-                  <select class="border rounded-lg p-2 text-sm">
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                  </select>
+                  <div class="flex items-center relative w-20">
+                    <input
+                      type="number"
+                      value="1"
+                      min="1"
+                      max="99"
+                      readonly
+                      class="w-full h-10 text-center border border-gray-300 rounded-lg pr-8"
+                    />
+                    <div class="absolute right-0 top-0 h-10">
+                      <div class="flex flex-col h-full divide-y divide-gray-300 border border-gray-300 rounded-r-lg">
+                        <button class="w-8 h-5 flex justify-center items-center bg-gray-100 hover:bg-gray-200 text-sm font-bold increment">
+                          ▲
+                        </button>
+                        <button class="w-8 h-5 flex justify-center items-center bg-gray-100 hover:bg-gray-200 text-sm font-bold decrement">
+                          ▼
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </td>
                 <td class="py-4 px-4">৳100</td>
               </tr>
@@ -297,6 +327,30 @@
     // Add active styles to the clicked tab
     element.classList.add('border-orange-500', 'text-orange-500', 'border-b-2');
   }
+
+    document.querySelectorAll(".relative").forEach(function (quantityElement) {
+    const decrementButton = quantityElement.querySelector(".decrement");
+    const incrementButton = quantityElement.querySelector(".increment");
+    const inputField = quantityElement.querySelector("input");
+
+    decrementButton.addEventListener("click", function () {
+      const currentValue = parseInt(inputField.value, 10);
+      const minValue = parseInt(inputField.min, 10);
+      if (currentValue > minValue) {
+        inputField.value = currentValue - 1;
+      }
+    });
+
+    incrementButton.addEventListener("click", function () {
+      const currentValue = parseInt(inputField.value, 10);
+      const maxValue = parseInt(inputField.max, 10);
+      if (currentValue < maxValue) {
+        inputField.value = currentValue + 1;
+      }
+    });
+  });
+
+
 
   </script>
 </body>

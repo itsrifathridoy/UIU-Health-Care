@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Setting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-4 flex items-center justify-center">
+  <div class="w-screen bg-white rounded-lg shadow-lg p-6 flex">
+    <!-- Sidebar -->
+    <aside class="w-1/4 border-r border-gray-200 pr-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">General Setting</h2>
+      <ul class="space-y-4">
+        <li>
+          <a href="#general" class="tab text-orange-500 font-medium" onclick="switchTab('general', this)">General</a>
+        </li>
+        <li>
+          <a href="#edit" class="tab text-gray-600 hover:text-orange-500" onclick="switchTab('edit', this)">Edit Profile</a>
+        </li>
+        <li>
+          <a href="#password" class="tab text-gray-600 hover:text-orange-500" onclick="switchTab('password', this)">Password</a>
+        </li>
+        <li>
+          <a href="#delete" class="text-red-500 hover:underline" onclick="switchTab('delete', this)">Delete Account</a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Content Area -->
+    <section id="general" class="section flex-1 pl-6">
+      <div class="flex-1 pl-6">
+        <h1 class="text-2xl font-semibold mb-6 text-gray-800">General</h1>
+        <p class="text-gray-500 mb-6">Update your username and manage your account</p>
+        <form>
+          <div class="mb-6">
+            <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <input type="text" id="username" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="someone">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="uiu-mail" class="block text-sm font-medium text-gray-700 mb-1">UIU Mail</label>
+              <input type="email" id="uiu-mail" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="someone@cse.uiu.ac.bd">
+            </div>
+            <div>
+              <label for="uiu-id" class="block text-sm font-medium text-gray-700 mb-1">UIU ID</label>
+              <input type="text" id="uiu-id" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="01221493">
+            </div>
+          </div>
+          <div class="mb-6">
+            <label for="secondary-mail" class="block text-sm font-medium text-gray-700 mb-1">Secondary Mail</label>
+            <input type="email" id="secondary-mail" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="someone@gmail.com">
+          </div>
+          <div>
+            <button type="submit" class="w-full bg-orange-400 text-white font-medium py-2 px-4 rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="edit" class="section flex-1 pl-6 hidden">
+      <div class="flex-1 pl-6">
+        <h1 class="text-2xl font-semibold mb-6 text-gray-800">Edit Profile</h1>
+        <p class="text-gray-500 mb-6">Update your profile info</p>
+        <form>
+            <div class="flex items-center mb-6">
+                <div class="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
+                  <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
+                <!-- Hidden file input -->
+                <input type="file" id="file-input" accept="image/*" class="hidden" onchange="previewImage(event)">
+                <!-- Edit button -->
+                <button type="button" class="ml-4 bg-gray-100 text-gray-600 px-4 py-2 rounded-md hover:bg-gray-200" onclick="document.getElementById('file-input').click()">
+                  Edit
+                </button>
+            </div>
+           <!-- Name -->
+           <div class="mb-6">
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input type="text" id="name" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="username">
+          </div>
+          <!-- Date of Birth -->
+            <div class="mb-6">
+                <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                <input type="date" id="dob" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="2000-01-01">
+            </div>
+  
+          <!-- Mobile Number -->
+          <div class="mb-6">
+            <label for="mobile" class="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+            <input type="text" id="mobile" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="+880-99-9999-999">
+          </div>
+          <!-- Gender and Blood Group -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+              <select id="gender" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="blood-group" class="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
+              <select id="blood-group" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500">
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+              </select>
+            </div>
+          </div>
+          <!-- Save Button -->
+          <div>
+            <button type="submit" class="w-full bg-orange-500 text-white font-medium py-2 px-4 rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="password" class="section flex-1 pl-6 hidden">
+      <div class="flex-1 pl-6">
+        <h1 class="text-2xl font-semibold mb-6 text-gray-800">Password</h1>
+        <p class="text-gray-500 mb-6">Update your password here</p>
+
+        <form>
+            <div class="mb-6">
+                <label for="currentpw" class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                <input type="password" id="currentpw" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="Current Password">
+            </div>    
+    
+            <div class="mb-6">
+                <label for="newpw" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                <input type="password" id="newpw" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="New Password">
+            </div> 
+    
+            <div class="mb-6">
+                <label for="confirmpw" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                <input type="password" id="confirmpw" class="block w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-orange-500 focus:border-orange-500" placeholder="Confirm Password">
+            </div> 
+    
+            <div>
+                <button type="submit" class="w-full bg-orange-500 text-white font-medium py-2 px-4 rounded-md hover:bg-orange-600 focus:ring-2 focus:ring-orange-400 focus:ring-offset-2">Save Changes</button>
+            </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="delete" class="section flex-1 pl-6 hidden">
+        <div class="w-full bg-white rounded-lg shadow-lg p-6 border border-red-300">
+            <h2 class="text-2xl font-semibold text-red-600 mb-4">Delete Account</h2>
+            <p class="text-gray-600 mb-6">
+              Are you sure you want to delete your account? This action cannot be undone, and all your data will be permanently deleted.
+            </p>
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-4">
+              <!-- Cancel Button -->
+              <button
+                type="button"
+                class="bg-gray-100 text-gray-600 px-4 py-2 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                Cancel
+              </button>
+              <!-- Confirm Delete Button -->
+              <button
+                type="button"
+                class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2">
+                Delete Account
+              </button>
+            </div>
+          </div>
+          
+    </section>
+  </div>
+
+  <script>
+    function switchTab(tabId, element) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach((section) => {
+        section.classList.add('hidden');
+      });
+
+      // Show the selected section
+      document.getElementById(tabId).classList.remove('hidden');
+
+      // Remove active styles from all tabs
+      document.querySelectorAll('.tab').forEach((tab) => {
+        tab.classList.remove('text-orange-500', 'font-medium');
+      });
+
+      // Add active styles to the clicked tab
+      element.classList.add('text-orange-500', 'font-medium');
+    }
+
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('profile-picture').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        }
+    }
+
+
+  </script>
+</body>
+</html>

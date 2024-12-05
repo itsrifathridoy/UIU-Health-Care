@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Filter Row -->
+    <div class="p-6 bg-white shadow-sm">
+        <div class="flex justify-center items-center space-x-4">
+            <!-- Blood Type Filter -->
+            <div class="flex items-center space-x-4">
+                <label for="bloodType" class="text-gray-700 font-semibold">Blood Type:</label>
+                <select id="bloodType" class="py-2 px-4 border-2 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400">
+                    
+                </select>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="relative w-1/3">
+                <input type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+                <button class="absolute right-3 top-2">
+                    <i class='bx bx-search text-lg' ></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto p-6">
+        <table class="min-w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-orange-400 text-gray-700">
+                <tr>
+                    <th class="py-3 px-6 text-left">#</th>
+                    <th class="py-3 px-6 text-left">Name</th>
+                    <th class="py-3 px-6 text-left">Age</th>
+                    <th class="py-3 px-6 text-left">Department</th>
+                    <th class="py-3 px-6 text-left">Previously Donated</th>
+                    <th class="py-3 px-6 text-left"># Of Donations</th>
+                    <th class="py-3 px-6">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-t border-gray-200">
+                    <td class="py-4 px-6">1</td>
+                    <td class="py-4 px-6">Student 1</td>
+                    <td class="py-4 px-6">23</td>
+                    <td class="py-4 px-6">CSE</td>
+                    <td class="py-4 px-6">01-11-2024</td>
+                    <td class="py-4 px-6">5</td>
+                    <td class="py-4 px-6 text-center">
+                        <button class="text-gray-600 hover:text-gray-900">...</button>
+                    </td>
+                </tr>
+                <tr class="border-t border-gray-200">
+                    <td class="py-4 px-6">2</td>
+                    <td class="py-4 px-6">Student 2</td>
+                    <td class="py-4 px-6">22</td>
+                    <td class="py-4 px-6">EEE</td>
+                    <td class="py-4 px-6">01-11-2024</td>
+                    <td class="py-4 px-6">2</td>
+                    <td class="py-4 px-6 text-center">
+                        <button class="text-gray-600 hover:text-gray-900">...</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="p-6">
+        <div class="flex justify-between items-center">
+            <button class="bg-gray-200 px-4 py-2 rounded-lg text-gray-800"><i class='bx bxs-chevron-left'></i></button>
+            <div class="text-gray-800">1 of 10</div>
+            <button class="bg-gray-200 px-4 py-2 rounded-lg text-gray-800"><i class='bx bxs-chevron-right'></i></button>
+        </div>
+    </div>
+
+
+</body>
+</html>
