@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(116.24deg, #FFFFFF 1.24%, #CEA88E 93.87%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+  }
+  </style>
+</head>
+
+<body class="text-gray-700" >
+
+  <div class=" mx-auto flex">
+    <!-- Sidebar -->
+    <div class="w-[220px] h-[93vh] m-6 bg-black text-white flex flex-col rounded-3xl ">
+      <div class="flex items-center justify-center h-[100px] border-b border-gray-800">
+        <img src="./assets/logo.png" alt="Logo" class="h-[40px]" />
+      </div>
+      <!-- Main navigation content -->
+      <nav class="flex-1 mt-6 px-6 flex flex-col justify-between">
+        <!-- Top section -->
+        <div class="space-y-4">
+          <a href="./overview.html" class="flex items-center gap-4  font-semibold">
+            <i class="fa-solid fa-house"></i> Overview
+          </a>
+          <a href="./medicine.html" class="flex items-center gap-4 text-orange-400 hover:text-orange-400">
+            <i class="fa-solid fa-pills"></i> Medicine
+          </a>
+          <a href="./order.html" class="flex items-center gap-4 hover:text-orange-400">
+            <i class="fa-solid fa-box"></i> Orders
+          </a>
+          <a href="./payment.html" class="flex items-center gap-4 hover:text-orange-400">
+            <i class="fa-solid fa-credit-card"></i> Payments
+          </a>
+        </div>
+        <!-- Bottom section -->
+        <div class="space-y-4 mb-6">
+          <a href="#" class="flex items-center gap-4 hover:text-orange-400">
+            <i class="fa-solid fa-gear"></i> Settings
+          </a>
+          <a href="#" class="flex items-center gap-4 hover:text-orange-400">
+            <i class="fa-solid fa-life-ring"></i> Support
+          </a>
+        </div>
+      </nav>
+    </div>
+    
+    
+
+    <!-- Main Content -->
+    <div class="flex-1 mt-4">
+      <!-- Header -->
+      <div class="h-[80px] bg-gradient-to-r  flex items-center px-10 justify-between">
+        <h1 class="text-4xl font-bold text-orange-400">Medicine</h1>
+        <div class="flex items-center gap-6">
+          <i class="fa-solid fa-magnifying-glass text-xl text-gray-600"></i>
+          <i class="fa-solid fa-bell text-xl text-gray-600"></i>
+          <div class="flex items-center gap-4">
+            <img src="https://placehold.co/40x40" alt="User" class="w-10 h-10 rounded-full" />
+            <div class="text-right">
+              <p class="text-sm font-semibold">UserName</p>
+              <p class="text-xs text-gray-500">Pharmacist</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs and Search -->
+      <div class="px-7 mt-6 ">
+        <div class="flex items-center justify-between">
+          <div class="flex space-x-6">
+            <button class="text-orange-400 border-b-2 border-orange-400 font-medium">Available Medicine</button>
+            <button class="text-gray-500">Stock Out Medicine</button>
+            <button class="text-gray-500">Requested Medicine</button>
+          </div>
+          <button class="bg-orange-400 text-white px-4 py-2 rounded flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i> Add New Item
+          </button>
+        </div>
+
+        <div class="mt-4 flex items-center gap-4">
+          <div class="relative flex-1">
+            <input type="text" placeholder="   Search Medicine Inventory.." class="w-2/5 py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400">
+            <i class="fa-solid fa-magnifying-glass absolute left-2 top-3 text-gray-400"></i>
+          </div>
+          <select class="w-1/6 py-2 px-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400">
+            <option>- Select Group -</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="mt-6 bg-[#f9f5f4] rounded-3xl h-[68vh] m-6">
+        <table class="w-full border-collapse bg-white shadow-md rounded-lg">
+          <thead class="bg-gray-100">
+            <tr class="text-left text-gray-600 text-sm font-medium">
+              <th class="py-4 px-6">Medicine Name <i class="fa-solid fa-caret-down ml-1"></i></th>
+              <th class="py-4 px-6">Medicine ID <i class="fa-solid fa-caret-down ml-1"></i></th>
+              <th class="py-4 px-6">Group Name <i class="fa-solid fa-caret-down ml-1"></i></th>
+              <th class="py-4 px-6">Stock in Qty <i class="fa-solid fa-caret-down ml-1"></i></th>
+              <th class="py-4 px-6">Action</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm text-gray-700">
+            <!-- Row 1 -->
+            <tr class="border-t hover:bg-gray-50">
+              <td class="py-4 px-6">Augmentin 625 Duo Tablet</td>
+              <td class="py-4 px-6">D06ID232435454</td>
+              <td class="py-4 px-6">Generic Medicine</td>
+              <td class="py-4 px-6">350</td>
+              <td class="py-4 px-6 text-orange-400 font-medium">View Full Detail <i class="fa-solid fa-chevron-right ml-1"></i></td>
+            </tr>
+            <!-- Add more rows as necessary -->
+            <tr class="border-t hover:bg-gray-50">
+              <td class="py-4 px-6">Azithral 500 Tablet</td>
+              <td class="py-4 px-6">D06ID232435451</td>
+              <td class="py-4 px-6">Generic Medicine</td>
+              <td class="py-4 px-6">20</td>
+              <td class="py-4 px-6 text-orange-400 font-medium">View Full Detail <i class="fa-solid fa-chevron-right ml-1"></i></td>
+            </tr>
+            <!-- Add more rows as necessary -->
+          </tbody>
+        </table>
+
+
+          <!-- Pagination -->
+          <div class="mt-4 flex justify-between items-center mx-6">
+            <p class="text-sm text-gray-500">Showing 1 - 8 results of 298</p>
+            <div class="flex items-center space-x-2">
+              <button class="p-2 bg-gray-200 rounded-full text-gray-500">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <span class="text-sm text-gray-500">Page 01</span>
+              <button class="p-2 bg-gray-200 rounded-full text-gray-500">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html
