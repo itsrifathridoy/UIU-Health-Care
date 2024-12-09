@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
+  <!-- Tailwind CSS CDN Link -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+ 
+
+  <!-- Main Section for Booking Appointment -->
+  <section id="main" class="container mx-auto bg-white p-8 rounded-lg shadow-md mt-8">
+    
+    <!-- Title Section -->
+    <h1 class="text-3xl font-bold text-orange-400 mb-8 text-center">Book an Appointment</h1>
+
+    <!-- Search Form Section -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Find a Doctor</h2>
+      <form class="flex gap-4 mb-6">
+        <!-- Specialization Field (Dropdown) -->
+        <div class="w-full sm:w-1/3">
+          <label for="specialization" class="block text-lg font-semibold">Specialization</label>
+          <select id="specialization" class="w-full p-3 border rounded-md bg-white shadow-sm">
+            <option value="" disabled selected>Select Specialization</option>
+            <option value="cardiologist">Cardiologist</option>
+            <option value="dentist">Dentist</option>
+            <option value="dermatologist">Dermatologist</option>
+            <option value="neurologist">Neurologist</option>
+            <option value="orthopedic">Orthopedic</option>
+            <option value="pediatrician">Pediatrician</option>
+            <option value="pediatrician">Psychiatrist</option>
+            <option value="pediatrician">Others</option>
+          </select>
+        </div>
+
+        <!-- Doctor's Name Field -->
+        <div class="w-full sm:w-1/3">
+          <label for="doctor-name" class="block text-lg font-semibold">Doctor's Name</label>
+          <input type="text" id="doctor-name" class="w-full p-3 border rounded-md" placeholder="Doctor's Name">
+        </div>
+
+        <!-- Appointment Type Dropdown -->
+        <div class="w-full sm:w-1/3">
+          <label for="appointment-type" class="block text-lg font-semibold">Appointment Type</label>
+          <select id="appointment-type" class="w-full p-3 border rounded-md bg-white shadow-sm">
+            <option value="" disabled selected>Select Appointment Type</option>
+            <option value="new_patient">New Patient</option>
+            <option value="follow_up">Follow Up</option>
+            <option value="report_show">Report Show</option>
+          </select>
+        </div>
+
+        <!-- Search Button -->
+        <div class="w-full sm:w-1/3 flex items-end">
+          <button type="submit" class="w-full bg-orange-400 text-white p-3 rounded-lg shadow-md hover:bg-orange-500">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Available Doctors Section -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Available Doctors</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Doctor Card Example 1 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-lg transition-shadow duration-300 ">
+          <img src="https://via.placeholder.com/150" alt="Doctor Image" class="w-24 h-24 rounded-full mx-auto mb-4">
+          <div class="flex-col space-y-1 mt-6">
+            <div class="text-center ">
+              <label class="text-xl font-semibold text-orange-400 ">Dr. John Doe</label>
+            </div>
+            <div class="text-center">
+              <label class="text-gray-600 mb-2 ">Cardiologist</label>
+            </div>
+            
+            <div class="flex space-x-2">
+                <label class="text-gray-600 mb-2">Experience:</label>
+                <p class="text-gray-600 mb-2">10 Years</p>
+            </div>
+            <div class="flex space-x-2">
+              <label class="text-gray-600 mb-2">Location:</label>
+              <p class="text-gray-600 mb-2">Dhaka</p>
+          </div>
+          <div>
+            <label class="text-gray-600 mb-2">Available Slots:</label>
+            <div class="grid grid-cols-3 gap-1 mt-2">
+              <button class="bg-slate-500 text-white py-2 rounded-md hover:bg-slate-600">9:00 AM</button>
+              <button class="bg-slate-500 text-white py-2 rounded-md hover:bg-slate-600">2:00 PM</button>
+              <button class="bg-slate-500 text-white py-2 rounded-md hover:bg-slate-600">5:30 PM</button>
+            </div>
+        </div>
+          </div>
+          <button class="w-full bg-orange-400 text-white p-3 rounded-lg shadow-md hover:bg-orange-500 mt-4" onclick="openBookingModal()">Book Appointment</button>
+        </div>
+
+        <!-- Doctor Card Example 2 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-lg transition-shadow duration-300 ">
+          <img src="https://via.placeholder.com/150" alt="Doctor Image" class="w-24 h-24 rounded-full mx-auto mb-4">
+          <div class="flex-col space-y-1 mt-6">
+            <div class="text-center ">
+              <label class="text-xl font-semibold text-orange-400 ">Dr. John Doe</label>
+            </div>
+            <div class="text-center">
+              <label class="text-gray-600 mb-2 ">Cardiologist</label>
+            </div>
+            
+            <div class="flex space-x-2">
+                <label class="text-gray-600 mb-2">Experience:</label>
+                <p class="text-gray-600 mb-2">10 Years</p>
+            </div>
+            <div class="flex space-x-2">
+              <label class="text-gray-600 mb-2">Location:</label>
+              <p class="text-gray-600 mb-2">Dhaka</p>
+            </div>
+            <div>
+                <label class="text-gray-600 mb-2">Available Slots:</label>
+                <div class="grid grid-cols-3 gap-1 mt-2">
+                  <button class="bg-slate-500  text-white py-2 rounded-md hover:bg-slate-600">9:00 AM</button>
+                  <button class="bg-slate-500 text-white py-2 rounded-md hover:bg-slate-600">2:00 PM</button>
+                  <button class="bg-slate-500 text-white py-2 rounded-md hover:bg-slate-600">5:30 PM</button>
+                </div>
+            </div>
+          </div>
+          <button class="w-full bg-orange-400 text-white p-3 rounded-lg shadow-md hover:bg-orange-500 mt-4" onclick="openBookingModal()">Book Appointment</button>
+        </div>
+
+        <!-- Additional Doctor Cards can be added here -->
+      </div>
+    </div>
+
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
+      <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-svw">
+        <h3 class="text-2xl font-semibold text-orange-400 mb-4">Book Appointment with <span>Dr. John Doe</span></h3>
+        <form>
+          <!-- Patient Name -->
+          <div class="mb-4">
+            <label for="patient-name" class="block text-lg font-semibold">Your Name</label>
+            <input type="text" id="patient-name" class="w-full p-3 border rounded-md" placeholder="Enter your name">
+          </div>
+
+          <!-- Date & Time -->
+          <div class="mb-4">
+            <label for="appointment-date" class="block text-lg font-semibold">Preferred Date</label>
+            <input type="date" id="appointment-date" class="w-full p-3 border rounded-md">
+          </div>
+
+          <div class="mb-4">
+            <label for="appointment-time" class="block text-lg font-semibold">Preferred Time</label>
+            <input type="time" id="appointment-time" class="w-full p-3 border rounded-md">
+          </div>
+
+          <!-- Patient Contact -->
+          <div class="mb-4">
+            <label for="patient-contact" class="block text-lg font-semibold">Contact Number</label>
+            <input type="text" id="patient-contact" class="w-full p-3 border rounded-md" placeholder="Enter your contact number">
+          </div>
+
+           <!-- Appointment Confirmation Section -->
+            <div class="mb-4">
+              <h2 class="text-xl font-semibold text-gray-800 mb-4">Appointment Confirmation</h2>
+              <label for="problem-description" class="block text-gray-700 font-medium mb-2">
+                Please Write a description of your problem
+              </label>
+              <textarea
+                id="problem-description"
+                placeholder="Write something"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                rows="5"
+              ></textarea>
+              <p class="text-sm text-gray-600 mt-3">
+                *Pay <span class="font-semibold text-orange-600">100 TK</span> to confirm your appointment
+              </p>
+              <button
+                class="w-full bg-orange-500 text-white font-medium py-2 px-4 rounded-lg mt-4 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                onclick="openPayment()"
+              >
+                Pay Now
+              </button>
+            </div>
+
+            <!-- Booking Buttons -->
+          <div class="flex justify-between">
+            <button type="button" class="bg-orange-400 text-white px-6 py-3 rounded-lg shadow-md hover:bg-orange-500" onclick="submitAppointment()">Confirm Appointment</button>
+            <button type="button" class="bg-gray-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700" onclick="closeBookingModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div  id="payment" class="max-w-5xl mx-auto bg-white rounded-lg shadow-md p-6 hidden">
+      <!-- Doctor Details -->
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h2 class="text-2xl font-semibold text-gray-800">Dr. Shafwanur Rahman</h2>
+          <p class="text-gray-600">MBBS | General Physician, Dermatology</p>
+          <p class="text-gray-600">Patients in queue: <span class="font-bold">0</span></p>
+        </div>
+        <div class="text-right">
+          <h3 class="text-lg font-medium">Payment Details</h3>
+          <p>Consultation Fee: ৳285.71</p>
+          <p>VAT (5%): ৳14.29</p>
+          <p class="font-bold text-orange-500">Total Payable: ৳300</p>
+        </div>
+      </div>
+  
+      <!-- Steps -->
+      <div>
+        <!-- Step 1: Mobile Number -->
+        <div class="mb-4">
+          <h3 class="text-lg font-medium">1. Mobile Number</h3>
+          <div class="flex items-center mt-2">
+            <div class="flex items-center border border-gray-300 rounded-md px-2 bg-gray-50">
+              <span class="text-lg">+88</span>
+            </div>
+            <input type="text" id="mobile-number" class="w-full border border-gray-300 rounded-md px-3 py-2 ml-2" placeholder="Enter your mobile number">
+            <button class="ml-4 px-10 py-1 bg-orange-400 text-white rounded-md font-bold hover:bg-orange-500" onclick="sendOtp()">Send OTP</button>
+          </div>
+        </div>
+  
+        <!-- Step 2: OTP Verification -->
+        <div class="mb-4 hidden" id="otp-section">
+          <h3 class="text-lg font-medium">Enter OTP</h3>
+          <input type="text" id="otp-code" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-2" placeholder="Enter OTP">
+          <button class="mt-3 px-6 py-2 bg-slate-500 text-white rounded-md font-bold hover:bg-slate-400" onclick="verifyOtp()">Verify OTP</button>
+        </div>
+  
+        <!-- Step 3: Payment Method -->
+        <div class="mb-4 hidden" id="payment-section">
+          <h3 class="text-lg font-medium">3. Payment Method</h3>
+          <div class="grid grid-cols-3 gap-4 mt-2">
+            <button class="px-6 py-3 bg-gray-100  text-white rounded-md hover:bg-pink-100" onclick="processPayment('bKash')"><img src="../assets/BKash-bKash-Logo.wine.png" alt=""> bKash</button>
+            <button class="px-6 py-3 bg-gray-100  text-white rounded-md hover:bg-violet-100" onclick="processPayment('Rocket')"><img src="../assets/Rocket_Logo.png" alt=""> Rocket</button>
+            <button class="px-6 py-3 bg-gray-100  text-white rounded-md hover:bg-red-100" onclick="processPayment('Nagad')"><img src="../assets/Nagad-Logo.wine.png" alt=""> Nagad</button>
+          </div>
+
+          <button onclick="submitPayment()">Submit Payment</button>
+        </div>
+  
+        <!-- Step 4: Receipt -->
+        <div class="hidden" id="receipt-section">
+          <h3 class="text-lg font-medium">Payment Successful!</h3>
+          <p class="mt-3">Thank you for your payment. Here is your receipt:</p>
+          <div class="border border-gray-300 rounded-md p-4 mt-4">
+            <p><strong>Doctor:</strong> Dr. Shafwanur Rahman</p>
+            <p><strong>Consultation Fee:</strong> ৳285.71</p>
+            <p><strong>VAT (5%):</strong> ৳14.29</p>
+            <p class="font-bold"><strong>Total Paid:</strong> ৳300</p>
+            <p class="mt-2 text-green-500 font-semibold">Payment ID: #12345ABC</p>
+  
+            <button class="mt-3 px-6 py-2 bg-slate-500 text-white rounded-md font-bold hover:bg-slate-400">Download</button>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </section>
+
+   
+  
+ 
+
+  <!-- JavaScript for Modal -->
+  <script>
+    // Function to show the booking modal
+    function openBookingModal() {
+      document.getElementById('booking-modal').classList.remove('hidden');
+    }
+  
+    // Function to hide the booking modal
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+  
+    // Function to handle appointment submission
+    function submitAppointment() {
+      alert('Appointment Confirmed!');
+      closeBookingModal();
+    }
+  
+    // Function to open the payment section
+    function openPayment() {
+      // Hide the booking modal
+      document.getElementById('booking-modal').classList.add('hidden');
+      
+      // Show the payment section
+      document.getElementById('payment').classList.remove('hidden');
+    }
+  
+    // Additional functionality for handling payment submission (you can customize it as needed)
+    function submitPayment() {
+      alert('Payment Confirmed!');
+      document.getElementById('payment').classList.add('hidden');
+    }
+  </script>
+  
+
+</body>
+</html>

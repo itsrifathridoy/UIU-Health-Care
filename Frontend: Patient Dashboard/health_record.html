@@ -7,244 +7,600 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-
 </head>
 <body class="bg-gray-100">
 
     <div class="bg-gray-50 min-h-screen p-6">
         <!-- Tabs -->
-        <div class="flex items-center border-b-2 border-gray-200 text-xl">
-          <button class="px-4 py-2 font-bold text-orange-500 border-b-2 border-orange-500">
-            Basic Health Checkup
-          </button>
-          <button class="px-4 py-2 font-bold text-gray-500 hover:text-orange-500">
-            Medical History
-          </button>
-          <button class="px-4 py-2 font-bold text-gray-500 hover:text-orange-500">
-            Test Report
-          </button>
+        <div class="flex space-x-6 border-b pb-4 mb-6 text-gray-600 text-lg font-semibold">
+            <a href="#record" class="tab border-orange-500 text-orange-500 border-b-2 pb-2"
+               onclick="switchTab('record', this)">Basic Health Checkup</a>
+            <a href="#medical_history" class="tab hover:text-orange-500"
+               onclick="switchTab('medical_history', this)">Medical History</a>
+            <a href="#test_report" class="tab hover:text-orange-500"
+               onclick="switchTab('test_report', this)">Test Report</a>
         </div>
-      
-       
-        <!-- Table -->
+
+        <!-- Sections -->
         <section id="record" class="section">
             <div class="mt-6 bg-white rounded-lg shadow-md overflow-hidden">
 
-                 <!-- Add New Button -->
-                <div class="flex justify-end mt-4">
+                <!-- Add New Button -->
+               <div class="flex justify-end mt-4">
+                   <button
+                   id="addNewButton"
+                   class="bg-orange-500 text-white px-8 py-2 font-bold rounded-lg shadow hover:bg-orange-600 mb-6 mr-6"
+                   >
+                   Add New
+                   </button>
+               </div>
+     
+               <table class="w-full text-left border-collapse">
+                 <!-- Table Head -->
+                 <thead class="bg-gray-200">
+                   <tr>
+                     <th class="py-3 px-4 text-gray-600 text-sm">#</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Date Of Checkup</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Weight (Kg)</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Heart Rate (BPM)</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Blood Pressure (MmHg)</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Chest (In)</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Waist (In)</th>
+                     <th class="py-3 px-4 text-gray-600 text-sm">Hip (Cm)</th>
+                   </tr>
+                 </thead>
+                 <!-- Table Body -->
+                 <tbody>
+                   <tr class="bg-gray-50">
+                     <td class="py-3 px-4 text-sm">1</td>
+                     <td class="py-3 px-4 text-sm">
+                       <div class="font-medium">Tuesday</div>
+                       <div class="text-gray-500">19/11/2024</div>
+                     </td>
+                     <td class="py-3 px-4 text-sm">60Kg</td>
+                     <td class="py-3 px-4 text-sm">120bpm</td>
+                     <td class="py-3 px-4 text-sm">80/120mmHg</td>
+                     <td class="py-3 px-4 text-sm">36in</td>
+                     <td class="py-3 px-4 text-sm">30in</td>
+                     <td class="py-3 px-4 text-sm">28in</td>
+                   </tr>
+                   <tr class="bg-orange-50">
+                     <td class="py-3 px-4 text-sm">2</td>
+                     <td class="py-3 px-4 text-sm">
+                       <div class="font-medium">Tuesday</div>
+                       <div class="text-gray-500">19/11/2024</div>
+                     </td>
+                     <td class="py-3 px-4 text-sm">60Kg</td>
+                     <td class="py-3 px-4 text-sm">120bpm</td>
+                     <td class="py-3 px-4 text-sm">80/120mmHg</td>
+                     <td class="py-3 px-4 text-sm">36in</td>
+                     <td class="py-3 px-4 text-sm">30in</td>
+                     <td class="py-3 px-4 text-sm">28in</td>
+                   </tr>
+                   <!-- Repeat rows as necessary -->
+                 </tbody>
+               </table>
+             </div>
+        </section>
+
+        <section id="measurements" class="section hidden">
+            <div class="bg-gray-50 min-h-screen p-6">
+            
+          
+                <!-- Form Section -->
+                <form class="mt-8 space-y-6 bg-white p-6 rounded-lg shadow-md">
+                  <!-- Icon -->
+                  <div class="flex justify-center mb-6">
+                    <div class="text-orange-500 text-xl">
+                      <img src="../assets/medical-record_10531098.png" height="50" width="60" alt="records">
+                    </div>
+                  </div>
+              
+                  <!-- Inputs -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Weight -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <i class="fas fa-weight"></i> Weight (kg)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Weight"
+                        class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                      />
+                    </div>
+              
+                    <!-- Heart Rate -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <i class="fas fa-heartbeat"></i> Heart Rate (bpm)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Heart Rate"
+                        class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+              
+                  <!-- Blood Pressure -->
+                  <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Blood Pressure</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                          <i class="fas fa-tachometer-alt"></i> Systolic (mmHg)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Systolic"
+                          class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                          <i class="fas fa-tachometer-alt"></i> Diastolic (mmHg)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Diastolic"
+                          class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- Body Measurements -->
+                  <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Body Measurements</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <!-- Chest -->
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                          <i class="fas fa-ruler"></i> Chest (In)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Chest"
+                          class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                        />
+                      </div>
+                      <!-- Waist -->
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                          <i class="fas fa-ruler-combined"></i> Waist (In)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Waist"
+                          class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                        />
+                      </div>
+                      <!-- Hip -->
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                          <i class="fas fa-ruler"></i> Hip (In)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Hip"
+                          class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- Submit Button -->
+                  <div class="flex justify-center mt-6">
                     <button
-                    id="addNewButton"
-                    class="bg-orange-500 text-white px-8 py-2 font-bold rounded-lg shadow hover:bg-orange-600 mb-6 mr-6"
+                      type="submit"
+                      class="bg-orange-500 text-white px-6 py-2 rounded-lg shadow hover:bg-orange-600 mt-10"
                     >
-                    Add New
+                      Add Record
+                    </button>
+                  </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="medical_history" class="section hidden">
+            <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8 ">
+
+              <header class="bg-orange-400 text-white py-6 px-4 shadow-lg">
+                <div class="container mx-auto">
+                  <h1 class="text-3xl font-bold">Patient Medical Records</h1>
+                  <p class="text-sm mt-1">Detailed medical test results for patient assessment.</p>
+                </div>
+              </header>
+
+              <main class="container mx-auto py-8 px-4">
+                <!-- Patient Information -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Patient Information</h2>
+                    <div class="grid grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Full Name:</label>
+                            <p class="text-gray-800 font-medium">John Doe</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Age:</label>
+                            <p class="text-gray-800 font-medium">23</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Gender:</label>
+                            <p class="text-gray-800 font-medium">Male</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Weight:</label>
+                            <p class="text-gray-800 font-medium">75 kg</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Height:</label>
+                            <p class="text-gray-800 font-medium">5'9"</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">University Mail:</label>
+                            <p class="text-gray-800 font-medium">john.doe@university.edu</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">University ID:</label>
+                            <p class="text-gray-800 font-medium">011221493</p>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-600">Address:</label>
+                            <p class="text-gray-800 font-medium">123 Main Street, Cityville</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Medical Conditions -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Medical Conditions</h2>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Ongoing Treatment:</label>
+                            <p class="text-gray-800 font-medium">High Blood Pressure</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Known Allergies:</label>
+                            <p class="text-gray-800 font-medium">Penicillin</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Chronic Conditions:</label>
+                            <p class="text-gray-800 font-medium">Diabetes</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Test Report History -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Test Report History</h2>
+                    <table class="w-full mt-4 text-left border-collapse">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Date</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Test Type</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Result</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td class="py-3 px-4 text-sm">2024-11-10</td>
+                                <td class="py-3 px-4 text-sm">Blood Sugar</td>
+                                <td class="py-3 px-4 text-sm">7.8 mmol/L</td>
+                                <td class="py-3 px-4 text-sm">High</td>
+                            </tr>
+                            <tr class="bg-orange-50">
+                                <td class="py-3 px-4 text-sm">2024-10-15</td>
+                                <td class="py-3 px-4 text-sm">Blood Pressure</td>
+                                <td class="py-3 px-4 text-sm">140/90</td>
+                                <td class="py-3 px-4 text-sm">Medication Required</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="py-3 px-4 text-sm">2024-09-01</td>
+                                <td class="py-3 px-4 text-sm">Cholesterol</td>
+                                <td class="py-3 px-4 text-sm">220 mg/dL</td>
+                                <td class="py-3 px-4 text-sm">Diet Adjustment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Medical History -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Medical History</h2>
+                    <table class="w-full mt-4 text-left border-collapse">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Date</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Diagnosis</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Treatment</th>
+                                <th class="py-3 px-4 text-gray-600 text-sm">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-gray-50">
+                                <td class="py-3 px-4 text-sm">2024-10-15</td>
+                                <td class="py-3 px-4 text-sm">Common Cold</td>
+                                <td class="py-3 px-4 text-sm">Antibiotics</td>
+                                <td class="py-3 px-4 text-sm">Improved after 1 week</td>
+                            </tr>
+                            <tr class="bg-orange-50">
+                                <td class="py-3 px-4 text-sm">2024-09-05</td>
+                                <td class="py-3 px-4 text-sm">Fractured Arm</td>
+                                <td class="py-3 px-4 text-sm">Cast Applied</td>
+                                <td class="py-3 px-4 text-sm">Follow-up after 6 weeks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!-- Footer -->
+                <div class="text-right">
+                    <button class="bg-orange-400 text-white px-6 py-2 rounded hover:bg-orange-500">
+                        Print Records
                     </button>
                 </div>
-      
-                <table class="w-full text-left border-collapse">
-                  <!-- Table Head -->
-                  <thead class="bg-gray-200">
+              </main>
+            </div>
+        </section>
+
+        <section id="test_report" class="section hidden">
+          <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8 ">
+          <!-- Header Section -->
+          <header class="bg-orange-400 text-white py-6 px-4 shadow-lg">
+            <div class="container mx-auto">
+              <h1 class="text-3xl font-bold">Patient Test Report</h1>
+              <p class="text-sm mt-1">Detailed medical test results for patient assessment.</p>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="container mx-auto py-8 px-4">
+            <!-- Patient Information -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+              <h2 class="text-xl font-bold text-orange-400 mb-4">Patient Information</h2>
+            <div class="grid grid-cols-4 gap-4 mt-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-600">Full Name:</label>
+                  <p class="text-gray-800 font-medium">John Doe</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">Age:</label>
+                  <p class="text-gray-800 font-medium">23</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">Gender:</label>
+                  <p class="text-gray-800 font-medium">Male</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">DOB:</label>
+                  <p class="text-gray-800 font-medium">2002-07-12</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">University Mail:</label>
+                  <p class="text-gray-800 font-medium">john.doe@university.edu</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">University ID:</label>
+                  <p class="text-gray-800 font-medium">011221493</p>
+              </div>
+              <div>
+                  <label class="block text-sm font-medium text-gray-600">Patient ID:</label>
+                  <p class="text-gray-800 font-medium">#12345678</p>
+              </div>
+              <div >
+                <label class="block text-sm font-medium text-gray-600">Date of Test:</label>
+                <p class="text-gray-800 font-medium">2024-12-05</p>
+              </div>
+              <div >
+                <label class="block text-sm font-medium text-gray-600">Doctor:</label>
+                <p class="text-gray-800 font-medium">Dr. Jane Smith</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600">Test Center:</label>
+                <p class="text-gray-800 font-medium">United Medical lab</p>
+              </div>
+
+            </div>
+            </section>
+
+            <!-- Test Results Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+              <h2 class="text-xl font-bold text-orange-400 mb-4">Test Results</h2>
+              <div class="overflow-x-auto">
+                <table class="min-w-full border-collapse border border-gray-200 text-sm">
+                  <thead class="bg-gray-100">
                     <tr>
-                      <th class="py-3 px-4 text-gray-600 text-sm">#</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Date Of Checkup</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Weight (Kg)</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Heart Rate (BPM)</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Blood Pressure (MmHg)</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Chest (In)</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Waist (In)</th>
-                      <th class="py-3 px-4 text-gray-600 text-sm">Hip (Cm)</th>
+                      <th class="border border-gray-300 px-4 py-2">Test Name</th>
+                      <th class="border border-gray-300 px-4 py-2">Result</th>
+                      <th class="border border-gray-300 px-4 py-2">Reference Range</th>
+                      <th class="border border-gray-300 px-4 py-2">Flag</th>
                     </tr>
                   </thead>
-                  <!-- Table Body -->
                   <tbody>
-                    <tr class="bg-gray-50">
-                      <td class="py-3 px-4 text-sm">1</td>
-                      <td class="py-3 px-4 text-sm">
-                        <div class="font-medium">Tuesday</div>
-                        <div class="text-gray-500">19/11/2024</div>
-                      </td>
-                      <td class="py-3 px-4 text-sm">60Kg</td>
-                      <td class="py-3 px-4 text-sm">120bpm</td>
-                      <td class="py-3 px-4 text-sm">80/120mmHg</td>
-                      <td class="py-3 px-4 text-sm">36in</td>
-                      <td class="py-3 px-4 text-sm">30in</td>
-                      <td class="py-3 px-4 text-sm">28in</td>
+                    <!-- Test Result Row Example -->
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Blood Pressure</td>
+                      <td class="border border-gray-300 px-4 py-2">120/80 mmHg</td>
+                      <td class="border border-gray-300 px-4 py-2">90/60 - 120/80 mmHg</td>
+                      <td class="border border-gray-300 px-4 py-2 text-green-600">Normal</td>
                     </tr>
-                    <tr class="bg-orange-50">
-                      <td class="py-3 px-4 text-sm">2</td>
-                      <td class="py-3 px-4 text-sm">
-                        <div class="font-medium">Tuesday</div>
-                        <div class="text-gray-500">19/11/2024</div>
-                      </td>
-                      <td class="py-3 px-4 text-sm">60Kg</td>
-                      <td class="py-3 px-4 text-sm">120bpm</td>
-                      <td class="py-3 px-4 text-sm">80/120mmHg</td>
-                      <td class="py-3 px-4 text-sm">36in</td>
-                      <td class="py-3 px-4 text-sm">30in</td>
-                      <td class="py-3 px-4 text-sm">28in</td>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Cholesterol</td>
+                      <td class="border border-gray-300 px-4 py-2">240 mg/dL</td>
+                      <td class="border border-gray-300 px-4 py-2">Below 200 mg/dL</td>
+                      <td class="border border-gray-300 px-4 py-2 text-red-600">High</td>
                     </tr>
-                    <!-- Repeat rows as necessary -->
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Blood Sugar (Fasting)</td>
+                      <td class="border border-gray-300 px-4 py-2">95 mg/dL</td>
+                      <td class="border border-gray-300 px-4 py-2">70 - 100 mg/dL</td>
+                      <td class="border border-gray-300 px-4 py-2 text-green-600">Normal</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Hemoglobin</td>
+                      <td class="border border-gray-300 px-4 py-2">13.5 g/dL</td>
+                      <td class="border border-gray-300 px-4 py-2">12 - 15 g/dL</td>
+                      <td class="border border-gray-300 px-4 py-2 text-green-600">Normal</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-        </section>
+            </section>
 
+            <!-- Recommendations Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+              <h2 class="text-xl font-bold text-orange-400 mb-4">Recommendations</h2>
+              <p class="text-lg text-gray-800 font-medium">
+                Based on your results, we recommend the following actions:
+              </p>
+              <ul class="list-disc pl-6 text-lg text-gray-800 font-medium">
+                <li>Follow up with your primary care physician for cholesterol management.</li>
+                <li>Maintain a healthy diet and exercise to manage blood pressure.</li>
+                <li>Continue monitoring your blood sugar levels regularly.</li>
+                <li>Regular check-ups for optimal health.</li>
+              </ul>
 
-       <section id="measurements" class="hidden">
-        <div class="bg-gray-50 min-h-screen p-6">
+            </section>
+
             
-          
-            <!-- Form Section -->
-            <form class="mt-8 space-y-6 bg-white p-6 rounded-lg shadow-md">
-              <!-- Icon -->
-              <div class="flex justify-center mb-6">
-                <div class="text-orange-500 text-xl">
-                  <img src="../assets/medical-record_10531098.png" height="50" width="60" alt="records">
+          <!-- <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-bold text-blue-600 mb-4">Payment Details</h2>
+            <p class="text-lg mb-4">Total Amount Due: <span class="font-semibold text-xl text-red-600">$150.00</span></p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+
+              
+              <div class="col-span-2 space-y-4">
+                <h3 class="text-lg font-semibold">Or Pay Using:</h3>
+                <div class="flex gap-4">
+                  
+                  <button class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md w-full hover:bg-blue-600">
+                    Pay via bKash
+                  </button>
+                  
+                  <button class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md w-full hover:bg-green-600">
+                    Pay via Rocket
+                  </button>
+                
+                  <button class="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-md w-full hover:bg-orange-600">
+                    Pay via Nagad
+                  </button>
+                </div>
+                <div class="mt-4 text-sm text-gray-500">
+                  <p>For bKash, Rocket, and Nagad payments, use the respective payment services on your phone. Enter the following details:</p>
+                  <ul class="list-disc pl-6">
+                    <li>Phone Number: <span class="font-semibold">+8801234567890</span></li>
+                    <li>Payment Reference: <span class="font-semibold">Patient ID #12345678</span></li>
+                  </ul>
                 </div>
               </div>
-          
-              <!-- Inputs -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Weight -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <i class="fas fa-weight"></i> Weight (kg)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Weight"
-                    class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                  />
-                </div>
-          
-                <!-- Heart Rate -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <i class="fas fa-heartbeat"></i> Heart Rate (bpm)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Heart Rate"
-                    class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                  />
-                </div>
+
+              <div class="col-span-2 flex justify-end">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow-md">Confirm Payment</button>
               </div>
-          
-              <!-- Blood Pressure -->
-              <div class="mt-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Blood Pressure</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <i class="fas fa-tachometer-alt"></i> Systolic (mmHg)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Systolic"
-                      class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <i class="fas fa-tachometer-alt"></i> Diastolic (mmHg)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Diastolic"
-                      class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-          
-              <!-- Body Measurements -->
-              <div class="mt-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Body Measurements</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <!-- Chest -->
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <i class="fas fa-ruler"></i> Chest (In)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Chest"
-                      class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                    />
-                  </div>
-                  <!-- Waist -->
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <i class="fas fa-ruler-combined"></i> Waist (In)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Waist"
-                      class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                    />
-                  </div>
-                  <!-- Hip -->
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <i class="fas fa-ruler"></i> Hip (In)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Hip"
-                      class="mt-2 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-orange-200 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-          
-              <!-- Submit Button -->
-              <div class="flex justify-center mt-6">
-                <button
-                  type="submit"
-                  class="bg-orange-500 text-white px-6 py-2 rounded-lg shadow hover:bg-orange-600 mt-10"
-                >
-                  Add Record
-                </button>
-              </div>
-            </form>
+            </div>
+          </section> -->
+
+
+            <!-- Action Buttons -->
+            <section class="flex justify-end gap-4">
+              <button class="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300 shadow">
+                Print Report
+              </button>
+              <button class="bg-orange-400 text-white px-4 py-2 rounded-lg hover:bg-orange-500 shadow">
+                Download PDF
+              </button>
+            </section>
+          </main>
+
         </div>
-       </section>
+        </section>
+    
 
-
-
-
-          
-      
-        <!-- Pagination -->
-        <div class="flex items-center justify-center mt-4 gap-2 text-gray-600">
-          <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
-            <i class='bx bxs-chevron-left'></i>
-          </button>
-          <button class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">
-            1
-          </button>
-          <button class="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center font-bold">
-            2
-          </button>
-          <button class="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center font-bold">
-            3
-          </button>
-          <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
-            <i class='bx bxs-chevron-right'></i>
-          </button>
-        </div>
+    <!-- Pagination -->
+    <div class="pagination-container flex items-center justify-center mt-4 gap-2 text-gray-600">
+        <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+          <i class='bx bxs-chevron-left'></i>
+        </button>
+        <button class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold">
+          1
+        </button>
+        <button class="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center font-bold">
+          2
+        </button>
+        <button class="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center font-bold">
+          3
+        </button>
+        <button class="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+          <i class='bx bxs-chevron-right'></i>
+        </button>
       </div>
-      
-      <script>
+
+    </div>
+
+
+    <script>
         const addNewButton = document.getElementById("addNewButton");
         const recordSection = document.getElementById("record");
         const measurementsSection = document.getElementById("measurements");
-      
+        const pagination = document.querySelector('.pagination-container');
+
+        // Handle "Add New" button click
         addNewButton.addEventListener("click", () => {
-          // Hide the record section
-          recordSection.classList.add("hidden");
-          // Show the measurements section
-          measurementsSection.classList.remove("hidden");
+        // Hide the record section and pagination
+        recordSection.classList.add("hidden");
+        pagination.classList.add("hidden");
+        
+        // Show the measurements section
+        measurementsSection.classList.remove("hidden");
         });
-      </script>
+
+        // Function to handle tab switching
+        function switchTab(tabId, element) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach((section) => {
+            section.classList.add('hidden');
+        });
+
+        // Show the selected section
+        const selectedSection = document.getElementById(tabId);
+        if (selectedSection) {
+            selectedSection.classList.remove('hidden');
+        }
+
+        // Remove active styles from all tabs
+        document.querySelectorAll('.tab').forEach((tab) => {
+            tab.classList.remove('border-orange-500', 'text-orange-500', 'border-b-2');
+        });
+
+        // Add active styles to the clicked tab
+        element.classList.add('border-orange-500', 'text-orange-500', 'border-b-2');
+
+        // Toggle pagination visibility for the "Record" section only
+        if (tabId === 'record') {
+            pagination.classList.remove('hidden');
+        } else {
+            pagination.classList.add('hidden');
+        }
+        }
+
+        // Handle "Add Record" button click in the Measurements section
+        const addRecordButton = measurementsSection.querySelector("button[type='submit']");
+        addRecordButton.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent form submission (for demo purposes)
+
+        // Hide the measurements section
+        measurementsSection.classList.add("hidden");
+
+        // Show the record section and pagination
+        recordSection.classList.remove("hidden");
+        pagination.classList.remove("hidden");
+        });
+
+    </script>
 </body>
 </html>

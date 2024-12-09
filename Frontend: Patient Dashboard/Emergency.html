@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Actions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <!-- Main Content -->
+    <div class="flex space-x-8">
+        <!-- Call for Ambulance -->
+        <div class="text-center">
+            <img src="../assets/Ambulance-bro.png" alt="Ambulance" height="400" width="400" >
+            <button 
+                onclick="showPopup('ambulance')"
+                class="mt-4 bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">
+                Call for Ambulance
+            </button>
+        </div>
+
+        <!-- Emergency Consultation -->
+        <div class="text-center">
+            <img src="../assets/Emergency call-bro.png" alt="Emergency Consultation" height="400" width="400" >
+            <button 
+                onclick="showPopup('consultation')"
+                class="mt-4 bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">
+                Emergency Consultation
+            </button>
+        </div>
+    </div>
+
+    <!-- Pop-up Modal -->
+    <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded shadow-lg text-center max-w-lg w-full">
+            <h2 id="popupTitle" class="text-lg font-semibold mb-4"></h2>
+            
+            <!-- Dynamic Form -->
+            <div id="formContent" class="hidden">
+                <form class="space-y-4 text-left">
+                    <div>
+                        <label for="from" class="block text-sm font-medium">From</label>
+                        <input 
+                            type="text" id="from" placeholder="Example: Dhaka"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring"
+                        >
+                    </div>
+                    <div>
+                        <label for="destination" class="block text-sm font-medium">Destination</label>
+                        <input 
+                            type="text" id="destination" placeholder="Example: Khulna"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring"
+                        >
+                    </div>
+                    <div>
+                        <label for="ambulanceType" class="block text-sm font-medium">Ambulance Type</label>
+                        <select id="ambulanceType" class="w-full border border-gray-300 rounded px-3 py-2">
+                            <option>Select</option>
+                            <option>Basic Life Support</option>
+                            <option>Advanced Life Support</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date" class="block text-sm font-medium">Date</label>
+                        <input 
+                            type="date" id="date"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring"
+                        >
+                    </div>
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring focus:ring-blue-00">
+                            <span class="ml-2">I need a round trip</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="name" class="block text-sm font-medium">Name</label>
+                        <input 
+                            type="text" id="name" placeholder="Your name"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-500"
+                        >
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium">Phone</label>
+                        <div class="flex">
+                            <span class="inline-flex items-center bg-gray-100 px-3 border border-gray-300 rounded-l">+880</span>
+                            <input 
+                                type="tel" id="phone" placeholder="Phone number"
+                                class="w-full border border-gray-300 rounded-r px-3 py-2 focus:ring focus:ring-blue-500"
+                            >
+                        </div>
+                    </div>
+
+                    <button 
+                        type="submit"
+                        class="w-full bg-orange-400 text-white px-4 py-2 rounded hover:bg-orange-500">
+                        Send Ambulance Request
+                    </button>
+                    
+                    <div class="text-left text-sm mt-6 flex text-gray-400">
+                        <i class='bx bx-info-circle mt-1 mr-3 text-lg' style='color:#078ef7'></i>
+                        <p>One of our agen will get back to you within 30 minutes with the update of the ambulance</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Numbers List -->
+            <ul id="popupList" class="text-left space-y-2"></ul>
+            
+            <button 
+                onclick="hidePopup()"
+                class="mt-4 bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                Close
+            </button>
+
+            
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // Data for the popups
+        const data = {
+            ambulance: {
+                title: "Request an Ambulance",
+                form: true,
+                numbers: []
+            },
+            consultation: {
+                title: "Consultation Numbers",
+                form: false,
+                numbers: ["+1122334455", "+5566778899"]
+            }
+        };
+
+        // Show the popup
+        function showPopup(type) {
+            const popup = document.getElementById('popup');
+            const title = document.getElementById('popupTitle');
+            const formContent = document.getElementById('formContent');
+            const list = document.getElementById('popupList');
+
+            // Set title
+            title.textContent = data[type].title;
+
+            // Show form or numbers
+            if (data[type].form) {
+                formContent.classList.remove('hidden');
+                list.classList.add('hidden');
+            } else {
+                formContent.classList.add('hidden');
+                list.classList.remove('hidden');
+                list.innerHTML = data[type].numbers
+                    .map(number => `<li><a href="tel:${number}" class="text-blue-500 hover:underline">${number}</a></li>`)
+                    .join('');
+            }
+
+            // Show the popup
+            popup.classList.remove('hidden');
+        }
+
+        // Hide the popup
+        function hidePopup() {
+            document.getElementById('popup').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
