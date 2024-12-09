@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(116.24deg, #FFFFFF 1.24%, #CEA88E 93.87%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+  }
+  </style>
+  </head>
+  <body>
+    <div class="flex flex-row h-[100vh] w-[100vw] bg-gradient-to-r from-[#4f48e6] from-10% via-[#6968f0] via-30% to-[#808bf7] to-90%">
+        <div class="w-[60%] h-full flex flex-col gap-2 text-white pl-32  pr-16 justify-center">
+        <img class="h-20 w-fit mb-8" src="assets/logo.png" alt="Login"/>
+        <h1 class="text-[2.5em] font-bold">Welcome to UIU Healthcare</h1>
+        <p class="text-[1.1em] mb-8">Your health is just a click away!</p>
+        <p class="text-gray-200">Connecting students, faculty, and staff to better healthcare. Schedule appointments, access records, and order medicines—all in one place.</p>
+      </div>
+
+      <div class="flex flex-col items-center pt-20 w-[34%] h-[85%] mt-auto bg-white rounded-t-[30px]">
+        <h1 class="text-[1.8em] font-bold">Forgot Your Password?</h1>
+        <p class="text-gray-500 text-[0.8em]">Enter your email address, and we'll send you a link to reset your password.</p>
+        
+
+        <form class="w-[70%] mt-10 flex flex-col items-center gap-2" action="emailSent.html">
+        
+            <input type="email" id="email" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3 " placeholder="Email" required /> 
+            <button type="submit" class="bg-[#5145e5] text-white text-sm font-semibold rounded-2xl w-full p-2.5 mt-4">Send Reset Link</button>
+        </form>
+  
+      </div>
+    </div>
+  </body>
+</html>
