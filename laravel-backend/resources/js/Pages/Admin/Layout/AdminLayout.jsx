@@ -7,7 +7,7 @@ export default function AdminLayout({children}) {
     const menuItems = [
         { href: "/admin", icon: "fa-solid fa-house", label: "Dashboard" },
         { href: "/admin/doctors", icon: "fa-solid fa-user-doctor", label: "Doctors" },
-        { href: "/admin/posts", icon: "fa-solid fa-calendar-check", label: "Appointments" },
+        { href: "/admin/posts", icon: "fa-solid fa-calendar-check", label: "Appointments.jsx" },
         { href: "/admin/patients", icon: "fa-solid fa-square-phone", label: "Consultation" },
 
     ];

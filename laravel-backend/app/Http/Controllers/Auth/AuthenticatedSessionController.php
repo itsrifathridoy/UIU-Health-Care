@@ -33,10 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         $authenticateRole = Auth::user()->role;
         if($authenticateRole == 0 ){
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('patient', absolute: false));
         }
         elseif($authenticateRole == 1 ){
-            return redirect()->intended(route('patient', absolute: false));
+            return redirect()->intended(route('doctor', absolute: false));
         }
         elseif($authenticateRole == 2 ){
             return redirect()->intended(route('pharmacist', absolute: false));

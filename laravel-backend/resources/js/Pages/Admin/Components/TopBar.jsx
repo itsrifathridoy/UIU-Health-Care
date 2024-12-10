@@ -1,8 +1,8 @@
-export default function TopBar({ notifications, user }) {
+export default function TopBar({ notifications, user, title }) {
     return (
         <div className={"flex justify-between w-full h-[15%] text-[#f5852a]"}>
             <div className={"flex items-center pl-5"}>
-                <h1 className={"text-2xl font-bold"}>Admin Dashboard</h1>
+                <h1 className={"text-2xl font-bold"}>{title}</h1>
             </div>
             <div className="flex items-center gap-6">
                 <div className={'bg-white h-10 w-10 flex justify-center items-center rounded-full '}>

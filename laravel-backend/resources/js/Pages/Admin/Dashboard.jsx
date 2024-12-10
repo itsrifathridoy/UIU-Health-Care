@@ -5,6 +5,7 @@ import SideBar from "@/Pages/Admin/Components/SideBar.jsx";
 import TopBar from "@/Pages/Admin/Components/TopBar.jsx";
 import CustomerVsRetention from "@/Pages/Admin/Components/CustomerVsRetention.jsx";
 import AdminLayout from "@/Pages/Admin/Layout/AdminLayout.jsx";
+import DashboardLayout from "@/Layouts/DashboardLayout.jsx";
 
 export default function Dashboard() {
     // Define menu items
@@ -78,10 +79,28 @@ export default function Dashboard() {
 
         },
     ];
+    const menuItems = [
+        { href: "/admin", icon: "fa-solid fa-house", label: "Dashboard" },
+        { href: "/admin/doctors", icon: "fa-solid fa-user-doctor", label: "Doctors" },
+        { href: "/admin/posts", icon: "fa-solid fa-calendar-check", label: "Appointments.jsx" },
+        { href: "/admin/patients", icon: "fa-solid fa-square-phone", label: "Consultation" },
 
+    ];
+
+    const notifications = [
+        { id: 1, message: "New user registered" },
+        { id: 2, message: "New post published" },
+    ];
+
+    const user = {
+        name: "Rifat",
+        userType: "Pharmacist",
+        avatar: "https://placehold.co/40x40",
+
+    }
 
     return (
-        <AdminLayout>
+        <DashboardLayout menuItems={menuItems} notifications={notifications} user={user} >
         <Head title="Admin Dashboard" />
             <div className={'flex h-[35%] gap-10'}>
                 <div className={'w-[33.33%] flex flex-col h-full bg-[#FFF6EC] rounded-2xl'}>
@@ -152,7 +171,7 @@ export default function Dashboard() {
                 <CustomerVsRetention data={data}/>
 
             </div>
-        </AdminLayout>
+        </DashboardLayout>
 
     );
 }

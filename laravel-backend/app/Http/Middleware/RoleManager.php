@@ -47,7 +47,7 @@ class RoleManager
 
         switch ($authUserRole) {
             case 0:
-                return redirect()->route('dashboard');
+                return redirect()->route('patient');
                 break;
             case 1:
                 return redirect()->route('doctor');

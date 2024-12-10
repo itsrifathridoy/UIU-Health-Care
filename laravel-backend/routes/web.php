@@ -30,14 +30,28 @@ Route::get('/pharmacist', function () {
     return Inertia::render('Pharmacist/Dashboard');
 })->middleware(['auth', 'verified','role:pharmacist'])->name('pharmacist');
 
+//Route::get('/patient', function () {
+//    return Inertia::render('Patient/Dashboard');
+//})->middleware(['auth', 'verified','role:patient'])->name('patient');
+
+
+//Route::middleware(['auth', 'verified','role:patient'])->group(function () {
+//    Route::controller(PatientController::class, 'patient')->group(function () {
+//        Route::prefix('patient')->group(function () {
+//            Route::get('/',  'index')->name('patient');
+//        });
+//    });
+//});
+
+
+
+
+
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified','role:patient'])->name('dashboard');
-
-
-Route::get('/something', function () {
-    return Inertia::render('About');
-})->name('about');
+})->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -47,3 +61,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/patient.php';
