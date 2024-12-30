@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('role')->default(0);
+            $table->integer('role')->default(0);
             $table->string('profile_photo_path', 2048)->nullable();
             $table->enum('blood_group', ['Unknown','A+','A-','B+','B-','AB+','AB-','O+','O-'])->default('Unknown');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->boolean('available_for_donation')->default(false);
             $table->string('emergency_contact')->nullable();
-            $table->enum('user_type',['student','faculty','staff','alumni'])->default('student');
+            $table->enum('user_type',['student','faculty','staff','alumni'])->default('student')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

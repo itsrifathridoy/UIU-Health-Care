@@ -82,7 +82,7 @@ export default function Dashboard() {
     const menuItems = [
         { href: "/admin", icon: "fa-solid fa-house", label: "Dashboard" },
         { href: "/admin/doctors", icon: "fa-solid fa-user-doctor", label: "Doctors" },
-        { href: "/admin/posts", icon: "fa-solid fa-calendar-check", label: "Appointments.jsx" },
+        { href: "/admin/posts", icon: "fa-solid fa-calendar-check", label: "Appointments" },
         { href: "/admin/patients", icon: "fa-solid fa-square-phone", label: "Consultation" },
 
     ];
@@ -100,7 +100,7 @@ export default function Dashboard() {
     }
 
     return (
-        <DashboardLayout menuItems={menuItems} notifications={notifications} user={user} >
+        <AdminLayout >
         <Head title="Admin Dashboard" />
             <div className={'flex h-[35%] gap-10'}>
                 <div className={'w-[33.33%] flex flex-col h-full bg-[#FFF6EC] rounded-2xl'}>
@@ -171,7 +171,7 @@ export default function Dashboard() {
                 <CustomerVsRetention data={data}/>
 
             </div>
-        </DashboardLayout>
+        </AdminLayout>
 
     );
 }

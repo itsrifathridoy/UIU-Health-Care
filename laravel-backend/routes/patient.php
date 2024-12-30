@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\BkashTokenizePaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Patient\PatientController;
 
@@ -15,6 +16,8 @@ Route::group([
         ->name('patient.messages');
     Route::get('/appointments', [PatientController::class, 'appointments'])
         ->name('patient.appointments');
+    Route::post('/appointments/create', [PatientController::class, 'createAppointment'])
+        ->name('patient.appointments.create');
     Route::get('/consultation', [PatientController::class, 'consultations'])
         ->name('patient.consultations');
     Route::get('/medicines', [PatientController::class, 'medicines'])
@@ -29,4 +32,8 @@ Route::group([
         ->name('patient.blood-bank');
     Route::get('/settings', [PatientController::class, 'settings'])
         ->name('patient.settings');
+
+    Route::get('/bkash/create-payment', [BkashTokenizePaymentController::class,'createPayment'])->name('bkash-create-payment');
+    Route::get('/bkash/callback', [BkashTokenizePaymentController::class,'callBack'])->name('bkash-callBack');
+
 });
