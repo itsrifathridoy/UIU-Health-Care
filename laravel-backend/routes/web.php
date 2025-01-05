@@ -4,6 +4,7 @@ use App\Http\Controllers\CallingNotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Notifications\CallingNotification;
+use App\Http\Controllers\DoctorController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,6 +51,12 @@ Route::get('/bkash/refund/status', [App\Http\Controllers\BkashTokenizePaymentCon
 Route::get('/doctor', function () {
     return Inertia::render('Doctor/Dashboard');
 })->middleware(['auth', 'verified','role:doctor'])->name('doctor');
+
+Route::middleware(['auth', 'verified','role:doctor'])->group(function () {
+    Route::redirect('/', '/doctor');
+
+    Route::resource('doctor', DoctorController::class);
+});
 
 Route::get('/pharmacist', function () {
     return Inertia::render('Pharmacist/Dashboard');
