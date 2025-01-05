@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -59,6 +61,16 @@ class User extends Authenticatable
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    // Relationships with consultations
+    public function consultations(): HasMany
+    {
+        return $this->hasMany(Consultation::class);
+    }
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payments::class);
     }
 
 }

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CallingNotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Notifications\CallingNotification;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,6 +16,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::post('calling-notification',CallingNotificationController::class);
 
 
 // SSLCOMMERZ Start
@@ -66,8 +70,17 @@ Route::get('/pharmacist', function () {
 
 
 
-
-
+Route::get('/notification', function () {
+    $user = auth()->user();
+    $callDetails = [
+        'caller_id' => auth()->id(),
+        'caller_name' => auth()->user()->name,
+        'message' => 'You have an incoming call!',
+        'call_time' => now(),
+    ];
+    $user->notify(new CallingNotification($callDetails));
+    return "Notification";
+})->name('notification');
 
 
 Route::get('/dashboard', function () {

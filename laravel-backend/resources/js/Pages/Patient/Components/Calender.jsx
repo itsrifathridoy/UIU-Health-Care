@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import {Link, useForm} from "@inertiajs/react";
+import {usePage} from "@inertiajs/react";
 
 const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -12,6 +13,7 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
     const [showEventPopup, setShowEventPopup] = useState(false);
 
     const [paymentAppID, setPaymentAppID] = useState(0);
+    console.log(usePage().props);
 
 
     // Initialize appointments with passed-in appointments
@@ -68,6 +70,21 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
         return appointment ? "bg-[#f97316]" : "";
     }
 
+    const hasAppointmentConflict = (newDate, newTime) => {
+
+        newDate = newDate.toISOString().split('T')[0];
+        newTime = newTime.split(':').slice(0, 2).join(':');
+
+        const newAppointmentDate = new Date(new Date(`${newDate} ${newTime}`).getTime() + 24 * 60 * 60 * 1000);
+
+        return appointments.some(appointment => {
+            const existingAppointmentDate = new Date(`${appointment.date.toISOString().split('T')[0]} ${appointment.time.split(':').slice(0, 2).join(':')}`);
+            const diffInMinutes = Math.abs((newAppointmentDate - existingAppointmentDate) / (1000 * 60));
+            return diffInMinutes < 15; // Conflict if the difference is less than 15 minutes
+        });
+    };
+
+
     const handleDayClick = (day) => {
         const clickedDate = new Date(currentYear, currentMonth, day);
         const today = new Date();
@@ -114,7 +131,8 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
                     date: data.date,
                     time: data.time,
                     doctor: selectedDoctor,
-                    problems: data.problems
+                    problems: data.problems,
+                    status: 'pending'
                 };
                 setAppointments([...appointments, newAppointment]);
 
@@ -215,6 +233,21 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
                                     type="time"
                                     value={data.time}
                                     onChange={(e) => setData('time', e.target.value)}
+                                    onChangeCapture={() => {
+
+                                        const conflict = hasAppointmentConflict(selectedDate, data.time)
+                                        console.log(conflict);
+                                        //shift 15 minutes
+                                        const newTime = new Date(`${selectedDate.toISOString().split('T')[0]} ${data.time.split(':').slice(0, 2).join(':')}`);
+                                        newTime.setMinutes(newTime.getMinutes() + 15);
+                                        if (conflict) {
+                                            alert('Appointment time conflicts with another appointment. Please select another time');
+                                            console.log(`${newTime.getHours()}:${newTime.getMinutes()}`);
+                                            setData('time', `${newTime.getHours()}:${newTime.getMinutes()}`);
+                                        }
+
+                                    }
+                                }
                                     className="border border-gray-300 p-2 rounded-lg"
                                 />
                                 {errors.time && <div className="text-red-500">{errors.time}</div>}
@@ -283,7 +316,7 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
                 )}
 
                 {/* Appointments List */}
-                <div>
+                <div className={'h-[55vh] overflow-y-auto'}>
                     <h3 className="text-2xl font-bold mb-4">Upcoming Appointments</h3>
                     {appointments.length > 0 ? (
                         appointments.map((appointment, index) => (
@@ -302,24 +335,18 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
                                         } ${appointment.date.getFullYear()}`}
                                     </h3>
                                     <h6 className="text-sm">{convertToAmPm(appointment.time)}</h6>
-                                    <div className="flex items-center gap-2 mt-1">
-                                        {appointment.doctor?.image && (
-                                            <img
-                                                src={appointment.doctor.image}
-                                                alt={appointment.doctor.name}
-                                                className="w-6 h-6 rounded-full object-cover"
-                                            />
-                                        )}
-                                        <p className="text-sm">{appointment.doctor?.name || 'N/A'}</p>
-                                        {appointment.doctor?.specialty && (
+                                    <div className="flex items-center gap-2 mt-1 ml-auto">
+
+                                        <p className="text-lg font-bold text-gray-800">{appointment.name || 'N/A'}</p>
+                                        {appointment.specialty && (
                                             <span className="text-xs text-gray-600">
-                                                ({appointment.doctor.specialty})
+                                                ({appointment.specialty})
                                             </span>
                                         )}
                                     </div>
-                                    {appointment.problems && (
+                                    {appointment.problem && (
                                         <p className="text-xs text-gray-600 mt-1">
-                                            Problems: {appointment.problems}
+                                            Problems: {appointment.problem}
                                         </p>
                                     )}
                                 </div>
@@ -330,7 +357,7 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
 
 
                                         <a key={appointment.app_id}
-                                        href={`/patient/bkash/create-payment?id=${appointment.app_id}&amount=5&purpose=Appointment&callback=${window.location.origin}/patient/bkash/callback&paymentOrigin=${window.location.href}`}
+                                        href={`/patient/bkash/create-payment?id=${appointment.app_id}&amount=1&purpose=Appointment&callback=${window.location.origin}/patient/bkash/callback&paymentOrigin=${window.location.href}`}
                                                 className="text-sm text-gray-800 hover:text-white transition-colors">
                                             <img className={'h-10 ml-auto'} src="/images/patient/bkash.png"
                                                  alt="Bkash"/>
@@ -368,23 +395,16 @@ const Calendar = ({doctors, initialAppointments, previousAppointments}) => {
                                     </h3>
                                     <h6 className="text-sm">{convertToAmPm(appointment.time)}</h6>
                                     <div className="flex items-center gap-2 mt-1">
-                                        {appointment.doctor?.image && (
-                                            <img
-                                                src={appointment.doctor.image}
-                                                alt={appointment.doctor.name}
-                                                className="w-6 h-6 rounded-full object-cover"
-                                            />
-                                        )}
-                                        <p className="text-sm">{appointment.doctor?.name || 'N/A'}</p>
-                                        {appointment.doctor?.specialty && (
+                                        <p className="text-lg font-bold text-gray-800">{appointment.name || 'N/A'}</p>
+                                        {appointment.specialty && (
                                             <span className="text-xs text-gray-600">
-                                                ({appointment.doctor.specialty})
+                                                ({appointment.specialty})
                                             </span>
                                         )}
                                     </div>
-                                    {appointment.problems && (
+                                    {appointment.problem && (
                                         <p className="text-xs text-gray-600 mt-1">
-                                            Problems: {appointment.problems}
+                                            Problems: {appointment.problem}
                                         </p>
                                     )}
                                 </div>

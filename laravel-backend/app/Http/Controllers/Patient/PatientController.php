@@ -28,21 +28,21 @@ class PatientController extends Controller
         $appointments = DB::table('appointments')
             ->join('doctors', 'appointments.doc_id', '=', 'doctors.doc_id')
             ->join('users', 'doctors.doc_id', '=', 'users.id')
-            ->select('appointments.*', 'doctors.*', 'users.name', 'users.email', 'users.phone')
+            ->select('appointments.*', 'doctors.*', 'users.name', 'users.email', 'users.phone','users.profile_photo_path')
             ->where('appointments.user_id', auth()->user()->id)
             ->where('appointments.date', '>=', now())
-            ->orderBy('date')
-            ->orderBy('time')
+            ->orderBy('date',direction: 'desc')
+            ->orderBy('time',direction: 'desc')
             ->get();
         // previous appointments
         $previousAppointments = DB::table('appointments')
             ->join('doctors', 'appointments.doc_id', '=', 'doctors.doc_id')
             ->join('users', 'doctors.doc_id', '=', 'users.id')
-            ->select('appointments.*', 'doctors.*', 'users.name', 'users.email', 'users.phone')
+            ->select('appointments.*', 'doctors.*', 'users.name', 'users.email', 'users.phone', 'users.profile_photo_path')
             ->where('appointments.user_id', auth()->user()->id)
             ->where('appointments.date', '<', now())
-            ->orderBy('date')
-            ->orderBy('time')
+            ->orderBy('date',direction: 'desc')
+            ->orderBy('time',direction: 'desc')
             ->get();
         return Inertia::render('Patient/Appointments',
             ['doctors' => $doctors, 'appointments' => $appointments, 'previousAppointments' => $previousAppointments]);
@@ -100,9 +100,44 @@ class PatientController extends Controller
             ['doctors' => $doctors, 'appointments' => $appointments, 'previousAppointments' => $previousAppointments]);
 
     }
-    public function consultations()
+    public function consultations(Request $request)
     {
-        return Inertia::render('Patient/Consultations');
+        $doctors = DB::table('doctors')
+            ->join('users', 'doctors.doc_id', '=', 'users.id')
+            ->select('doctors.*', 'users.profile_photo_path', 'users.email', 'users.phone')
+            ->get();
+        $consultations = DB::table('consultations')
+            ->join('doctors', 'consultations.doc_id', '=', 'doctors.doc_id')
+            ->join('users', 'doctors.doc_id', '=', 'users.id')
+            ->select('consultations.*', 'doctors.name', 'doctors.specialty', 'users.profile_photo_path')
+            ->where('consultations.user_id', auth()->user()->id)
+            ->orderBy('consultations.created_at', 'asc') // Specify the table for created_at
+            ->get();
+
+        return Inertia::render('Patient/Consultations', ['doctors' => $doctors, 'consultations' => $consultations]);
+    }
+    public function bookConsultation(Request $request)
+    {
+        $docID = $request->id;
+        $doctor = DB::table('doctors')
+            ->join('users', 'doctors.doc_id', '=', 'users.id')
+            ->select('doctors.*', 'users.profile_photo_path', 'users.email', 'users.phone')
+            ->where('doctors.doc_id', $docID)
+            ->first();
+        return Inertia::render('Patient/BookConsultation', ['doctor' => $doctor]);
+    }
+    public function booking(Request $request)
+    {
+//        $authUser = auth()->user();
+//        $validated = $request->validate([
+//            'doc_id' => 'required|exists:doctors,doc_id',
+//        ]);
+//
+//        return redirect()->route('patient.consultations', ['doctors' => $doctors]);
+    }
+    public function videoCall($id)
+    {
+        return Inertia::render('Patient/VideoCall', ['id' => $id]);
     }
     public function medicines()
     {

@@ -20,6 +20,12 @@ Route::group([
         ->name('patient.appointments.create');
     Route::get('/consultation', [PatientController::class, 'consultations'])
         ->name('patient.consultations');
+    Route::post('/consultation/book', [PatientController::class, 'booking'])
+        ->name('patient.consultations.booking');
+    Route::get('/consultation/book/{id}', [PatientController::class, 'bookConsultation'])
+        ->name('patient.consultations.book');
+    Route::get('/consultation/{id}', [PatientController::class, 'videoCall'])
+        ->name('patient.consultations.call');
     Route::get('/medicines', [PatientController::class, 'medicines'])
         ->name('patient.medicines');
     Route::get('/health', [PatientController::class, 'healthRecords'])
@@ -35,5 +41,6 @@ Route::group([
 
     Route::get('/bkash/create-payment', [BkashTokenizePaymentController::class,'createPayment'])->name('bkash-create-payment');
     Route::get('/bkash/callback', [BkashTokenizePaymentController::class,'callBack'])->name('bkash-callBack');
+    Route::get('/bkash/search/{trxID}', [BkashTokenizePaymentController::class,'searchTnx'])->name('bkash-serach');
 
 });
