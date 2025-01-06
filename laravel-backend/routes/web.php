@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CallingNotificationController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Notifications\CallingNotification;
@@ -17,7 +18,10 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::post('calling-notification',CallingNotificationController::class);
+
+
 
 
 // SSLCOMMERZ Start
@@ -47,16 +51,14 @@ Route::get('/bkash/refund/status', [App\Http\Controllers\BkashTokenizePaymentCon
 
 
 
-Route::get('/doctor', function () {
-    return Inertia::render('Doctor/Dashboard');
-})->middleware(['auth', 'verified','role:doctor'])->name('doctor');
+
 
 Route::get('/pharmacist', function () {
-    return Inertia::render('Pharmacist/Dashboard');
+    return Inertia::render('Pharmacist/Consultations');
 })->middleware(['auth', 'verified','role:pharmacist'])->name('pharmacist');
 
 //Route::get('/patient', function () {
-//    return Inertia::render('Patient/Dashboard');
+//    return Inertia::render('Patient/Consultations');
 //})->middleware(['auth', 'verified','role:patient'])->name('patient');
 
 
@@ -84,7 +86,7 @@ Route::get('/notification', function () {
 
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Consultations');
 })->name('dashboard');
 
 
@@ -92,9 +94,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/messages', [MessageController::class, 'send'])->name('messages.send');
+
 });
 
 require __DIR__.'/auth.php';
 require __DIR__.'/patient.php';
 require __DIR__.'/admin.php';
+require __DIR__.'/doctor.php';
 //require __DIR__.'/payment.php';

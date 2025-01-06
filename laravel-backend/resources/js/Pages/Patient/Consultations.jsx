@@ -6,24 +6,11 @@ import { router } from "@inertiajs/react";
 export default function Consultations({doctors,consultations}) {
     const [activeTab, setActiveTab] = useState("book"); // Manage active tab state
 
-    function makeCall(receiverID) {
-        router.post(
-            "/calling-notification",
-            {
-                receiverID: receiverID,
-            },
-            {
-                preserveScroll: true,
-            }
-        );
-    }
+    
 
     return (
         <PatientLayout title={"Consultation"}>
-            <button
-            >
-                Send Notification
-            </button>
+
             <div className={'h-[80vh] flex flex-col overflow-y-auto'}>
                 {/* Tabs */}
                 <div className="flex justify-start space-x-4 border-b-2 pb-2">

@@ -137,7 +137,8 @@ class PatientController extends Controller
     }
     public function videoCall($id)
     {
-        return Inertia::render('Patient/VideoCall', ['id' => $id]);
+        $name = auth()->user()->name;
+        return Inertia::render('Patient/VideoCall', ['id' => $id, 'name' => $name]);
     }
     public function medicines()
     {
@@ -146,6 +147,10 @@ class PatientController extends Controller
     public function healthRecords()
     {
         return Inertia::render('Patient/HealthRecords');
+    }
+    public function addHealthRecord()
+    {
+        return Inertia::render('Patient/AddHealthRecord');
     }
     public function payments()
     {
@@ -162,6 +167,18 @@ class PatientController extends Controller
     public function settings()
     {
         return Inertia::render('Patient/Settings');
+    }
+
+    public function emergency()
+    {
+        return Inertia::render('Patient/Emergency');
+    }
+
+    public function upload()
+    {
+        //get BLOB_SAS_URL from env
+        $blobSasUrl = env('BLOB_SAS_URL');
+        return Inertia::render('Patient/FIleUpload', ['blobSasUrl' => $blobSasUrl]);
     }
 
 }
