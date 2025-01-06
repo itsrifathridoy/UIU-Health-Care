@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +25,10 @@
   
         <ul class="hidden md:flex space-x-8 text-gray-700 font-medium ml-96">
           <li><a href="#" class="hover:text-blue-600">Home</a></li>
-          <li><a href="#" class="hover:text-blue-600">Doctors</a></li>
-          <li><a href="#" class="hover:text-blue-600">Services</a></li>
+          <li><a href="#appointment" class="hover:text-blue-600">Doctors</a></li>
+          <li><a href="#service" class="hover:text-blue-600">Services</a></li>
           <li><a href="#" class="hover:text-blue-600">Blood Bank</a></li>
-          <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+          <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
         </ul>
     
         <button class="hidden md:block font-bold bg-gradient-to-r from-blue-800 to-violet-800 text-white px-8 py-2 rounded-lg hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 transition-all duration-300 ease-in-out">
@@ -43,9 +43,11 @@
         <div class="absolute inset-0 flex justify-center items-start z-0 mt-32 pointer-events-none font-sans">
           
           <div class="absolute inset-0 m-auto w-[400px] h-[270px] bg-[#2973e6] rounded-full blur-[350px]"></div>
-          <h1 class="text-[150px] font-call  font-extrabold text-blue-900 leading-none tracking-wide">
-            Health<span class="text-gray-700">Care</span>
+          <h1 class="text-[150px] font-call  font-extrabold text-blue-900 leading-none tracking-wide animate-in fade-in zoom-in">
+            Health<span class="text-gray-700 animate-wiggle">Care</span>
           </h1>
+
+          
         </div>
            
         <div class="container mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 py-16 relative z-10">
@@ -54,7 +56,7 @@
             <div class="mt-6 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
               <div class="flex items-center bg-white shadow-lg px-7 py-2 rounded-full ">
                 <i class="fa-solid fa-suitcase-medical" style="color:  #5a8cdd;"></i>
-                <span class="text-gray-800 ml-3">Expert Consultations</span>
+                <span class="text-gray-800 ml-3 animate-wiggle">Expert Consultations</span>
               </div>
               <div class="flex items-center bg-white shadow-lg px-7 py-2 rounded-full ">
                 <i class="fa-solid fa-heart-pulse" style="color: #e882b3;"></i>
@@ -75,7 +77,7 @@
       </div>
     </header>
     
-    <section class="bg-white py-16">
+    <section class="bg-white py-16" id="about">
       <div class="container mx-auto px-4">
 
         <h3 class="text-2xl font-bold text-cyan-700 text-left mb-8">
@@ -101,7 +103,7 @@
     
       
 
-      <section class="bg-blue-50 py-16">
+      <section class="bg-blue-50 py-16" id="service">
         <div class="container mx-auto px-4">
           <h2 class="text-2xl font-bold text-cyan-700 text-left">Features We Provide</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
@@ -163,7 +165,7 @@
         </div>
       </section>
 
-      <footer class="bg-gray-100 text-gray-600 py-10">
+      <footer class="bg-gray-100 text-gray-600 py-10" >
         <div class="container mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           <div>
@@ -182,7 +184,7 @@
           </div>
       
           
-          <div class="ml-10">
+          <div class="ml-10" id="contact">
             <h3 class="font-semibold text-gray-900 mb-4">Services</h3>
             <ul>
               <li><a href="#" class="hover:underline">Appointment</a></li>

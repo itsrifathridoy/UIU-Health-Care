@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-gray-100 font-sans">
+
+
+    <div class="flex h-screen">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-black text-white relative overflow-hidden rounded-r-3xl">
+            <!-- Curved Background -->
+            <div class="absolute top-0 right-0 h-full w-6 bg-black rounded-r-sm"></div>
+
+            <div class="flex items-center justify-center py-4 mt-4 mr-10">
+                <img src="../assets/logowhite.png" alt="Logo" class="h-20">
+            </div>
+            <nav class="flex flex-col justify-between h-[calc(100%-6rem)]">
+                <!-- Main Navigation -->
+                <ul class="space-y-4 p-4">
+                    <li class="flex items-center space-x-3 py-2 px-4 bg-gradient-to-r from-[#f5852a] to-[#241cf5] text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-dashboard text-2xl'></i>
+                        <a href="./overview.html" class="block">Overview</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-chat text-2xl'></i>
+                        <a href="#" class="block">Patient</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-calendar text-2xl'></i>
+                        <a href="#" class="block">Appointments</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-user-voice text-2xl'></i>
+                        <a href="#" class="block">Consultation</a>
+                    </li>
+                </ul>
+
+                <!-- Bottom Items -->
+                <ul class="p-4 mb-6">
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-cog text-2xl'></i>
+                        <a href="#" class="block">Settings</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-help-circle text-2xl'></i>
+                        <a href="#" class="block">Support</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-6">
+                <div>
+                  <h1 class="text-4xl font-bold text-orange-400">Doctor Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <header class="flex justify-between items-center mb-6">
+                        
+                        <div class="flex items-center space-x-6">
+                          <!-- Search Bar -->
+                          <div class="flex items-center space-x-3 p-2 bg-gray-800 rounded-lg">
+                            <i class='bx bx-search text-xl text-gray-200'></i>
+                            <input 
+                              type="search" 
+                              placeholder="Search..." 
+                              class="p-1 w-full bg-transparent border-0 outline-none text-gray-200 placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-[#f5852a] transition-all duration-300 ease-in-out"
+                              style="appearance: none; -webkit-appearance: none;" 
+                            />
+                          </div>
+                      
+                          <!-- Notification Icon -->
+                          <div class="relative">
+                            <i class='bx bxs-bell text-3xl' ></i>
+                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">2</span>
+                          </div>
+                      
+                          <!-- User Profile -->
+                          <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/40x40" alt="User" class="w-10 h-10 rounded-full" />
+                            <div class="text-right">
+                              <p class="text-sm font-semibold">UserName</p>
+                              <p class="text-xs text-gray-500">Doctor</p>
+                            </div>
+                          </div>
+                        </div>
+                      </header>
+                </div>
+              </header>
+
+
+              <div class="mb-8 p-6 bg-white shadow-lg rounded-lg" id="patient-table">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-4">
+                  <h1 class="text-2xl font-bold text-orange-500">Today's Patients</h1>
+                </div>
+              
+                <!-- Search and Filter -->
+                <div class="flex justify-between items-center mb-4">
+                  <!-- Search -->
+                  <div class="relative">
+                    <input
+                      type="text"
+                      placeholder="Search Patient..."
+                      class="pl-4 pr-10 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-orange-300"
+                    />
+                    <span class="absolute inset-y-0 right-3 flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.804 3.757l4.259 4.26a1 1 0 01-1.415 1.415l-4.26-4.259A6 6 0 012 8z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <!-- Filter -->
+                  <div class="flex items-center space-x-2">
+                    <button
+                      class="flex items-center space-x-1 border rounded-lg px-4 py-2 shadow-sm focus:outline-none hover:bg-gray-100"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M3 5a1 1 0 011-1h12a1 1 0 011 1v2.586a1 1 0 01-.293.707l-3.5 3.5A1 1 0 0113 12H7a1 1 0 01-.707-.293l-3.5-3.5A1 1 0 013 7.586V5z"
+                          clip-rule="evenodd"
+                        />
+                        <path
+                          d="M5.121 14a3.001 3.001 0 005.757 0H5.121z"
+                        />
+                      </svg>
+                      <span>Filter</span>
+                    </button>
+                    <select
+                      class="border rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring focus:ring-orange-300"
+                    >
+                      <option>- Select Status -</option>
+                      <option>Admitted</option>
+                      <option>Discharged</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Patient Table -->
+                <div >
+                    
+                    <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Patient Name</th>
+                            <th class="py-3 px-6 text-left">Age</th>
+                            <th class="py-3 px-6 text-left">Type</th>
+                            <th class="py-3 px-6 text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="patients" class="text-gray-600 text-sm font-light">
+                        <!-- Sample Patient Rows -->
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">Rifat Hridoy</td>
+                            <td class="py-3 px-6 text-left">25</td>
+                            <td class="py-3 px-6 text-left">Student</td>
+                            <td class="py-3 px-6 text-center">
+                            <button
+                                class="view-details text-blue-500 hover:underline"
+                                data-patient-id="1"
+                            >
+                                View Full Detail
+                            </button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">Jiyasmin Sinthiya</td>
+                            <td class="py-3 px-6 text-left">30</td>
+                            <td class="py-3 px-6 text-left">Student</td>
+                            <td class="py-3 px-6 text-center">
+                                <button
+                                class="view-details text-blue-500 hover:underline"
+                                data-patient-id="1"
+                              >
+                                View Full Detail
+                              </button>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">Mithila Arunima</td>
+                            <td class="py-3 px-6 text-left">30</td>
+                            <td class="py-3 px-6 text-left">Student</td>
+                            <td class="py-3 px-6 text-center">
+                                <button
+                                class="view-details text-blue-500 hover:underline"
+                                data-patient-id="1"
+                              >
+                                View Full Detail
+                              </button>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">Koushik Roy</td>
+                            <td class="py-3 px-6 text-left">20</td>
+                            <td class="py-3 px-6 text-left">Faculty</td>
+                            <td class="py-3 px-6 text-center">
+                                <button
+                                class="view-details text-blue-500 hover:underline"
+                                data-patient-id="1"
+                              >
+                                View Full Detail
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+              
+               
+              
+                <!-- Pagination -->
+                <div class="flex justify-between items-center mt-4">
+                  <p class="text-sm text-gray-600">Showing 1 - 8 results of 298</p>
+                  <div class="flex space-x-2">
+                    <button class="px-4 py-2 bg-gray-100 rounded-lg shadow hover:bg-gray-200">
+                      &lt;
+                    </button>
+                    <select class="border rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring focus:ring-orange-300">
+                      <option>Page 01</option>
+                      <option>Page 02</option>
+                      <option>Page 03</option>
+                    </select>
+                    <button class="px-4 py-2 bg-gray-100 rounded-lg shadow hover:bg-gray-200">
+                      &gt;
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+
+              <div id="patient-details" class="hidden p-6 bg-white shadow-lg rounded-lg mb-8">
+
+                <div class="mb-4">
+                    <button
+                      id="back-button"
+                      class="text-gray-500 text-2xl hover:text-orange-500 font-semibold flex items-center"
+                    >
+                    <i class='bx bxs-left-arrow-circle' ></i> Back to Patients
+                    </button>
+                  </div>
+                <!-- Tabs -->
+                <div class="flex border-b mb-4">
+                <button data-tab="#health" class="px-6 py-2 text-orange-500 font-semibold border-b-2 border-orange-500">
+                    Health
+                </button>
+                <button data-tab="#medicine" class="px-6 py-2 text-gray-500 hover:text-orange-500">
+                    Medicine
+                </button>
+                <button data-tab="#test-records" class="px-6 py-2 text-gray-500 hover:text-orange-500">
+                    Test Records
+                </button>
+                <button data-tab="#history" class="px-6 py-2 text-gray-500 hover:text-orange-500">
+                    History
+                </button>
+                </div>
+            
+                <!-- Content -->
+                <div id="health" data-content class="grid grid-cols-3 gap-6">
+                <!-- Health Content (same as above) -->
+                <div class="col-span-1 bg-gray-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">Heart Rate <span class="text-gray-500">120 bpm</span></h2>
+                    <div class="h-32">
+                    <!-- Placeholder for Line Chart -->
+                    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
+                        <polyline
+                        points="0,25 10,10 20,30 30,15 40,35 50,20 60,40 70,15 80,30 90,25"
+                        fill="none"
+                        stroke="blue"
+                        stroke-width="2"
+                        />
+                        <line x1="0" y1="25" x2="100" y2="25" stroke="#ddd" stroke-width="0.5" />
+                    </svg>
+                    <div class="text-sm text-gray-500 flex justify-between mt-2">
+                        <span>09:00</span>
+                        <span>12:00</span>
+                        <span>15:00</span>
+                        <span>18:00</span>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-span-1 bg-gray-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">Blood Pressure</h2>
+                    <p class="text-gray-600 mb-2">130/90 mm Hg</p>
+                    <h2 class="text-lg font-semibold mb-2">Pulse</h2>
+                    <p class="text-gray-600 mb-2">81 beats/min</p>
+                    <h2 class="text-lg font-semibold mb-2">Oxygen</h2>
+                    <p class="text-gray-600">93%</p>
+                </div>
+                <div class="col-span-1 bg-gray-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">BMI</h2>
+                    <p class="text-gray-600 mb-2">24</p>
+                    <h2 class="text-lg font-semibold mb-2">Blood Group</h2>
+                    <p class="text-gray-600 mb-2">B+</p>
+                    <h2 class="text-lg font-semibold mb-2">Special Diseases</h2>
+                    <p class="text-gray-600">Not Specified</p>
+                </div>
+                </div>
+            
+                <div id="medicine" data-content class="hidden">
+                <p class="text-center text-gray-600">Medicine Information Coming Soon...</p>
+                </div>
+            
+                <div id="test-records" data-content class="hidden">
+                <p class="text-center text-gray-600">Test Records Coming Soon...</p>
+                </div>
+            
+                <div id="history" data-content class="hidden">
+                <p class="text-center text-gray-600">History Information Coming Soon...</p>
+                </div>
+            
+                <!-- Footer: Treatment Button -->
+                <div class="text-center mt-6">
+                <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600">
+                    Treatment
+                </button>
+                </div>
+            </div>
+    
+        </div>
+
+        
+    </div>
+
+    <script>
+        // Select all tab buttons and tab content containers
+    const tabs = document.querySelectorAll('[data-tab]');
+    const tabContents = document.querySelectorAll('[data-content]');
+
+    // Add event listeners to all tab buttons
+    tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabs.forEach((tab) => tab.classList.remove('text-orange-500', 'border-orange-500'));
+        // Add active class to the clicked tab
+        tab.classList.add('text-orange-500', 'border-orange-500');
+
+        // Hide all tab content
+        tabContents.forEach((content) => content.classList.add('hidden'));
+        // Show content for the clicked tab
+        const targetContent = document.querySelector(tab.dataset.tab);
+        targetContent.classList.remove('hidden');
+    });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const viewDetailsButtons = document.querySelectorAll(".view-details");
+    const patientTable = document.getElementById("patient-table");
+    const patientDetails = document.getElementById("patient-details");
+    const backButton = document.getElementById("back-button");
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabContents = document.querySelectorAll("[data-content]");
+
+    // Show Details on "View Full Detail" Click
+    viewDetailsButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+        patientTable.classList.add("hidden");
+        patientDetails.classList.remove("hidden");
+        });
+    });
+
+    // Back to Patients Table
+    backButton.addEventListener("click", () => {
+        patientTable.classList.remove("hidden");
+        patientDetails.classList.add("hidden");
+    });
+
+    // Tab Switching Logic
+    tabButtons.forEach((tab) => {
+        tab.addEventListener("click", (event) => {
+        const target = event.currentTarget.getAttribute("data-tab");
+
+        // Remove active class from all buttons and hide all content
+        tabButtons.forEach((btn) =>
+            btn.classList.remove("text-orange-500", "border-orange-500")
+        );
+        tabContents.forEach((content) => content.classList.add("hidden"));
+
+        // Add active class to the clicked button and show the target content
+        event.currentTarget.classList.add("text-orange-500", "border-orange-500");
+        document.querySelector(target).classList.remove("hidden");
+        });
+    });
+    });
+
+
+    </script>
+</body>
+</html>

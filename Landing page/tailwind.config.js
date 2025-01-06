@@ -1,11 +1,12 @@
 module.exports = {
-    theme: {
-      extend: {
-        fontFamily: {
-          call: ['ADLaM Display', 'sans-serif'], 
-        },
+  theme: {
+    extend: {
+      fontFamily: {
+        call: ['ADLaM Display', 'sans-serif'],
       },
     },
-    plugins: [],
-  };
-  
+  },
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
+};

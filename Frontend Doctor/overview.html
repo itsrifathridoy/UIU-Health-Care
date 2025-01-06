@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        /* Hide scrollbar for horizontal scrolling */
+    .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    }
+    .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    }
+
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-black text-white relative overflow-hidden rounded-r-3xl">
+            <!-- Curved Background -->
+            <div class="absolute top-0 right-0 h-full w-6 bg-black rounded-r-sm"></div>
+
+            <div class="flex items-center justify-center py-4 mt-4 mr-10">
+                <img src="../assets/logowhite.png" alt="Logo" class="h-20">
+            </div>
+            <nav class="flex flex-col justify-between h-[calc(100%-6rem)]">
+                <!-- Main Navigation -->
+                <ul class="space-y-4 p-4">
+                    <li class="flex items-center space-x-3 py-2 px-4 bg-gradient-to-r from-[#f5852a] to-[#241cf5] text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-dashboard text-2xl'></i>
+                        <a href="#" class="block">Overview</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-chat text-2xl'></i>
+                        <a href="./patient.html" class="block">Patient</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-calendar text-2xl'></i>
+                        <a href="#" class="block">Appointments</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-user-voice text-2xl'></i>
+                        <a href="#" class="block">Consultation</a>
+                    </li>
+                </ul>
+
+                <!-- Bottom Items -->
+                <ul class="p-4 mb-6">
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-cog text-2xl'></i>
+                        <a href="#" class="block">Settings</a>
+                    </li>
+                    <li class="flex items-center space-x-3 py-2 px-4 block hover:bg-gradient-to-r hover:from-[#f5852a] hover:to-[#165a89] hover:text-transparent bg-clip-text transition-all duration-300 ease-in-out">
+                        <i class='bx bxs-help-circle text-2xl'></i>
+                        <a href="#" class="block">Support</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-6">
+                <div>
+                  <h1 class="text-4xl font-bold text-orange-400">Doctor Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <header class="flex justify-between items-center mb-6">
+                        
+                        <div class="flex items-center space-x-6">
+                          <!-- Search Bar -->
+                          <div class="flex items-center space-x-3 p-2 bg-gray-800 rounded-lg">
+                            <i class='bx bx-search text-xl text-gray-200'></i>
+                            <input 
+                              type="search" 
+                              placeholder="Search..." 
+                              class="p-1 w-full bg-transparent border-0 outline-none text-gray-200 placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-[#f5852a] transition-all duration-300 ease-in-out"
+                              style="appearance: none; -webkit-appearance: none;" 
+                            />
+                          </div>
+                      
+                          <!-- Notification Icon -->
+                          <div class="relative">
+                            <i class='bx bxs-bell text-3xl' ></i>
+                            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">2</span>
+                          </div>
+                      
+                          <!-- User Profile -->
+                          <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/40x40" alt="User" class="w-10 h-10 rounded-full" />
+                            <div class="text-right">
+                              <p class="text-sm font-semibold">UserName</p>
+                              <p class="text-xs text-gray-500">Doctor</p>
+                            </div>
+                          </div>
+                        </div>
+                      </header>
+                </div>
+              </header>
+
+
+            <div class="grid grid-cols-2 gap-6 mb-8">
+               
+
+                <!-- Appointments Card -->
+                <div class="bg-[#fff7ec] p-6 rounded-3xl shadow-md flex flex-col space-y-4">
+                    <div class="flex items-center space-x-4">
+                    
+                    <div class="bg-indigo-50 p-3 rounded-full">
+                        <img src="../assets/appointcal.png" alt="User" class="w-10 h-10" />
+                    </div>
+                  
+                    <h3 class="text-lg font-sans text-gray-800">Appointments</h3>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 mt-auto">
+                    <p class="text-3xl  text-gray-900">1,250</p>
+                    <p class="text-sm text-green-600 mt-1">↑ 4.8% from last week</p>
+                    </div>
+                </div>
+            
+                <!-- Call Consultancy Card -->
+                <div class="bg-[#fff7ec] p-6 rounded-3xl shadow-md flex flex-col space-y-4">
+                    <div class="flex items-center space-x-4">
+                      
+                     <div class="bg-rose-100 p-3 rounded-full">
+                        <img src="../assets/call.png" alt="User" class="w-10 h-10 rounded-full" />
+                     </div>
+
+                      <h3 class="text-lg font-sans  text-gray-800">Call Consultancy</h3>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 mt-auto">
+                      <p class="text-3xl text-gray-900">1,002</p>
+                      <p class="text-sm text-green-600 mt-1">↑ 40% from last week</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Records -->
+            <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-bold text-gray-700 mb-4">Patient's Records</h2>
+                
+                <div class="relative w-full overflow-hidden">
+                    <!-- Navigation Buttons -->
+                    <button id="prevButton" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-300 hover:bg-gray-400 text-white p-3 rounded-full shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L9.414 10l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    </button>
+                
+                    <div id="cardContainer" class="flex space-x-6 overflow-x-scroll scrollbar-hide py-4 px-4">
+                    <!-- Card 1 -->
+                    <div class="min-w-[250px] bg-gray-100 shadow-lg rounded-lg p-4 flex-shrink-0">
+                        <img src="https://placehold.co/40x40" alt="Student 1" class="w-24 h-24 rounded-full mx-auto">
+                        <h2 class="text-center text-lg font-semibold mt-4">John Doe</h2>
+                        <p class="text-center text-gray-500 mt-2">Last Checkup: Dec 20, 2024</p>
+                        <p class="text-center text-gray-600 mt-1">No issues reported.</p>
+                    </div>
+                
+                    <!-- Card 2 -->
+                    <div class="min-w-[250px] bg-gray-100 shadow-lg rounded-lg p-4 flex-shrink-0">
+                        <img src="https://placehold.co/40x40" alt="Student 2" class="w-24 h-24 rounded-full mx-auto">
+                        <h2 class="text-center text-lg font-semibold mt-4">Jane Smith</h2>
+                        <p class="text-center text-gray-500 mt-2">Last Checkup: Jan 5, 2025</p>
+                        <p class="text-center text-gray-600 mt-1">Recommended further evaluation.</p>
+                    </div>
+                
+                    <!-- Card 3 -->
+                    <div class="min-w-[250px] bg-gray-100 shadow-lg rounded-lg p-4 flex-shrink-0">
+                        <img src="https://placehold.co/40x40" alt="Student 3" class="w-24 h-24 rounded-full mx-auto">
+                        <h2 class="text-center text-lg font-semibold mt-4">Michael Lee</h2>
+                        <p class="text-center text-gray-500 mt-2">Last Checkup: Nov 15, 2024</p>
+                        <p class="text-center text-gray-600 mt-1">Recovered from minor flu.</p>
+                    </div>
+                
+                    <!-- Card 4 -->
+                    <div class="min-w-[250px] bg-gray-100 shadow-lg rounded-lg p-4 flex-shrink-0">
+                        <img src="https://placehold.co/40x40" alt="Student 4" class="w-24 h-24 rounded-full mx-auto">
+                        <h2 class="text-center text-lg font-semibold mt-4">Emily Davis</h2>
+                        <p class="text-center text-gray-500 mt-2">Last Checkup: Oct 28, 2024</p>
+                        <p class="text-center text-gray-600 mt-1">All parameters normal.</p>
+                    </div>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button id="nextButton" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-300 hover:bg-gray-400 text-white p-3 rounded-full shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    </button>
+                </div>
+
+            </div>
+              
+            
+              
+              
+              
+
+            <!-- Calendar & Appointments -->
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Calendar -->
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h2 class="text-lg font-bold text-gray-700 mb-4">Calendar</h2>
+                    <div class="grid grid-cols-7 gap-2 text-center text-gray-500 font-semibold">
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                        <div>Sun</div>
+                        <!-- Sample dates -->
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                        <div>7</div>
+                        <div>8</div>
+                        <div>9</div>
+                        <div>10</div>
+                        <div>11</div>
+                        <div>12</div>
+                        <div>13</div>
+                        <div class="bg-orange-400 text-white rounded-full">16</div>
+                    </div>
+                </div>
+                <!-- Today's Appointments -->
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h2 class="text-lg font-bold text-gray-700 mb-4">Today's Appointments</h2>
+                    <ul>
+                        <li class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <div>
+                                <p class="font-semibold text-gray-800">Mithila Arunima</p>
+                                <p class="text-sm text-gray-500">Clinic Appointment</p>
+                            </div>
+                            <span class="text-orange-500 font-semibold">10:00 AM</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <div>
+                                <p class="font-semibold text-gray-800">Jiyasmin Sinthiya</p>
+                                <p class="text-sm text-gray-500">Back Surgery</p>
+                            </div>
+                            <span class="text-orange-500 font-semibold">2:00 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center py-2">
+                            <div>
+                                <p class="font-semibold text-gray-800">Koushik Roy</p>
+                                <p class="text-sm text-gray-500">Hospital Appointment</p>
+                            </div>
+                            <span class="text-orange-500 font-semibold">4:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+
+  <script>
+    const cardContainer = document.getElementById('cardContainer');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+
+    prevButton.addEventListener('click', () => {
+    cardContainer.scrollBy({
+        left: -250, // Scroll left
+        behavior: 'smooth', // Smooth scrolling
+    });
+    });
+
+    nextButton.addEventListener('click', () => {
+    cardContainer.scrollBy({
+        left: 250, // Scroll right
+        behavior: 'smooth', // Smooth scrolling
+    });
+    });
+
+    
+
+
+
+  </script>
+</body>
+</html>
