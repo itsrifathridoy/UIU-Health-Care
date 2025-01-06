@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Notifications\CallingNotification;
 use App\Http\Controllers\DoctorController;
+use App\Models\Doctor;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,15 +49,10 @@ Route::get('/bkash/refund/status', [App\Http\Controllers\BkashTokenizePaymentCon
 
 
 
-Route::get('/doctor', function () {
-    return Inertia::render('Doctor/Dashboard');
-})->middleware(['auth', 'verified','role:doctor'])->name('doctor');
+// Route::get('/doctor', function () {
+//     return Inertia::render('Doctor/Dashboard');
+// })->middleware(['auth', 'verified','role:doctor'])->name('doctor');
 
-Route::middleware(['auth', 'verified','role:doctor'])->group(function () {
-    Route::redirect('/', '/doctor');
-
-    Route::resource('doctor', DoctorController::class);
-});
 
 Route::get('/pharmacist', function () {
     return Inertia::render('Pharmacist/Dashboard');
@@ -100,6 +96,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::middleware(['auth', 'verified', 'role:doctor'])
+    ->group(function () {
+        Route::redirect('/', '/doctor'); // Redirect root to /doctor
+
+        Route::prefix('doctor')->group(function () {
+            Route::get('/', [DoctorController::class, 'index'])->name('doctor.index');
+            Route::get('/patient', [DoctorController::class, 'patient'])->name('doctor.patient');
+            Route::get('/patient/{id}', [DoctorController::class, 'showPatient'])->name('doctor.patient.show');
+
+        });
+    }
+
+);
+
+
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/patient.php';

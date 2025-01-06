@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // User::factory()->create([
-        //     'name' => 'Doctor A',
-        //     'email' => 'dra@example.com',
-        //     'role' => 1,
-        //     'password' => bcrypt('12345678'),
-        // ]);
+        User::factory()->create([
+            'name' => 'Doctor A',
+            'email' => 'dra@example.com',
+            'role' => 1,
+            'password' => bcrypt('12345678'),
+        ]);
     }
 }
