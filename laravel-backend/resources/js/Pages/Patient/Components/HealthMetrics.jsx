@@ -1,9 +1,21 @@
 import React, { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
 
-const HealthMetrics = () => {
-    const [bmi, setBmi] = useState(24.9);
-    const [height, setHeight] = useState(170);
-    const [weight, setWeight] = useState(72);
+//calculate BMI
+
+const calculateBmi = (weight, height) => {
+    return (weight / (height / 100) ** 2).toFixed(1);
+};
+const HealthMetrics = ({health_details,date}) => {
+    console.log(health_details);
+    const [healthDetails, setHealthDetails] = useState(health_details);
+
+
+
+    const [bmi, setBmi] = useState(calculateBmi(healthDetails.weight, healthDetails.height));
+    const [height, setHeight] = useState(healthDetails.height);
+    const [weight, setWeight] = useState(healthDetails.weight);
+
 
     const getBmiStatus = () => {
         if (bmi < 18.5) return "Underweight";
@@ -20,7 +32,7 @@ const HealthMetrics = () => {
 
             <div className={'flex flex-col items-start h-[10%]'}>
                 <h1 className={'text-2xl font-semibold text-white'}>Health Metrics</h1>
-                <p className={'text-sm text-gray-300'}>Last Check <span>2 Days</span> Ago</p>
+                <p className={'text-sm text-gray-300'}>Last Check <span>{formatDistanceToNow(new Date(date))}</span> Ago</p>
             </div>
 
             <div className={'flex justify-between mt-4 gap-4  h-[20%] w-full'}>
@@ -31,16 +43,18 @@ const HealthMetrics = () => {
                     </div>
                     <div className={'flex flex-col'}>
                         <p className={'text-lg font-semibold text-black'}>Heart Rate</p>
-                        <p className={'text-lg font-semibold text-black'}>72 bpm</p>
+                        <p className={'text-lg font-semibold text-black'}>{healthDetails.heartRate} bpm</p>
                     </div>
                 </div>
                 <div className={'flex gap-4 w-[50%] justify-center items-center rounded-2xl bg-[#d0fbff] h-full'}>
                     <div className={''}>
-                        <img src={'../images/patient/blood-pressure.png'} alt={''} className={'h-16'}/>
+                        <img src={'../images/patient/blood-pressure.png'} alt={''} className={'h-12'}/>
                     </div>
                     <div className={'flex flex-col'}>
-                        <p className={'text-lg font-semibold text-black'}>Heart Rate</p>
-                        <p className={'text-lg font-semibold text-black'}>72 bpm</p>
+                        <p className={'text-lg font-semibold text-black'}>Blood Pressure</p>
+                        <p className={'text-lg font-semibold text-black'}>{
+                            healthDetails.systolic + '/' + healthDetails.diastolic + ' mmHg'
+                        }</p>
                     </div>
                 </div>
 

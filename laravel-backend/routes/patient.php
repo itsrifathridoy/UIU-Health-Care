@@ -36,6 +36,8 @@ Route::group([
         ->name('patient.health-records');
     Route::get('/addHealthRecord', [PatientController::class, 'addHealthRecord'])
         ->name('patient.addHealthRecord');
+    Route::post('/addHealthRecord', [PatientController::class, 'storeHealthRecord'])
+        ->name('patient.storeHealthRecord');
     Route::get('/payments', [PatientController::class, 'payments'])
         ->name('patient.payments');
     Route::get('/profile', [PatientController::class, 'profile'])

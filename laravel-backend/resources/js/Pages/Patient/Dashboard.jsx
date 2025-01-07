@@ -4,12 +4,13 @@ import MedicineAndAppointment from "@/Pages/Patient/Components/MedicineAndAppoin
 import HealthMetrics from "@/Pages/Patient/Components/HealthMetrics.jsx";
 import PatientLayout from "@/Pages/Patient/Layout/PatientLayout.jsx";
 
-export default function Consultations() {
+export default function Dashboard({healthRecords,nextAppointment}) {
 
+    console.log(healthRecords);
     return (
 
-        <PatientLayout title={'Patient Consultations'}>
-            <Head title="Consultations"/>
+        <PatientLayout title={'Patient Dashboard'}>
+            <Head title="Dashboard"/>
             <div className="flex h-full w-full ">
                 <div className={'flex flex-col h-full w-[60%] '}>
                     <div className={'grid gap-2 h-[40%] grid-cols-2 '}>
@@ -46,11 +47,11 @@ export default function Consultations() {
                         </div>
                     </div>
                     <div className={'flex h-[60%] w-full '}>
-                        <MedicineAndAppointment />
+                        <MedicineAndAppointment nextAppointment={nextAppointment} />
                     </div>
                 </div>
                 <div className={'flex h-full w-[40%] pl-5'}>
-                    <HealthMetrics />
+                    <HealthMetrics date={healthRecords.date} health_details={JSON.parse(healthRecords.record_details)} />
                 </div>
             </div>
 

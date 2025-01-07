@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function MedicineAndAppointment() {
+export default function MedicineAndAppointment({nextAppointment}) {
     const [activeTab, setActiveTab] = useState("next-medicine");
 
     const showTab = (tabName) => {
@@ -92,6 +92,7 @@ export default function MedicineAndAppointment() {
                     </div>
 
                 )}
+                {console.log(nextAppointment)}
 
                 {activeTab === "next-appointment" && (
                     <div id="next-appointment" className="p-6">
@@ -99,10 +100,20 @@ export default function MedicineAndAppointment() {
                             className="p-6 bg-gradient-to-r from-orange-100 to-white rounded-lg shadow-md flex flex-col sm:flex-row items-center">
                             {/* Doctor's Details */}
                             <div className="flex-1">
-                                <p className="text-sm font-medium text-gray-500 mb-2">Psychiatrist</p>
-                                <h3 className="text-xl font-bold text-gray-900">Prof. Dr. Mesbah Uddin Ahmed</h3>
-                                <p className="text-orange-500 font-medium">MBBS, MS (ENT)</p>
-                                <p className="text-gray-600 mb-4">United Medical Hospital</p>
+                                <p className="text-sm font-medium text-gray-500 mb-2">{nextAppointment.specialty}</p>
+                                <h3 className="text-xl font-bold text-gray-900">{nextAppointment.name}</h3>
+                                <p className="text-orange-500 font-medium">
+
+                                    {
+                                        JSON.parse(nextAppointment.educations)[0].degree
+                                    }
+
+                                </p>
+                                <p className="text-gray-600 mb-4">
+                                    {
+                                        JSON.parse(nextAppointment.educations)[0].institute
+                                    }
+                                </p>
 
                                 {/* Appointment Info */}
                                 <div className="flex items-center text-gray-600 space-x-4">
@@ -121,7 +132,7 @@ export default function MedicineAndAppointment() {
                                                 d="M8 7V3m8 4V3m-9 4h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                             />
                                         </svg>
-                                        <span className="ml-2 text-sm">9:30 AM</span>
+                                        <span className="ml-2 text-sm">{nextAppointment.time}</span>
                                     </div>
                                     <div className="flex items-center">
                                         <svg
@@ -138,7 +149,7 @@ export default function MedicineAndAppointment() {
                                                 d="M8 7V3m8 4V3m-9 4h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                             />
                                         </svg>
-                                        <span className="ml-2 text-sm">19 Nov 2024</span>
+                                        <span className="ml-2 text-sm">{nextAppointment.date}</span>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +157,7 @@ export default function MedicineAndAppointment() {
                             {/* Doctor's Image */}
                             <div
                                 className="w-40 h-40 bg-cover bg-center rounded-lg ml-2 shadow-lg"
-                                style={{ backgroundImage: "url('https://via.placeholder.com/150')" }}
+                                style={{ backgroundImage: `url(${nextAppointment.profile_photo_path})` }}
                             ></div>
                         </div>
                     </div>

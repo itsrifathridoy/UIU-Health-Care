@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::post('calling-notification',CallingNotificationController::class);
 
+Route::post('send-message',[MessageController::class,'sendMessage']);
 
 
 

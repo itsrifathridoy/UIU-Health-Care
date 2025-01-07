@@ -1,5 +1,6 @@
 import DashboardLayout from "@/Layouts/DashboardLayout.jsx";
 import {useEffect} from "react";
+import {usePage} from "@inertiajs/react";
 
 export default function PatientLayout({ children,title }) {
     const menuItems = [
@@ -17,17 +18,11 @@ export default function PatientLayout({ children,title }) {
         { id: 2, message: "New post published" },
     ];
 
-    const user = {
-        name: "Rifat Hridoy",
-        userType: "Student",
-        avatar: "https://placehold.co/40x40",
-
-    }
 
 
 
     return (
-        <DashboardLayout notifications={notifications} menuItems={menuItems} user={user} title={title}>
+        <DashboardLayout notifications={notifications} menuItems={menuItems} title={title}>
             {children}
         </DashboardLayout>
     )
