@@ -30,26 +30,26 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-//        $authenticateRole = Auth::user()->role;
-//        if($authenticateRole == 0 ){
-//            return redirect()->intended(route('patient', absolute: false));
-//        }
-//        elseif($authenticateRole == 1 ){
-//            return redirect()->intended(route('doctor', absolute: false));
-//        }
-//        elseif($authenticateRole == 2 ){
-//            return redirect()->intended(route('pharmacist', absolute: false));
-//        }
-//        elseif($authenticateRole == 3 ){
-//            return redirect()->intended(route('admin', absolute: false));
-//        }
-//        else{
-//            return redirect()->intended(route('login', absolute: false));
-//        }
-//
-//        $request->session()->regenerate();
+       $authenticateRole = Auth::user()->role;
+       if($authenticateRole == 0 ){
+           return redirect()->intended(route('patient', absolute: false));
+       }
+       elseif($authenticateRole == 1 ){
+           return redirect()->intended(route('doctor', absolute: false));
+       }
+       elseif($authenticateRole == 2 ){
+           return redirect()->intended(route('pharmacist', absolute: false));
+       }
+       elseif($authenticateRole == 3 ){
+           return redirect()->intended(route('admin', absolute: false));
+       }
+       else{
+           return redirect()->intended(route('login', absolute: false));
+       }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+       $request->session()->regenerate();
+
+        // return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

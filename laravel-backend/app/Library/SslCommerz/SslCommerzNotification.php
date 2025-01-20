@@ -59,9 +59,12 @@ class SslCommerzNotification extends AbstractSslCommerz
                 curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
             } else {
                 curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);
-                curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 2);
+                curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 1);
             }
 
+            // Add these lines after the SSL settings
+            curl_setopt($handle, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+            curl_setopt($handle, CURLOPT_HTTPHEADER, ['Expect:']);
 
             $result = curl_exec($handle);
 
