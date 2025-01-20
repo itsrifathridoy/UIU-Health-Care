@@ -44,8 +44,16 @@ class MessageController extends Controller
         broadcast(new MessageReceiveEvent($validate));
 
 
-        return response()->json(['message' => 'Message sent successfully'], 200);
+//        return response()->json(['message' => 'Message sent successfully'], 200);
 
 
+    }
+
+    public function searchUsers(Request $request)
+    {
+        //get query from query params
+        $search = $request['q'];
+        $users = DB::table('users')->where('name', 'like', '%' . $search . '%')->get();
+        return response()->json(['users' => $users], 200);
     }
 }

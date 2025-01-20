@@ -5,6 +5,8 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Notifications\CallingNotification;
+use App\Http\Controllers\DoctorController;
+use App\Models\Doctor;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,10 +21,15 @@ Route::get('/', function () {
 });
 
 
+Route::get('/landing', function () {
+    return Inertia::render('LandingPage');
+})->name('landing');
+
 Route::post('calling-notification',CallingNotificationController::class);
 
 Route::post('send-message',[MessageController::class,'sendMessage']);
 
+Route::get('/search-users',[MessageController::class,'searchUsers']);
 
 
 // SSLCOMMERZ Start
@@ -52,10 +59,14 @@ Route::get('/bkash/refund/status', [App\Http\Controllers\BkashTokenizePaymentCon
 
 
 
+// Route::get('/doctor', function () {
+//     return Inertia::render('Doctor/Dashboard');
+// })->middleware(['auth', 'verified','role:doctor'])->name('doctor');
+
 
 
 Route::get('/pharmacist', function () {
-    return Inertia::render('Pharmacist/Consultations');
+    return Inertia::render('Pharmacist/Dashboard');
 })->middleware(['auth', 'verified','role:pharmacist'])->name('pharmacist');
 
 //Route::get('/patient', function () {
@@ -87,7 +98,7 @@ Route::get('/notification', function () {
 
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Consultations');
+    return Inertia::render('Dashboard');
 })->name('dashboard');
 
 
@@ -99,6 +110,25 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', [MessageController::class, 'send'])->name('messages.send');
 
 });
+
+
+
+Route::middleware(['auth', 'verified', 'role:doctor'])
+    ->group(function () {
+        Route::redirect('/', '/doctor'); // Redirect root to /doctor
+
+        Route::prefix('doctor')->group(function () {
+            Route::get('/', [DoctorController::class, 'index'])->name('doctor.index');
+            Route::get('/patient', [DoctorController::class, 'patient'])->name('doctor.patient');
+            Route::get('/patient/{id}', [DoctorController::class, 'showPatient'])->name('doctor.patient.show');
+
+        });
+    }
+
+);
+
+
+
 
 require __DIR__.'/auth.php';
 require __DIR__.'/patient.php';

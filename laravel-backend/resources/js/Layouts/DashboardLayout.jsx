@@ -1,4 +1,4 @@
-import { Head, usePage } from "@inertiajs/react";
+import {Head, router, usePage} from "@inertiajs/react";
 import SideBar from "@/Pages/Admin/Components/SideBar.jsx";
 import TopBar from "@/Pages/Admin/Components/TopBar.jsx";
 import CustomerVsRetention from "@/Pages/Admin/Components/CustomerVsRetention.jsx";
@@ -10,6 +10,7 @@ export default function DashboardLayout({ children, menuItems, notifications, ti
 
     const { auth } = usePage().props;
     console.log(auth.user);
+
 
     // State for the modal
     const [isModalOpen, setIsModalOpen] = useState(false);

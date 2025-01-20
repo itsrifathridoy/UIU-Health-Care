@@ -2,7 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link, usePage } from '@inertiajs/react';
+import {Link, router, usePage} from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function AuthenticatedLayout({ header, children }) {
@@ -10,6 +10,19 @@ export default function AuthenticatedLayout({ header, children }) {
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+
+    if(user.role == 0){
+        router.get('/patient');
+    }
+    if(user.role == 1){
+        router.get('/doctor');
+    }
+    if(user.role == 2){
+        router.get('/pharmacist');
+    }
+    if(user.role == 3){
+        router.get('/admin');
+    }
 
     return (
         <div className="min-h-screen bg-gray-100">

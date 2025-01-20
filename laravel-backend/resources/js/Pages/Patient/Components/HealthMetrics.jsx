@@ -7,8 +7,13 @@ const calculateBmi = (weight, height) => {
     return (weight / (height / 100) ** 2).toFixed(1);
 };
 const HealthMetrics = ({health_details,date}) => {
-    console.log(health_details);
-    const [healthDetails, setHealthDetails] = useState(health_details);
+    const [healthDetails, setHealthDetails] = useState(health_details?health_details:{
+        weight: 0,
+        height: 0,
+        heartRate: 0,
+        systolic: 0,
+        diastolic: 0
+    });
 
 
 
@@ -32,7 +37,7 @@ const HealthMetrics = ({health_details,date}) => {
 
             <div className={'flex flex-col items-start h-[10%]'}>
                 <h1 className={'text-2xl font-semibold text-white'}>Health Metrics</h1>
-                <p className={'text-sm text-gray-300'}>Last Check <span>{formatDistanceToNow(new Date(date))}</span> Ago</p>
+                <p className={'text-sm text-gray-300'}>Last Check <span>{formatDistanceToNow(new Date(date?date:new Date()))}</span> Ago</p>
             </div>
 
             <div className={'flex justify-between mt-4 gap-4  h-[20%] w-full'}>

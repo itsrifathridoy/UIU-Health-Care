@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { router, usePage } from "@inertiajs/react";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance } from "date-fns";
 import ImageModal from "@/Components/ImageModal.jsx";
 
 const ChatApp = ({ messageHistory }) => {
     const { auth } = usePage().props;
 
-    // Initialize messages with proper mapping
+    const handleImageClick = (imageUrl) => {
+        setSelectedImage(imageUrl);
+        setModalOpen(true);
+    };
+
+    // Initialize messages
     const initialMessages = messageHistory.map((message) => ({
         id: message.id,
         senderId: message.sender_id,
@@ -32,67 +37,59 @@ const ChatApp = ({ messageHistory }) => {
     const [selectedImage, setSelectedImage] = useState("");
     const [chatList, setChatList] = useState([]);
     const [selectedChatId, setSelectedChatId] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [currentRecieverPic, setCurrentRecieverPic] = useState("");
 
-    // Update chat list with proper conversation grouping
+    // Update chat list
     useEffect(() => {
-        // Create a map to store the latest message for each conversation
         const conversationMap = new Map();
 
-        // Process all messages to find unique conversations
         messages.forEach((msg) => {
-            let conversationPartnerId;
-            let conversationPartnerInfo;
+            let partnerId, partnerInfo;
 
             if (msg.senderId === auth.user.id) {
-                // If current user is sender, use receiver as conversation partner
-                conversationPartnerId = msg.receiverId;
-                conversationPartnerInfo = {
-                    name: messages.find(m => m.senderId === msg.receiverId)?.sender,
+                partnerId = msg.receiverId;
+                partnerInfo = {
+                    name: msg.receiver,
                     profilePic: msg.receiverPic,
-                    role: messages.find(m => m.senderId === msg.receiverId)?.role
+                    role: "Receiver",
                 };
             } else {
-                // If current user is receiver, use sender as conversation partner
-                conversationPartnerId = msg.senderId;
-                conversationPartnerInfo = {
+                partnerId = msg.senderId;
+                partnerInfo = {
                     name: msg.sender,
                     profilePic: msg.senderPic,
-                    role: msg.role
+                    role: msg.role,
                 };
             }
 
-            // Skip if conversation partner info is incomplete
-            if (!conversationPartnerId || !conversationPartnerInfo.name) return;
-
-            // Check if this is a more recent message for this conversation
-            const existingConversation = conversationMap.get(conversationPartnerId);
-            if (!existingConversation || new Date(msg.timestamp) > new Date(existingConversation.timestamp)) {
-                conversationMap.set(conversationPartnerId, {
-                    userId: conversationPartnerId,
-                    name: conversationPartnerInfo.name,
-                    profilePic: conversationPartnerInfo.profilePic,
-                    role: conversationPartnerInfo.role,
+            const existing = conversationMap.get(partnerId);
+            if (!existing || new Date(msg.timestamp) > new Date(existing.timestamp)) {
+                conversationMap.set(partnerId, {
+                    userId: partnerId,
+                    name: partnerInfo.name,
+                    profilePic: partnerInfo.profilePic,
+                    role: partnerInfo.role,
                     lastMessage: msg.content,
                     timestamp: msg.timestamp,
-                    time: msg.time
+                    time: msg.time,
                 });
             }
         });
 
-        // Convert map to array and sort by timestamp
         const uniqueChats = Array.from(conversationMap.values())
-            .filter(chat => chat.userId !== auth.user.id) // Exclude current user's own messages
+            .filter(chat => chat.userId !== auth.user.id)
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
         setChatList(uniqueChats);
 
-        // Set initial selected chat if none is selected
         if (selectedChatId === null && uniqueChats.length > 0) {
             setSelectedChatId(uniqueChats[0].userId);
+            setCurrentRecieverPic(uniqueChats[0].profilePic);
         }
     }, [messages, auth.user.id]);
 
-    // Filter messages for the selected chat
     const filteredMessages = messages.filter((message) =>
         (message.senderId === selectedChatId && message.receiverId === auth.user.id) ||
         (message.senderId === auth.user.id && message.receiverId === selectedChatId)
@@ -121,11 +118,9 @@ const ChatApp = ({ messageHistory }) => {
                     isMine: false,
                 };
 
-                setMessages(prevMessages => [...prevMessages, newMessage]);
+                setMessages(prev => [...prev, newMessage]);
             })
-            .error((error) => {
-                console.error("Channel subscription error:", error);
-            });
+            .error((error) => console.error("Channel subscription error:", error));
     }, [auth.user.id]);
 
     const handleSendMessage = () => {
@@ -146,8 +141,9 @@ const ChatApp = ({ messageHistory }) => {
                 isMine: true,
             };
 
-            setMessages(prevMessages => [...prevMessages, newMessage]);
+            setMessages(prev => [...prev, newMessage]);
             setCurrentMessage("");
+            setCurrentRecieverPic(chatList.find(chat => chat.userId === selectedChatId).profilePic);
 
             router.post(
                 "/send-message",
@@ -162,6 +158,26 @@ const ChatApp = ({ messageHistory }) => {
         }
     };
 
+    const handleSearch = async (query) => {
+        setSearchQuery(query);
+        if (query.trim()) {
+           const result = await  axios.get(`/search-users?q=${query}`)
+
+            console.log(result)
+
+            setSearchResults(result.data.users);
+        } else {
+            setSearchResults([]);
+        }
+    };
+
+    const startConversation = (userId) => {
+        setSelectedChatId(userId);
+        setCurrentRecieverPic(searchResults.find(user => user.id === userId).profile_photo_path);
+        setSearchQuery("");
+        setSearchResults([]);
+    };
+
     return (
         <div className="flex h-[80vh] bg-beige-100 font-sans">
             {/* Chat List Sidebar */}
@@ -169,37 +185,63 @@ const ChatApp = ({ messageHistory }) => {
                 <div className="flex items-center space-x-3 p-4 border-b">
                     <input
                         type="text"
-                        placeholder="Search Messages"
+                        placeholder="Search Messages or Users"
                         className="w-full p-2 text-sm bg-gray-100 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+                        value={searchQuery}
+                        onChange={(e) => handleSearch(e.target.value)}
                     />
                 </div>
                 <div className="overflow-y-auto flex-grow">
-                    {chatList.map((chat) => (
-                        <div
-                            key={chat.userId}
-                            className={`p-4 flex items-center justify-evenly hover:bg-orange-100 transition cursor-pointer border-b ${
-                                chat.userId === selectedChatId ? "bg-orange-200" : ""
-                            }`}
-                            onClick={() => setSelectedChatId(chat.userId)}
-                        >
-                            <img
-                                alt="profile"
-                                src={chat.profilePic}
-                                className="w-10 h-10 bg-gray-300 rounded-full mr-1"
-                            />
-                            <div>
-                                <h4 className="font-semibold text-gray-800 mr-2">
-                                    {chat.name}
-                                </h4>
-                                <p className="text-sm text-gray-500 truncate">
-                                    {chat.lastMessage}
-                                </p>
+                    {searchQuery ? (
+                        searchResults.map((user) => (
+                            <div
+                                key={user.id}
+                                className="p-4 flex items-center hover:bg-orange-100 transition cursor-pointer border-b"
+                                onClick={() => startConversation(user.id)}
+                            >
+                                <img
+                                    alt="profile"
+                                    src={user.profile_photo_path}
+                                    className="w-10 h-10 bg-gray-300 rounded-full mr-1"
+                                />
+                                <div>
+                                    <h4 className="font-semibold text-gray-800 mr-2">
+                                        {user.name}
+                                    </h4>
+                                    <p className="text-sm text-gray-500 truncate">
+                                        {user.role}
+                                    </p>
+                                </div>
                             </div>
-                            <span className="text-xs text-gray-400">
-                                {chat.time}
-                            </span>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        chatList.map((chat) => (
+                            <div
+                                key={chat.userId}
+                                className={`p-4 flex items-center hover:bg-orange-100 transition cursor-pointer border-b ${
+                                    chat.userId === selectedChatId ? "bg-orange-200" : ""
+                                }`}
+                                onClick={() => setSelectedChatId(chat.userId)}
+                            >
+                                <img
+                                    alt="profile"
+                                    src={chat.profilePic}
+                                    className="w-10 h-10 bg-gray-300 rounded-full mr-1"
+                                />
+                                <div>
+                                    <h4 className="font-semibold text-gray-800 mr-2">
+                                        {chat.name}
+                                    </h4>
+                                    <p className="text-sm text-gray-500 truncate">
+                                        {chat.lastMessage}
+                                    </p>
+                                </div>
+                                <span className="text-xs text-gray-400">
+                                    {chat.time}
+                                </span>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
 

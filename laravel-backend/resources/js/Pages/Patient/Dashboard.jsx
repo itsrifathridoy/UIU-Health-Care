@@ -51,7 +51,13 @@ export default function Dashboard({healthRecords,nextAppointment}) {
                     </div>
                 </div>
                 <div className={'flex h-full w-[40%] pl-5'}>
-                    <HealthMetrics date={healthRecords.date} health_details={JSON.parse(healthRecords.record_details)} />
+                    <HealthMetrics date={healthRecords?healthRecords.date:new Date()} health_details={healthRecords?JSON.parse(healthRecords.record_details):{
+                        weight: 0,
+                        height: 0,
+                        heartRate: 0,
+                        systolic: 0,
+                        diastolic: 0
+                    }} />
                 </div>
             </div>
 

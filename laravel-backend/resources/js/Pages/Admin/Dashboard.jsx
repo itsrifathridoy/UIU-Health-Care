@@ -7,7 +7,7 @@ import CustomerVsRetention from "@/Pages/Admin/Components/CustomerVsRetention.js
 import AdminLayout from "@/Pages/Admin/Layout/AdminLayout.jsx";
 import DashboardLayout from "@/Layouts/DashboardLayout.jsx";
 
-export default function Consultations() {
+export default function Dashboard() {
     // Define menu items
 
 
@@ -101,7 +101,7 @@ export default function Consultations() {
 
     return (
         <AdminLayout >
-        <Head title="Admin Consultations" />
+        <Head title="Admin Dashboard" />
             <div className={'flex h-[35%] gap-10'}>
                 <div className={'w-[33.33%] flex flex-col h-full bg-[#FFF6EC] rounded-2xl'}>
                     <div className={'h-[50%] w-full  px-6 gap-5 flex  justify-start items-center'}>

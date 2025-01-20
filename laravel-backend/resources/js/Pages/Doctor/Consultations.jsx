@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import DoctorLayout from "@/Layouts/DoctorLayout.jsx";
+import DoctorLayout from "@/Pages/Doctor/Layout/DoctorLayout.jsx";
 import { router } from "@inertiajs/react";
 import DoctorCard from "@/Pages/Patient/Components/DoctorCard.jsx";
 
