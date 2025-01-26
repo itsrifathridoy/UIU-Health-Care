@@ -41,7 +41,8 @@ class PatientController extends Controller
             ->orWhere('messages.receiver_id', auth()->user()->id)
             ->orderBy('messages.timestamp', 'asc') // Specify the table for created_at
             ->get();
-        return Inertia::render('Patient/Messages', ['messageHistory' => $messageHistory, 'users' => $users]);
+        $blobSasUrl = env('BLOB_SAS_URL');
+        return Inertia::render('Patient/Messages', ['messageHistory' => $messageHistory, 'users' => $users, 'blobSasUrl' => $blobSasUrl]);
     }
     public function appointments()
     {

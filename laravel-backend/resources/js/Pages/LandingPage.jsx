@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from "@inertiajs/react"; // Include your Tailwind CSS and other custom styles
+import Loader from '@/Components/Loader';
+
+// Loading component
 
 const Header = () => (
     <header className="bg-gray-50">
@@ -141,13 +144,31 @@ const Footer = () => (
     </footer>
 );
 
-const LandingPage = () => (
-    <>
-        <Header />
-        <About />
-        <Features />
-        <Footer />
-    </>
-);
+const LandingPage = () => {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate loading time (you can remove setTimeout if you have actual data fetching)
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
+
+    return (
+        <div className="min-h-screen">
+            <Header />
+            <About />
+            <Features />
+            <Footer />
+        </div>
+    );
+};
 
 export default LandingPage;

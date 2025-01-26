@@ -18,33 +18,30 @@ class MessageController extends Controller
 
 
         $validate = $request->validate([
-            'content' => 'required',
+            'content' => 'nullable',
             'receiver_id' => 'required',
-            'filePath' => 'nullable',
-            'timestamp' => 'required',
+            'filePath' => 'nullable|string',
+            'timestamp' => 'required'
         ]);
 
-        if($validate['filePath'] == null){
-            $validate['filePath'] = '';
-        }
+        $messageData = [
+            'content' => $validate['content'] ?? '',
+            'receiver_id' => $validate['receiver_id'],
+            'filePath' => $validate['filePath'] ?? '',
+            'timestamp' => $validate['timestamp'],
+            'sender_id' => auth()->user()->id,
+            'id' => rand(1000, 99999999999999)
+        ];
 
-        $validate['sender_id'] = auth()->user()->id;
+        DB::table('messages')->insert($messageData);
+        $broadcastData = array_merge($messageData, [
+            'senderPic' => DB::table('users')->where('id', $messageData['sender_id'])->first()->profile_photo_path,
+            'sender_name' => auth()->user()->name,
+        ]);
 
+        broadcast(new MessageReceiveEvent($broadcastData));
 
-        // ranomly generate a number
-        $id = rand(1000, 99999999999999);
-        $validate['id'] = $id;
-
-        DB::table('messages')->insert($validate);
-
-        $validate['sender_name'] = auth()->user()->name;
-
-
-
-        broadcast(new MessageReceiveEvent($validate));
-
-
-//        return response()->json(['message' => 'Message sent successfully'], 200);
+        // return response()->json(['message' => 'Message sent successfully', 'data' => $broadcastData]);
 
 
     }
@@ -55,5 +52,17 @@ class MessageController extends Controller
         $search = $request['q'];
         $users = DB::table('users')->where('name', 'like', '%' . $search . '%')->get();
         return response()->json(['users' => $users], 200);
+    }
+
+    public function getMessages()
+    {
+        $messages = Message::with(['sender', 'receiver'])->get()->map(function ($message) {
+            return [
+                // ... other fields ...
+                'timestamp' => $message->created_at->setTimezone('Asia/Dhaka')->toISOString(),
+            ];
+        });
+
+        return response()->json($messages);
     }
 }

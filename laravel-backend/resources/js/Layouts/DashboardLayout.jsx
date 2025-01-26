@@ -5,6 +5,7 @@ import CustomerVsRetention from "@/Pages/Admin/Components/CustomerVsRetention.js
 import React, { useEffect, useState } from "react";
 import CallingModal from "@/Components/CallingModal.jsx";
 import {toast, ToastContainer} from "react-toastify";
+import Loader from "@/Components/Loader";
 
 export default function DashboardLayout({ children, menuItems, notifications, title }) {
 
@@ -16,6 +17,40 @@ export default function DashboardLayout({ children, menuItems, notifications, ti
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [consultationID, setConsultationID] = useState(null); // State to store the consultation ID
+    
+
+    const [isRefreshing, setIsRefreshing] = useState(false); // Loader state for refresh only
+
+    useEffect(() => {
+        // Show loader on refresh
+        const handleBeforeUnload = () => {
+          localStorage.setItem("isRefreshing", "true");
+        };
+    
+        window.addEventListener("beforeunload", handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }, []);
+    
+      useEffect(() => {
+        // Check if the page is being refreshed
+        const isPageRefreshing = localStorage.getItem("isRefreshing") === "true";
+    
+        if (isPageRefreshing) {
+          setIsRefreshing(true);
+    
+          // Clear the flag and hide loader after 5 seconds
+          const timer = setTimeout(() => {
+            setIsRefreshing(false);
+            localStorage.removeItem("isRefreshing");
+          }, 3000); // 3 seconds
+    
+          return () => clearTimeout(timer);
+        }
+      }, []);
+
 
 
     useEffect(() => {
@@ -58,7 +93,11 @@ export default function DashboardLayout({ children, menuItems, notifications, ti
     const closeModal = () => setIsModalOpen(false);
 
     return (
-        <div className="flex h-screen w-screen bg-gradient-to-r from-[#ffff] to-[#CEA88E]">
+        <>
+      {isRefreshing  ? (
+        <Loader />
+      ) : (
+         <div className="flex h-screen w-screen bg-gradient-to-r from-[#ffff] to-[#CEA88E]">
             <ToastContainer />
             <SideBar menuItems={menuItems} />
             <div className="flex flex-col h-full w-full pr-[50px] pb-5">
@@ -71,5 +110,8 @@ export default function DashboardLayout({ children, menuItems, notifications, ti
             {/* Calling Modal */}
             <CallingModal isOpen={isModalOpen} onClose={closeModal} consultationID={consultationID} />
         </div>
+      )}
+    </>
+       
     );
 }

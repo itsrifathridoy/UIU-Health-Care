@@ -17,7 +17,7 @@ class RoleManager
     public function handle(Request $request, Closure $next, $role): Response
     {
         if(!Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->route('landing');
 
         }
         $authUserRole = Auth::user()->role;
@@ -60,6 +60,6 @@ class RoleManager
                 break;
         }
 
-        return  redirect()->route('login');
+        return  redirect()->route('landing');
     }
 }

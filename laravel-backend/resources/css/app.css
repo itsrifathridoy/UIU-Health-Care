@@ -68,18 +68,11 @@
 }
 
 .control-btn {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.2s ease;
+    @apply p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
-.control-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+.control-btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
 }
 
 .image-container {
@@ -95,29 +88,26 @@
 }
 
 .action-btn {
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    transition: background 0.2s ease;
+    @apply px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200;
 }
 
-.action-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+.action-btn.share {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700;
 }
 
 .action-btn.primary {
-    background: rgba(255, 127, 80, 0.8);
-    color: white;
-    border-radius: 10px;
-}
-.share{
-    border-radius: 10px;
+    @apply bg-orange-500 hover:bg-orange-600 text-white;
 }
 
-.action-btn.primary:hover {
-    background: rgba(255, 127, 80, 1);
+/* PDF Modal specific styles */
+.react-pdf__Page {
+    margin: 1rem auto;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.react-pdf__Page canvas {
+    max-width: 100%;
+    height: auto !important;
 }

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('LandingPage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/landing', function () {
     return Inertia::render('LandingPage');
 })->name('landing');
+
 
 Route::post('calling-notification',CallingNotificationController::class);
 
@@ -127,6 +128,9 @@ Route::middleware(['auth', 'verified', 'role:doctor'])
 
 );
 
+Route::fallback(function () {
+     return Inertia::render('Error', ['status' => 404]);
+});
 
 
 
@@ -134,4 +138,5 @@ require __DIR__.'/auth.php';
 require __DIR__.'/patient.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/doctor.php';
+
 //require __DIR__.'/payment.php';
