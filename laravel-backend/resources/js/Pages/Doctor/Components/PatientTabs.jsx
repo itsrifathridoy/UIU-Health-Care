@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function PatientTabs({ health }) {
+    health = JSON.parse(health[0].record_details);
     const [activeTab, setActiveTab] = useState("Health");
 
     const tabs = ["Health", "Medicine", "Test Records", "History"];

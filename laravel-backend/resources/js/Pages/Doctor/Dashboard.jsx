@@ -3,8 +3,7 @@ import AppointmentCalendar from "./Components/AppointmentCalender";
 import PatientManagement from "./Components/PatientManagement";
 import { Cards } from "./Components/Cards";
 
-export default function Dashboard() {
-
+export default function Dashboard({appointments}) {
     const cardData = [
         {
             name: "Tasks Completed",
@@ -34,84 +33,89 @@ export default function Dashboard() {
         { day: 29 }, { day: 30 }, { day: 31 }
     ];
     
-    const appointments = [
-        {
-            patientName: "Patient 5",
-            appointmentType: "Video Consultancy",
-            image: "https://placehold.co/40x40",
-            icon: "fas fa-video"
-        },
-        {
-            patientName: "Patient 6",
-            appointmentType: "Clinic Appointment",
-            image: "https://placehold.co/40x40",
-            icon: "fas fa-hospital"
-        },
-        {
-            patientName: "Patient 7",
-            appointmentType: "Back Surgery",
-            image: "https://placehold.co/40x40",
-            icon: "fas fa-user-md"
-        },
-        {
-            patientName: "Patient 8",
-            appointmentType: "Hospital Appointment",
-            image: "https://placehold.co/40x40",
-            icon: "fas fa-ambulance"
-        }
-    ];
+    
+
+    // const appointments = [
+    //     {
+    //         patientName: "Patient 5",
+    //         appointmentType: "Video Consultancy",
+    //         image: "https://placehold.co/40x40",
+    //         icon: "fas fa-video"
+    //     },
+    //     {
+    //         patientName: "Patient 6",
+    //         appointmentType: "Clinic Appointment",
+    //         image: "https://placehold.co/40x40",
+    //         icon: "fas fa-hospital"
+    //     },
+    //     {
+    //         patientName: "Patient 7",
+    //         appointmentType: "Back Surgery",
+    //         image: "https://placehold.co/40x40",
+    //         icon: "fas fa-user-md"
+    //     },
+    //     {
+    //         patientName: "Patient 8",
+    //         appointmentType: "Hospital Appointment",
+    //         image: "https://placehold.co/40x40",
+    //         icon: "fas fa-ambulance"
+    //     }
+    // ];
 
 
 
-    const patientsData = [
-        {
-            id: 1,
-            name: "Patient 1",
-            age: 40,
-            image: "https://placehold.co/100x100",
-            health: {
-                heartRate: "120 bpm",
-                bloodPressure: "130/90 mm Hg",
-                pulse: "81 beats/min",
-                oxygen: "93%",
-                bmi: 24,
-                bloodGroup: "B+",
-                specialDiseases: "Not Specified",
-            },
-        },
-        {
-            id: 2,
-            name: "Patient 2",
-            age: 35,
-            image: "https://placehold.co/100x100",
-            health: {
-                heartRate: "110 bpm",
-                bloodPressure: "120/80 mm Hg",
-                pulse: "75 beats/min",
-                oxygen: "96%",
-                bmi: 22,
-                bloodGroup: "A+",
-                specialDiseases: "Diabetes",
-            },
-        },
-        {
-            id: 3,
-            name: "Patient 3",
-            age: 45,
-            image: "https://placehold.co/100x100",
-            health: {
-                heartRate: "130 bpm",
-                bloodPressure: "140/90 mm Hg",
-                pulse: "85 beats/min",
-                oxygen: "92%",
-                bmi: 26,
-                bloodGroup: "O+",
-                specialDiseases: "Not Specified",
-            },
-        },
+    // const patientsData = [
+    //     {
+    //         id: 1,
+    //         name: "Patient 1",
+    //         age: 40,
+    //         image: "https://placehold.co/100x100",
+    //         health: {
+    //             heartRate: "120 bpm",
+    //             bloodPressure: "130/90 mm Hg",
+    //             pulse: "81 beats/min",
+    //             oxygen: "93%",
+    //             bmi: 24,
+    //             bloodGroup: "B+",
+    //             specialDiseases: "Not Specified",
+    //         },
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Patient 2",
+    //         age: 35,
+    //         image: "https://placehold.co/100x100",
+    //         health: {
+    //             heartRate: "110 bpm",
+    //             bloodPressure: "120/80 mm Hg",
+    //             pulse: "75 beats/min",
+    //             oxygen: "96%",
+    //             bmi: 22,
+    //             bloodGroup: "A+",
+    //             specialDiseases: "Diabetes",
+    //         },
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Patient 3",
+    //         age: 45,
+    //         image: "https://placehold.co/100x100",
+    //         health: {
+    //             heartRate: "130 bpm",
+    //             bloodPressure: "140/90 mm Hg",
+    //             pulse: "85 beats/min",
+    //             oxygen: "92%",
+    //             bmi: 26,
+    //             bloodGroup: "O+",
+    //             specialDiseases: "Not Specified",
+    //         },
+    //     },
         
-    ];
+    // ];
 
+    const patientsData = appointments.map((appointment) => {
+        return appointment.user;
+    });
 
     return (
         <DoctorLayout title="Doctor Dashboard">
@@ -127,13 +131,14 @@ export default function Dashboard() {
                             Patient's Records
                         </h3>
 
+                        {/* <PatientManagement patients={patientsData} /> */}
                         <PatientManagement patients={patientsData} />
                     </section>
                 </div>
 
                 <div class="right-0">
                     {/* Calendar Section */}
-                    <AppointmentCalendar year={2024} month="January" dates={dates} appointments={appointments} />
+                    <AppointmentCalendar year={2024} month={new Date().getMonth()} dates={dates} appointments={appointments} />
                 </div>
             </div>
         </DoctorLayout>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
+use App\Models\HealthRecord;
 use Inertia\Inertia;
 
 
@@ -12,7 +14,18 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Doctor/Dashboard');
+        $appointments = Appointment::with('user')
+        ->where('doc_id', auth()->user()->id)
+        ->get()
+        ->map(function($appointment) {
+            $appointment->user->health = HealthRecord::where('user_id', $appointment->user_id)->get();
+            return $appointment;
+        });
+        
+
+        return Inertia::render('Doctor/Dashboard', [
+            'appointments' => $appointments,
+        ]);
     }
 
     /**
