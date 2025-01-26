@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     plugins: [
+        react(), // Add the React plugin here
         laravel({
-            input: 'resources/js/app.jsx',
+            input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        react(),
     ],
+    
 });

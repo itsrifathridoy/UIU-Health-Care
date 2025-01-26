@@ -25,11 +25,15 @@
     },
     "dependencies": {
         "@inertiajs/react": "^1.2.0",
+        "@rollup/rollup-win32-x64-msvc": "^4.29.2",
         "agora-react-uikit": "^1.2.0",
         "agora-rtc-sdk-ng": "^4.23.0",
         "boxicons": "^2.1.4",
+        "clsx": "^2.1.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "recharts": "^2.14.1"
+        "recharts": "^2.14.1",
+        "sucrase": "^3.35.0",
+        "ts-interface-checker": "^1.0.2"
     }
 }
