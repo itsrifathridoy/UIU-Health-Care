@@ -5,27 +5,36 @@ namespace App\Http\Controllers;
 
 use DGvai\SSLCommerz\SSLCommerz;
 use App\Http\Controllers\Controller;
+use App\Library\SslCommerz\SslCommerzNotification;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function order()
+    public function order(Request $request)
     {
-//        ...
-//        //  DO YOU ORDER SAVING PROCESS TO DB OR ANYTHING
-//        ...
+        $post_data = array();
+        $post_data['total_amount'] = $request->amount;
+        $post_data['currency'] = "BDT";
+        $post_data['tran_id'] = uniqid();
 
-        $sslc = new SSLCommerz();
-        $sslc->amount(20)
-            ->trxid('DEMOTRX123')
-            ->product('Demo Product Name')
-            ->customer('Customer Name','custemail@email.com');
-        return $sslc->make_payment();
+        # CUSTOMER INFORMATION
+        $post_data['cus_name'] = $request->name;
+        $post_data['cus_email'] = $request->email;
+        $post_data['cus_add1'] = $request->address;
+        $post_data['cus_phone'] = $request->phone;
 
-        /**
-         *
-         *  USE:  $sslc->make_payment(true) FOR CHECKOUT INTEGRATION
-         *
-         * */
+        $sslc = new SslCommerzNotification();
+        
+        try {
+            $payment_options = $sslc->makePayment($post_data, 'hosted');
+            if (!is_array($payment_options)) {
+                print_r($payment_options);
+                $payment_options = array();
+            }
+        } catch (\Exception $e) {
+            \Log::error('SSL Payment Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Payment initialization failed');
+        }
     }
 
     public function success(Request $request)

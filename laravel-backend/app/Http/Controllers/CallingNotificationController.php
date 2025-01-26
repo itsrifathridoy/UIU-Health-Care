@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\CallingNotificationEvent;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CallingNotificationController extends Controller
 {
@@ -15,11 +16,12 @@ class CallingNotificationController extends Controller
     {
         $sender = auth()->user();
         $receiverID = $request->receiverID;
+        $consultationID = $request->consultationID;
+
 
         $receiver = User::find($receiverID);
 
-        broadcast(new CallingNotificationEvent($sender, $receiver));
+        broadcast(new CallingNotificationEvent($sender, $receiver, $consultationID));
 
-        return response()->json(['status' => 'Notification sent']);
     }
 }

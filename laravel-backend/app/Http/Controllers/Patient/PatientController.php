@@ -11,11 +11,38 @@ class PatientController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Patient/Dashboard');
+        $healthRecords = DB::table('health_records')
+            ->select('health_records.*')
+            ->where('health_records.user_id', auth()->user()->id)
+            ->orderBy('health_records.date', 'desc') // Specify the table for created_at
+            ->first();
+
+        $nextAppointment = DB::table('appointments')
+            ->join('doctors', 'appointments.doc_id', '=', 'doctors.doc_id')
+            ->join('users', 'doctors.doc_id', '=', 'users.id')
+            ->select('appointments.*', 'doctors.*', 'users.profile_photo_path')
+            ->where('appointments.user_id', auth()->user()->id)
+            ->where('appointments.date', '>=', now())
+            ->orderBy('date')
+            ->orderBy('time')
+            ->first();
+        return Inertia::render('Patient/Dashboard', ['healthRecords' => $healthRecords, 'nextAppointment' => $nextAppointment]);
     }
     public function messages()
     {
-        return Inertia::render('Patient/Messages');
+        $users = DB::table('users')
+            ->select('users.*')
+            ->get();
+        $messageHistory = DB::table('messages')
+            ->join('users as sender', 'messages.sender_id', '=', 'sender.id')
+            ->join('users as receiver', 'messages.receiver_id', '=', 'receiver.id')
+            ->select('messages.*', 'sender.name as sender_name', 'receiver.name as receiver_name', 'sender.profile_photo_path as sender_photo', 'receiver.profile_photo_path as receiver_photo', 'sender.user_type as senderRole', 'receiver.user_type as receiverRole')
+            ->where('messages.sender_id', auth()->user()->id)
+            ->orWhere('messages.receiver_id', auth()->user()->id)
+            ->orderBy('messages.timestamp', 'asc') // Specify the table for created_at
+            ->get();
+        $blobSasUrl = env('BLOB_SAS_URL');
+        return Inertia::render('Patient/Messages', ['messageHistory' => $messageHistory, 'users' => $users, 'blobSasUrl' => $blobSasUrl]);
     }
     public function appointments()
     {
@@ -137,7 +164,8 @@ class PatientController extends Controller
     }
     public function videoCall($id)
     {
-        return Inertia::render('Patient/VideoCall', ['id' => $id]);
+        $name = auth()->user()->name;
+        return Inertia::render('Patient/VideoCall', ['id' => $id, 'name' => $name]);
     }
     public function medicines()
     {
@@ -145,11 +173,56 @@ class PatientController extends Controller
     }
     public function healthRecords()
     {
-        return Inertia::render('Patient/HealthRecords');
+        $healthRecords = DB::table('health_records')
+            ->select('health_records.*')
+            ->where('health_records.user_id', auth()->user()->id)
+            ->orderBy('health_records.date', 'desc') // Specify the table for created_at
+            ->get();
+        return Inertia::render('Patient/HealthRecords', ['healthRecords' => $healthRecords]);
     }
+    public function addHealthRecord()
+    {
+        return Inertia::render('Patient/AddHealthRecord');
+    }
+
+    public function storeHealthRecord(Request $request)
+    {
+
+//        {"weight":"34","heartRate":"34","systolic":"342","diastolic":"432","chest":"423","waist":"24","hip":"24"}"
+
+        $record_details = $request->validate([
+            'weight' => 'required',
+            'height' => 'required',
+            'heartRate' => 'required',
+            'systolic' => 'required',
+            'diastolic' => 'required',
+            'chest' => 'required',
+            'waist' => 'required',
+            'hip' => 'required',
+        ]);
+
+//        $table->id();
+//        $table->json('record_details');
+//        $table->unsignedBigInteger('user_id');
+//        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+//        $table->timestamp('date')->useCurrent();
+
+        DB::table('health_records')->insert([
+            'record_details' => json_encode($record_details),
+            'user_id' => auth()->user()->id,
+            'date' => now(),
+        ]);
+
+    }
+
     public function payments()
     {
-        return Inertia::render('Patient/Payments');
+        $payments = DB::table('payments')
+            ->select('payments.*')
+            ->where('payments.user_id', auth()->user()->id)
+            ->orderBy('payments.created_at', 'asc') // Specify the table for created_at
+            ->get();
+        return Inertia::render('Patient/Payments', ['payments' => $payments]);
     }
     public function profile()
     {
@@ -162,6 +235,18 @@ class PatientController extends Controller
     public function settings()
     {
         return Inertia::render('Patient/Settings');
+    }
+
+    public function emergency()
+    {
+        return Inertia::render('Patient/Emergency');
+    }
+
+    public function upload()
+    {
+        //get BLOB_SAS_URL from env
+        $blobSasUrl = env('BLOB_SAS_URL');
+        return Inertia::render('Patient/FIleUpload', ['blobSasUrl' => $blobSasUrl]);
     }
 
 }

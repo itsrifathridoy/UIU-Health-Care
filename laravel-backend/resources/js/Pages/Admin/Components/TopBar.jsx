@@ -12,11 +12,11 @@ export default function TopBar({ notifications, user, title }) {
                     <i className="fa-solid fa-bell text-xl text-[#f5852a]"></i>
                 </div>
                 <div className="flex items-center gap-4">
-                    <img height='40px' width='40px' src="https://placehold.co/40x40" alt="User"
+                    <img height='40px' width='40px' src={user.profile_photo_path || "/images/user.jpg"} alt="User"
                          className="w-10 h-10 rounded-full"/>
                     <div className="text-left">
                         <p className="text-sm font-semibold text-black">{user.name}</p>
-                        <p className="text-xs text-gray-500">{user.userType}</p>
+                        <p className="text-xs text-gray-500">{user.user_type}</p>
                     </div>
                     <i className="fa-solid fa-angle-down text-xl text-black"></i>
 

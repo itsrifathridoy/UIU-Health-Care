@@ -12,6 +12,10 @@ Route::group([
 ], function () {
     Route::get('/', [PatientController::class, 'index'])
           ->name('patient');
+
+    Route::get('/emergency', [PatientController::class, 'emergency'])
+        ->name('patient.emergency');
+
     Route::get('/messages', [PatientController::class, 'messages'])
         ->name('patient.messages');
     Route::get('/appointments', [PatientController::class, 'appointments'])
@@ -30,6 +34,10 @@ Route::group([
         ->name('patient.medicines');
     Route::get('/health', [PatientController::class, 'healthRecords'])
         ->name('patient.health-records');
+    Route::get('/addHealthRecord', [PatientController::class, 'addHealthRecord'])
+        ->name('patient.addHealthRecord');
+    Route::post('/addHealthRecord', [PatientController::class, 'storeHealthRecord'])
+        ->name('patient.storeHealthRecord');
     Route::get('/payments', [PatientController::class, 'payments'])
         ->name('patient.payments');
     Route::get('/profile', [PatientController::class, 'profile'])
@@ -38,6 +46,9 @@ Route::group([
         ->name('patient.blood-bank');
     Route::get('/settings', [PatientController::class, 'settings'])
         ->name('patient.settings');
+
+    Route::get('/upload', [PatientController::class, 'upload'])
+        ->name('patient.upload');
 
     Route::get('/bkash/create-payment', [BkashTokenizePaymentController::class,'createPayment'])->name('bkash-create-payment');
     Route::get('/bkash/callback', [BkashTokenizePaymentController::class,'callBack'])->name('bkash-callBack');

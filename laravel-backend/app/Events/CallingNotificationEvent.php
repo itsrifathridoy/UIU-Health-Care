@@ -19,7 +19,7 @@ class CallingNotificationEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public string $sender, public User  $receiver)
+    public function __construct(public string $sender, public User  $receiver, public $consultationID)
     {
 
     }
