@@ -23,7 +23,7 @@ export default function PatientCarousel({ patients, onSelectPatient, selectedPat
                             onClick={() => onSelectPatient(patient)}
                         >
                             <img
-                                src={patient.image}
+                                src={patient.profile_photo_path || "/images/user.jpg"}
                                 alt={patient.name}
                                 className="w-16 h-16 rounded-full border-2 border-gray-300"
                             />

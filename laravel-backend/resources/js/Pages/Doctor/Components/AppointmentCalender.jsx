@@ -42,27 +42,29 @@ export default function AppointmentCalendar({ year, month, dates, appointments }
                 </div>
                 <div className="space-y-4">
                     {appointments.map((appointment, index) => (
+                        <a href={`/doctor/patient/${appointment.user.id}`} className="block">
                         <div
                             key={index}
                             className="flex items-center bg-[#262626] p-4 rounded-lg"
                         >
                             <img
-                                src={appointment.image}
-                                alt={appointment.patientName}
+                                src={appointment.user.profile_photo_path || "/images/user.jpg"}
+                                alt={appointment.user.name}
                                 className="w-10 h-10 rounded-full"
                             />
                             <div className="ml-3">
                                 <p className="text-white font-medium">
-                                    {appointment.patientName}
+                                    {appointment.user.name}
                                 </p>
                                 <p className="text-gray-400 text-sm">
-                                    {appointment.appointmentType}
+                                    Clinic Appointment
                                 </p>
                             </div>
                             <i
-                                className={`${appointment.icon} ml-auto text-[#FF8C47]`}
+                                className={`fas fa-hospital ml-auto text-[#FF8C47]`}
                             ></i>
                         </div>
+                        </a>
                     ))}
                 </div>
             </div>

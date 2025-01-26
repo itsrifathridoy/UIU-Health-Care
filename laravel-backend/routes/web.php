@@ -122,7 +122,6 @@ Route::middleware(['auth', 'verified', 'role:doctor'])
             Route::get('/', [DoctorController::class, 'index'])->name('doctor.index');
             Route::get('/patient', [DoctorController::class, 'patient'])->name('doctor.patient');
             Route::get('/patient/{id}', [DoctorController::class, 'showPatient'])->name('doctor.patient.show');
-
         });
     }
 
