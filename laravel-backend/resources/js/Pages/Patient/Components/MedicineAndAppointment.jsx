@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-export default function MedicineAndAppointment({nextAppointment}) {
+export default function MedicineAndAppointment({nextAppointment,my_medicines}) {
     const [activeTab, setActiveTab] = useState("next-medicine");
 
     const showTab = (tabName) => {
         setActiveTab(tabName);
     };
-
+{console.log(my_medicines); }
     return (
             <div className="bg-white w-full shadow-lg rounded-lg p-5">
                 {/* Tab Header */}
@@ -31,65 +31,36 @@ export default function MedicineAndAppointment({nextAppointment}) {
 
                 {/* Content Sections */}
                 {activeTab === "next-medicine" && (
+                    
                     <div id="next-medicine" className="max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2
-  [&::-webkit-scrollbar-track]:rounded-full
-  [&::-webkit-scrollbar-track]:bg-gray-100
-  [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-[#f58532]
-">
-                        <table className="w-full text-left border-collapse">
-                            <thead className="bg-gray-200 sticky top-0">
-                            <tr>
-                                <th className="py-2 px-4 border-b">Name</th>
-                                <th className="py-2 px-4 border-b">Type</th>
-                                <th className="py-2 px-4 border-b">Dosage Time</th>
-                                <th className="py-2 px-4 border-b">Schedule</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Napa</td>
-                                <td className="py-2 px-4 border-b">Tablet</td>
-                                <td className="py-2 px-4 border-b">After Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
-                            <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Aspra</td>
-                                <td className="py-2 px-4 border-b">Capsule</td>
-                                <td className="py-2 px-4 border-b">Before Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
- <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Napa</td>
-                                <td className="py-2 px-4 border-b">Tablet</td>
-                                <td className="py-2 px-4 border-b">After Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
-                            <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Aspra</td>
-                                <td className="py-2 px-4 border-b">Capsule</td>
-                                <td className="py-2 px-4 border-b">Before Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
- <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Napa</td>
-                                <td className="py-2 px-4 border-b">Tablet</td>
-                                <td className="py-2 px-4 border-b">After Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
-                            <tr className="hover:bg-gray-100">
-                                <td className="py-2 px-4 border-b">Aspra</td>
-                                <td className="py-2 px-4 border-b">Capsule</td>
-                                <td className="py-2 px-4 border-b">Before Meal</td>
-                                <td className="py-2 px-4 border-b">8:30 AM - 12:00 AM</td>
-                            </tr>
-
-
-
-                            {/* Repeat other rows */}
-                            </tbody>
-                        </table>
-                    </div>
+                    [&::-webkit-scrollbar-track]:rounded-full
+                    [&::-webkit-scrollbar-track]:bg-gray-100
+                    [&::-webkit-scrollbar-thumb]:rounded-full
+                    [&::-webkit-scrollbar-thumb]:bg-[#f58532]
+                  ">
+                      <table className="w-full text-left border-collapse">
+                          <thead className="bg-gray-200 sticky top-0">
+                              <tr>
+                                  <th className="py-2 px-4 border-b">Name</th>
+                                  <th className="py-2 px-4 border-b">Type</th>
+                                  <th className="py-2 px-4 border-b">Dosage Time</th>
+                                  <th className="py-2 px-4 border-b">Schedule</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {
+                                
+                              my_medicines.map((medicine, index) => (
+                                  <tr key={index} className="hover:bg-gray-100">
+                                      <td className="py-2 px-4 border-b">{medicine.brand_name}</td>
+                                      <td className="py-2 px-4 border-b">{medicine.generic_name}</td>
+                                      <td className="py-2 px-4 border-b">{medicine.dosage_time}</td>
+                                      <td className="py-2 px-4 border-b">{medicine.schedule}</td>
+                                  </tr>
+                              ))}
+                          </tbody>
+                      </table>
+                  </div>
 
                 )}
                 {console.log(nextAppointment)}

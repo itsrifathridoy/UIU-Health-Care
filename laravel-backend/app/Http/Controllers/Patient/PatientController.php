@@ -26,7 +26,15 @@ class PatientController extends Controller
             ->orderBy('date')
             ->orderBy('time')
             ->first();
-        return Inertia::render('Patient/Dashboard', ['healthRecords' => $healthRecords, 'nextAppointment' => $nextAppointment]);
+        
+            $MyMedicines = DB::table('my_medicines')
+            ->join('medicines', 'my_medicines.medicine_id', '=', 'medicines.medicine_id')
+            ->where('my_medicines.user_id', auth()->user()->id)
+            ->select('my_medicines.dosage_time','my_medicines.schedule', 'medicines.brand_name', 'medicines.generic_name', 'my_medicines.id as my_medicine_id')
+            ->get();
+            
+
+        return Inertia::render('Patient/Dashboard', ['healthRecords' => $healthRecords, 'nextAppointment' => $nextAppointment, 'my_medicines' => $MyMedicines]);
     }
     public function messages()
     {

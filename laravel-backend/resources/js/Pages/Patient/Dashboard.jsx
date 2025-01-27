@@ -4,7 +4,7 @@ import MedicineAndAppointment from "@/Pages/Patient/Components/MedicineAndAppoin
 import HealthMetrics from "@/Pages/Patient/Components/HealthMetrics.jsx";
 import PatientLayout from "@/Pages/Patient/Layout/PatientLayout.jsx";
 
-export default function Dashboard({healthRecords,nextAppointment}) {
+export default function Dashboard({healthRecords,nextAppointment,my_medicines}) {
 
     console.log(healthRecords);
     return (
@@ -47,7 +47,7 @@ export default function Dashboard({healthRecords,nextAppointment}) {
                         </div>
                     </div>
                     <div className={'flex h-[60%] w-full '}>
-                        <MedicineAndAppointment nextAppointment={nextAppointment} />
+                        <MedicineAndAppointment nextAppointment={nextAppointment} my_medicines={my_medicines} />
                     </div>
                 </div>
                 <div className={'flex h-full w-[40%] pl-5'}>
