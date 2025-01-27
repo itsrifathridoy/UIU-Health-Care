@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-orange-50 flex justify-center items-center h-screen">
+  <div class="w-full max-w-4xl mx-auto">
+    <!-- Step Progress -->
+    <div class="flex justify-center items-center mb-8 space-x-0">
+      <div class="flex items-center">
+        <div class="h-8 w-8 rounded-full bg-orange-500 text-white flex justify-center items-center">1</div>
+        <span class="h-1 w-12 bg-orange-500"></span>
+      </div>
+      <div class="flex items-center">
+        <div id="step-2-circle" class="h-8 w-8 rounded-full bg-gray-200 text-black flex justify-center items-center">2</div>
+        <span class="h-1 w-12 bg-gray-200"></span>
+      </div>
+      <div class="flex items-center">
+        <div id="step-3-circle" class="h-8 w-8 rounded-full bg-gray-200 text-black flex justify-center items-center">3</div>
+        <span class="h-1 w-12 bg-gray-200"></span>
+      </div>
+      <div class="flex items-center">
+        <div id="step-4-circle" class="h-8 w-8 rounded-full bg-gray-200 text-black flex justify-center items-center">4</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-full p-8 bg-white rounded-xl shadow-md">
+      <!-- Step 1 -->
+      <div id="step-1" class="step-content flex flex-col justify-center items-center">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Chief Complaints</h2>
+        <div class="w-full border p-4 rounded-lg mb-4">
+          <div id="tags-container" class="flex flex-wrap gap-2 mb-4">
+            <!-- Tags will be dynamically added here -->
+          </div>
+          <input
+            id="tag-input"
+            type="text"
+            placeholder="Type a complaint and press Enter"
+            class="w-full h-48 border-gray-300 rounded-lg focus:ring-orange-400 focus:border-orange-400 px-4 outline-none resize-none text-center"
+          />
+        </div>
+        <button
+          id="continue-button"
+          class="w-48 bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600"
+        >
+          Continue
+        </button>
+      </div>
+
+      <!-- Step 2 (Diagnosis) -->
+      <div id="step-2" class="step-content hidden flex flex-col justify-center items-center">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Diagnosis</h2>
+        <div class="w-full border p-4 rounded-lg mb-4">
+          <div id="diagnosis-tags-container" class="flex flex-wrap gap-2 mb-4">
+            <!-- Tags will be dynamically added here -->
+          </div>
+          <input
+            id="diagnosis-input"
+            placeholder="Type diagnosis keywords and press Enter"
+            class="w-full h-48 border-gray-300 rounded-lg focus:ring-orange-400 focus:border-orange-400 px-4 outline-none resize-none text-center"
+          ></input>
+        </div>
+        <button
+          id="complete-button-2"
+          class="w-48 bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600"
+        >
+          Complete
+        </button>
+      </div>
+
+      <!-- Step 3 (Medicine) -->
+      <div id="step-3" class="step-content hidden flex flex-col justify-center items-center">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Medicine</h2>
+        <div id="medicine-container" class="w-full mb-4">
+          <div class="grid grid-cols-5 gap-4 mb-4 medicine-row">
+            <input class="border rounded-lg px-3 py-2 col-span-2" placeholder="Medicine Name" />
+            <input class="border rounded-lg px-3 py-2 col-span-1" placeholder="Quantity" />
+            <select class="border rounded-lg px-3 py-2 col-span-1">
+              <option>Before Meal</option>
+              <option>After Meal</option>
+            </select>
+            <input class="border rounded-lg px-3 py-2 col-span-1" placeholder="Duration" />
+          </div>
+        </div>
+        <button
+          class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 mb-4"
+          onclick="addMedicineRow()"
+        >
+          Add More Medicine
+        </button>
+        <button
+          class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600"
+          onclick="goToStep(4)"
+        >
+          Continue
+        </button>
+      </div>
+
+      <!-- Step 4 (Advice) -->
+      <div id="step-4" class="step-content hidden flex flex-col justify-center items-center">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Advice</h2>
+        <textarea
+          class="border rounded-lg px-3 py-2 w-full h-32 mb-4"
+          placeholder="Enter advice"
+        ></textarea>
+        <button
+          class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600"
+          onclick="submitForm()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleComplaintInput(event) {
+      if (event.key === "Enter") {
+        const input = event.target.value.trim();
+        if (input) {
+          const newTag = document.createElement("div");
+          newTag.className =
+            "bg-gray-200 px-3 py-1 rounded-full text-sm flex items-center gap-2";
+          newTag.innerHTML = `${input} <button onclick="this.parentElement.remove()">×</button>`;
+          event.target.parentElement.insertBefore(newTag, event.target);
+          event.target.value = "";
+        }
+      }
+    }
+
+    function goToStep(step) {
+      document.querySelectorAll(".step-content").forEach((el) => {
+        el.classList.add("hidden");
+      });
+      document.querySelector(`#step-${step}`).classList.remove("hidden");
+
+      // Update step progress
+      for (let i = 2; i <= step; i++) {
+        document.querySelector(`#step-${i}-circle`).classList.replace(
+          "bg-gray-200",
+          "bg-orange-500"
+        );
+      }
+    }
+
+    function submitForm() {
+      alert("Form submitted!");
+    }
+
+    function addMedicineRow() {
+      const medicineContainer = document.getElementById("medicine-container");
+      const newRow = document.createElement("div");
+      newRow.className = "grid grid-cols-5 gap-4 mb-4 medicine-row";
+      newRow.innerHTML = `
+        <input class="border rounded-lg px-3 py-2 col-span-2" placeholder="Medicine Name" />
+        <input class="border rounded-lg px-3 py-2 col-span-1" placeholder="Quantity" />
+        <select class="border rounded-lg px-3 py-2 col-span-1">
+          <option>Before Meal</option>
+          <option>After Meal</option>
+        </select>
+        <input class="border rounded-lg px-3 py-2 col-span-1" placeholder="Duration" />
+      `;
+      medicineContainer.appendChild(newRow);
+    }
+
+    // Step 1 logic
+    const tagsContainer = document.getElementById("tags-container");
+    const tagInput = document.getElementById("tag-input");
+    const continueButton = document.getElementById("continue-button");
+
+    // Handle adding tags
+    tagInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter" && tagInput.value.trim() !== "") {
+        event.preventDefault();
+        const tagValue = tagInput.value.trim();
+
+        const tag = document.createElement("div");
+        tag.className =
+          "bg-gray-200 text-gray-700 rounded-full px-4 py-1 flex items-center gap-2 text-sm";
+        tag.innerHTML = `${tagValue} <button class='remove-tag'>&times;</button>`;
+
+        tagsContainer.appendChild(tag);
+        tagInput.value = "";
+
+        // Handle removing tags
+        tag.querySelector(".remove-tag").addEventListener("click", () => {
+          tagsContainer.removeChild(tag);
+        });
+      }
+    });
+
+    // Handle switching steps
+    continueButton.addEventListener("click", () => {
+      goToStep(2);
+    });
+
+    // Step 2 logic
+    const diagnosisInput = document.getElementById("diagnosis-input");
+    const diagnosisTagsContainer = document.getElementById("diagnosis-tags-container");
+    const completeButton2 = document.getElementById("complete-button-2");
+
+    // Handle adding diagnosis keywords
+    diagnosisInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter" && diagnosisInput.value.trim() !== "") {
+        event.preventDefault();
+        const diagnosisValue = diagnosisInput.value.trim();
+
+        const diagnosisTag = document.createElement("div");
+        diagnosisTag.className =
+          "bg-gray-200 text-gray-700 rounded-full px-4 py-1 flex items-center gap-2 text-sm";
+        diagnosisTag.innerHTML = `${diagnosisValue} <button class='remove-tag'>&times;</button>`;
+
+        diagnosisTagsContainer.appendChild(diagnosisTag);
+        diagnosisInput.value = "";
+
+        // Handle removing diagnosis tags
+        diagnosisTag.querySelector(".remove-tag").addEventListener("click", () => {
+          diagnosisTagsContainer.removeChild(diagnosisTag);
+        });
+      }
+    });
+
+    // Move to next step after "Complete"
+    completeButton2.addEventListener("click", () => {
+      goToStep(3);
+    });
+  </script>
+</body>
+</html>
